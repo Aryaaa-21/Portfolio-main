@@ -81,9 +81,10 @@ function openTab(evt, tabName) {
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("education").style.display = "block";
         var typed = new Typed(".auto-type", {
-        strings: ["Learner", "Creator", "Developer", "Dreamer"],
+        strings: ["Arya Bhagat"," A Learner", "A Creator", "A Developer", "A Dreamer"],
         typeSpeed: 100,
         backSpeed: 60,
         loop: true
     });
+
 });
