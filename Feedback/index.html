@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="vanta-bg"></div>
+    <div class="cursor"></div>
+
+    <div class="main-wrapper">
+        <div class="contact-form">
+            <h3>Send Me A Message</h3>
+            <form id="feedbackForm">
+                <div class="form-group">
+                    <input type="text" name="user_name" placeholder="Name" class="form-control" required>
+                    <input type="email" name="user_email" placeholder="Email" class="form-control" required>
+                </div>
+                <input type="text" name="subject" placeholder="Subject" class="form-control" required>
+                <textarea name="message" placeholder="Your Message..." class="form-control" rows="5" required></textarea>
+                
+                <button type="submit" class="btn" id="sendBtn">Send Message</button>
+            </form>
+        </div>
+
+        <footer>
+            <p>Thank you for visiting &bull; Love from <span class="highlight">Arya &hearts;</span></p>
+        </footer>
+    </div>
+
+    <div id="popup" class="popup-overlay">
+        <div class="popup-content">
+            <h2>Thank You!</h2>
+            <p>For your response,<br> It means a lot to me.</p>
+            <button class="btn-close" onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
+    <script type="text/javascript">
+       (function(){
+          emailjs.init({
+            publicKey: "AFUeH2-pB8kMo2xgA", // Your Public Key
+          });
+       })();
+    </script>
+    
+    <script src="script.js"></script>
+
+</body>
+</html>

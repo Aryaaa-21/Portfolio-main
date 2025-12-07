@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arya Bhagat - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+
+    <div id="vanta-bg"></div>
+    
+    <div class="cursor"></div>
+
+    <main class="main-content">
+        
+        <section id="home" class="section">
+            <div class="home-container">
+                <div class="home-img">
+                    <img src="1.png" alt="Profile">
+                </div>
+                <div class="home-text">
+                    <span class="subtitle">Welcome</span>
+                    <h1>Hi, I'm a <br><span class="auto-type"></span></h1>
+                    <p>Your vision, My codes, Let's Build together</p>
+                    
+                    <a href="#about" class="btn">More about me</a>
+                    
+                    <div class="social-icons">
+                        <a href="https://www.linkedin.com/in/arya-bhagat-2102np"><i class='bx bxl-linkedin'></i> LinkedIn</a>
+                        <a href="https://github.com/Aryaaa-21"><i class='bx bxl-github'></i> GitHub</a>
+                        <a href="mailto:aryabhagat249@gmail.com"><i class='bx bxl-gmail'></i> Email</a>
+                        <a href="https://wa.me/qr/4A47DGO6OXKVI1"><i class='bx bxl-whatsapp'></i> Whatsapp</a>
+                        <a href="https://www.instagram.com/aryaaa._.21?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i class='bx bxl-instagram'></i> Instagram</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <h2 class="heading" style="text-align: center;">About <span>Me</span></h2>
+            
+            <div class="about-container">
+                <div class="about-img">
+                    <img src="1.png" alt="About Image">
+                </div>
+                <div class="about-text">
+                    <h3>I'm a Web Developer </h3>
+                    <p>I am a Computer Science student at *Narula institute of technology * passionate about building software that solves real-world problems. I am currently focusing on Web Development and strengthening my fundamentals in Data Structures.
+                        <hr>
+                    <li>🎓 Education: B.Tech in Information Technology (2025 - 2029)</li>
+                    <li>🔭 I'm currently working on: Open source contributions to showcase my skills.</li>
+                    <li>🌱 I'm currently learning: JavaScript, React.js, and Backend basics.</li>
+                    <li>👯 Im looking to collaborate on: Beginner-friendly open-source projects and hackathons</li>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="about-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" onclick="openTab(event, 'education')">Education</button>
+                    <button class="tab-btn" onclick="openTab(event, 'experience')">Experience</button>
+                    <button class="tab-btn" onclick="openTab(event, 'skills')">Skills</button>
+                </div>
+
+                <div id="education" class="tab-content active-content">
+                    <div class="timeline-box">
+                        <div class="timeline">
+                            <h4>2029</h4>
+                            <h3>Narula Institute of Technology</h3>
+                            <p>Pursuing B-tech </p>
+                        </div>
+                        <div class="timeline">
+                            <h4>2025</h4>
+                            <h3>Sudhir Memorial Institute</h3>
+                            <p>Class 12 </p>
+                        </div>
+                         <div class="timeline">
+                            <h4>2023</h4>
+                            <h3>St. Helen's School</h3>
+                            <p>Class 10</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="experience" class="tab-content">
+                    <div class="timeline-box">
+                        <div class="timeline">
+                            <h4>2025 - Present</h4>
+                            <h3>LEARNING</h3>
+                            <p>Full-Stack Devlopment</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="skills" class="tab-content">
+                    <div class="skill-box">
+                        <p>HTML</p>
+                        <div class="progress-bar"><span style="width: 90%"></span></div>
+                    </div>
+                    <div class="skill-box">
+                        <p>CSS</p>
+                        <div class="progress-bar"><span style="width: 85%"></span></div>
+                    </div>
+                    <div class="skill-box">
+                        <p>JavaScript</p>
+                        <div class="progress-bar"><span style="width: 60%"></span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="section right-aligned-section">
+            <div class="header-wrapper">
+                <h2 class="heading">Recent <span>Works</span></h2>     
+                <a href="./Projects/index.html" class="btn-small">View Projects</a>
+            </div>
+        </section>
+
+        <section id="achievements" class="section right-aligned-section">
+            <div class="header-wrapper">
+                <h2 class="heading">Achievements <span>& Certs</span></h2> 
+                <a href="./Certificates/index.html" class="btn-small">View Certificate</a>
+            </div>
+        </section>
+
+            <section id="feedback" class="section right-aligned-section">
+            <div class="header-wrapper">
+                <h2 class="heading">Feed <span>Back &hearts;</span></h2> 
+                <a href="./Feedback/index.html" class="btn-small">Add Feed Back</a>
+            </div>
+        </section>
+
+
+    </main>
+    
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
