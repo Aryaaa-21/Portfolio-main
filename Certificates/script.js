@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
         { title: "All My Certificates", desc: "After College" },
         { title: "My First Hackathon", desc: "Got 13th Rank" },
         { title: "Skill Up Certificate", desc: "Got After learning frontend" },
-        { title: "Cisco Certificate", desc: "Data Science " },
+        { title: "Cisco Certificate", desc: "Intro to Data Science " },
         { title: "IIC Regional Meet", desc: "Student Volunteer Certificate" },
         { title: "Celo Workshop", desc: "On 29th October" },
         { title: "Cultural Event", desc: "Participation Certificate" }
