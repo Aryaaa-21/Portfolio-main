@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    
+
     // --- 1. VANTA JS BACKGROUND ---
     try {
         VANTA.NET({
@@ -11,11 +11,11 @@ document.addEventListener("DOMContentLoaded", () => {
             minWidth: 200.00,
             scale: 1.00,
             scaleMobile: 1.00,
-            color: 0xff0033,        
-            backgroundColor: 0x050505, 
-            points: 10.00,
+            color: 0xff0033,
+            backgroundColor: 0x050505,
+            points: 5.00,
             maxDistance: 22.00,
-            spacing: 18.00,
+            spacing: 25.00,
             showDots: true
         });
     } catch (e) {
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- 2. CUSTOM NEON CURSOR ---
     const cursor = document.querySelector('.cursor');
-        if (window.matchMedia("(pointer: fine)").matches) {
+    if (window.matchMedia("(pointer: fine)").matches) {
         cursor.style.display = 'block';
 
         document.addEventListener('mousemove', (e) => {
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const dot = document.createElement("div");
         dot.classList.add("dot");
         if (index === 0) dot.classList.add("active");
-        
+
         dot.addEventListener("click", () => {
             if (!isAnimating && index !== currentIndex) {
                 changeCard(index);
@@ -94,19 +94,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (diff === 0) {
                 card.classList.add("active");
-            } 
+            }
             else if (diff === -1) {
                 card.classList.add("prev");
-            } 
+            }
             else if (diff === 1) {
                 card.classList.add("next");
-            } 
+            }
             else if (diff === 2) {
                 card.classList.add("next-2");
-            } 
+            }
             else if (diff < -1) {
                 card.classList.add("hidden-top");
-            } 
+            }
             else {
                 card.classList.add("hidden");
             }
@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 roleEl.textContent = cardData[currentIndex].desc;
             }
             infoContent.classList.remove("fade-out");
-        }, 250); 
+        }, 250);
 
         setTimeout(() => {
             isAnimating = false;
@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
         card.addEventListener("click", () => {
             if (card.classList.contains("active")) {
                 const img = card.querySelector("img");
-                if(img) {
+                if (img) {
                     lightboxImg.src = img.src;
                     lightbox.classList.add("show");
                 }
@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     closeBtn.addEventListener("click", closeLightbox);
-    
+
     lightbox.addEventListener("click", (e) => {
         if (e.target === lightbox) {
             closeLightbox();

@@ -12,9 +12,9 @@ try {
         scaleMobile: 1.00,
         color: 0xff0033,       // Matches your neon-red
         backgroundColor: 0x000000,
-        points: 12.00,
+        points: 6.00,
         maxDistance: 22.00,
-        spacing: 18.00
+        spacing: 25.00
     });
 } catch (error) {
     console.log("Vanta JS scripts not loaded correctly. Check HTML script tags.");
@@ -25,14 +25,14 @@ try {
 let next = document.querySelector('.next');
 let prev = document.querySelector('.prev');
 
-next.addEventListener('click', function(){
+next.addEventListener('click', function () {
     let items = document.querySelectorAll('.item');
     document.querySelector('.slide').appendChild(items[0]);
 });
 
-prev.addEventListener('click', function(){
+prev.addEventListener('click', function () {
     let items = document.querySelectorAll('.item');
-    document.querySelector('.slide').prepend(items[items.length - 1]); 
+    document.querySelector('.slide').prepend(items[items.length - 1]);
 });
 
 

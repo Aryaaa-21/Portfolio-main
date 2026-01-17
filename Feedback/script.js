@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     // --- USER CONFIGURATION: CHANGE THESE ---
     const serviceID = "service_ddnjx7z";   // Example: "service_xyz"
     const templateID = "template_y0p1ono"; // Example: "template_abc"
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mouseControls: true, touchControls: true, gyroControls: false,
             minHeight: 200.00, minWidth: 200.00, scale: 1.00, scaleMobile: 1.00,
             color: 0xff0000, backgroundColor: 0x050505,
-            points: 12.00, maxDistance: 20.00, spacing: 16.00
+            points: 6.00, maxDistance: 20.00, spacing: 25.00
         });
     } catch (e) { console.log("Vanta JS Error: ", e); }
 
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('mousemove', (e) => {
         cursor.style.left = e.clientX + 'px';
         cursor.style.top = e.clientY + 'px';
-        
+
         const trail = document.createElement('div');
         trail.classList.add('trail');
         trail.style.left = e.clientX + 'px';
@@ -64,16 +64,16 @@ function closePopup() {
 
 // Function to create Heart Burst Animation
 function createHeartBurst() {
-    const heartCount = 30; 
-    const colors = ['❤️', '💖', '❤️', '❤️']; 
+    const heartCount = 30;
+    const colors = ['❤️', '💖', '❤️', '❤️'];
 
     for (let i = 0; i < heartCount; i++) {
         const heart = document.createElement('div');
         heart.classList.add('heart');
         heart.innerText = colors[Math.floor(Math.random() * colors.length)];
-        
+
         const angle = Math.random() * Math.PI * 2;
-        const velocity = 200 + Math.random() * 30; 
+        const velocity = 200 + Math.random() * 30;
         const tx = Math.cos(angle) * velocity + 'px';
         const ty = Math.sin(angle) * velocity + 'px';
 
