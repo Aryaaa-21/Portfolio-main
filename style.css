@@ -424,9 +424,671 @@ body {
     .social-icons {
         justify-content: center;
     }
+}
 
+@media (max-width: 768px) {
     .tab-buttons {
         justify-content: center;
         gap: 1rem;
     }
 }
+
+
+/* --- PROJECTS SECTION --- */
+.projects-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.project-card {
+    background: rgba(17, 17, 17, 0.8);
+    border: 1px solid #333;
+    border-radius: 20px;
+    overflow: hidden;
+    width: 100%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 30px var(--main-color);
+    border-color: var(--main-color);
+}
+
+.project-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    max-height: 400px;
+}
+
+.project-info {
+    padding: 2rem;
+    text-align: center;
+}
+
+.project-info h3 {
+    font-size: 2rem;
+    color: var(--main-color);
+    margin-bottom: 1rem;
+}
+
+.project-info p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #ccc;
+}
+
+/* --- CERTIFICATES SECTION --- */
+.certificates-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.cert-card {
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    border: 1px solid #333;
+    transition: transform 0.3s ease;
+}
+
+.cert-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 30px var(--main-color);
+    border-color: var(--main-color);
+}
+
+.cert-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* --- FEEDBACK SECTION --- */
+.feedback-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.contact-form {
+    width: 100%;
+    max-width: 600px;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 0, 79, 0.5);
+    /* using main color */
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(255, 0, 79, 0.2);
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.contact-form h3 {
+    color: #fff;
+    font-size: 2rem;
+    margin-bottom: 25px;
+    text-shadow: 0 0 15px var(--main-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.form-group {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid #444;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: var(--main-color);
+    box-shadow: 0 0 15px rgba(255, 0, 79, 0.5);
+    background: rgba(0, 0, 0, 0.6);
+}
+
+input[type="text"].form-control:not(:first-child),
+textarea.form-control {
+    margin-bottom: 20px;
+}
+
+/* Popup */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s;
+}
+
+.popup-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.popup-content {
+    background: rgba(20, 20, 20, 0.95);
+    padding: 40px;
+    border-radius: 15px;
+    border: 1px solid var(--main-color);
+    box-shadow: 0 0 30px rgba(255, 0, 79, 0.4);
+    text-align: center;
+    color: white;
+    max-width: 400px;
+    width: 90%;
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+
+.popup-overlay.active .popup-content {
+    transform: scale(1);
+}
+
+.popup-content h2 {
+    color: var(--main-color);
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px var(--main-color);
+}
+
+.popup-content p {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.btn-close {
+    padding: 10px 25px;
+    background: var(--main-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(255, 0, 79, 0.5);
+}
+
+.heart {
+    position: fixed;
+    font-size: 24px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 10001;
+    animation: floatHeart 1.5s ease-out forwards;
+}
+
+@keyframes floatHeart {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty)) scale(1.5);
+    }
+}
+
+@media (max-width: 768px) {
+    .form-group {
+        flex-direction: column;
+    }
+
+    .contact-form {
+        width: 90%;
+        padding: 25px;
+    }
+}
+
+/* --- GLOBAL LIGHTBOX STYLES --- */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10002;
+    /* Higher than heart animation */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.lightbox.show {
+    display: flex;
+    opacity: 1;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+    box-shadow: 0 0 30px var(--main-color);
+    border: 2px solid var(--main-color);
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+
+.lightbox.show .lightbox-content {
+    transform: scale(1);
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    font-size: 50px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 10003;
+}
+
+.close-btn:hover {
+    color: var(--main-color);
+}
+
+@media (max-width: 768px) {
+    .close-btn {
+        right: 20px;
+        top: 10px;
+        font-size: 40px;
+    }
+}
+
+
+.cert-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.cert-info {
+    padding: 2rem;
+    text-align: center;
+    background: rgba(17, 17, 17, 0.8);
+    /* Match project card bg */
+}
+
+.cert-info h3 {
+    font-size: 2rem;
+    color: var(--main-color);
+    margin-bottom: 1rem;
+}
+
+.cert-info p {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #ccc;
+}
+
+
+/* --- NAVIGATION BAR --- */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem 5%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+    font-size: 2rem;
+    color: var(--text-color);
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.1);
+}
+
+.navbar a {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin-left: 3rem;
+    font-weight: 500;
+    transition: 0.3s;
+    border-bottom: 2px solid transparent;
+}
+
+.navbar a:hover,
+.navbar a.active {
+    color: var(--main-color);
+    border-bottom: 2px solid var(--main-color);
+}
+
+#menu-icon {
+    font-size: 2.5rem;
+    color: var(--text-color);
+    display: none;
+    cursor: pointer;
+}
+
+/* New Achievements Section Styling */
+.achievement-box {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: 0.3s;
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+}
+
+.achievement-box:hover {
+    border-color: var(--main-color);
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px rgba(255, 0, 79, 0.3);
+}
+
+.achievement-box h3 {
+    font-size: 1.5rem;
+    color: var(--main-color);
+    margin-bottom: 1rem;
+}
+
+.achievement-box p {
+    font-size: 1.1rem;
+    color: #ccc;
+}
+
+/* Responsive Navigation */
+@media (max-width: 900px) {
+    .header {
+        padding: 1.2rem 4%;
+    }
+}
+
+@media (max-width: 768px) {
+    #menu-icon {
+        display: block;
+    }
+
+    .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        padding: 1rem 4%;
+        background: rgba(0, 0, 0, 0.9);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        display: none;
+        /* Hidden by default */
+        flex-direction: column;
+    }
+
+    .navbar.active {
+        display: flex;
+        animation: slideDown 0.3s ease forwards;
+    }
+
+    .navbar a {
+        display: block;
+        font-size: 1.5rem;
+        margin: 2rem 0;
+        text-align: center;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+/* Scroll Padding for Fixed Header */
+html {
+    scroll-padding-top: 6rem;
+}
+
+
+/* --- SCROLL REVEAL ANIMATION --- */
+.reveal {
+    position: relative;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 1s ease;
+}
+
+.reveal.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+
+/* --- STACKED CARD EFFECT --- */
+.projects-stack,
+.certificates-stack {
+    padding-bottom: 150px;
+    /* Space for the last card */
+}
+
+.project-card,
+.cert-card {
+    transition: all 0.4s ease-out;
+    margin-bottom: -150px;
+    /* Overlap */
+    position: relative;
+    /* For z-index */
+    z-index: 1;
+    /* Ensure opacity is 1 if reveal animation ran, or set base styles */
+}
+
+.project-card:hover,
+.cert-card:hover {
+    z-index: 100;
+    transform: scale(1.05) translateY(-40px) !important;
+    /* Override reveal transform */
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9);
+    border-color: var(--main-color);
+}
+
+.project-card:last-child,
+.cert-card:last-child {
+    margin-bottom: 0;
+}
+
+
+/* --- REFINED STACKED LAYOUT --- */
+.projects-stack,
+.certificates-stack {
+    padding-bottom: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.project-card,
+.cert-card {
+    transition: all 0.4s ease-out;
+    margin-bottom: -120px !important;
+    /* Force overlap */
+    position: relative;
+    z-index: 1;
+    background: rgba(17, 17, 17, 0.95);
+    /* Ensure opacity for stacking */
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.5);
+    /* Shadow on top edge */
+}
+
+/* Ensure images are visible */
+.project-card img,
+.cert-card img {
+    height: auto;
+    opacity: 1;
+    transition: transform 0.3s ease;
+    display: block;
+}
+
+.project-card:hover,
+.cert-card:hover {
+    z-index: 100;
+    transform: translateY(-40px) scale(1.02) !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+    border-color: var(--main-color);
+}
+
+.project-card:last-child,
+.cert-card:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* Specific adjustment for mobile stacking */
+@media (max-width: 768px) {
+
+    .project-card,
+    .cert-card {
+        margin-bottom: -80px !important;
+    }
+}
+/* --- TITLE-ONLY STACK LAYOUT --- */
+.projects-stack, .certificates-stack {
+    padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Space between titles */
+}
+
+.project-card, .cert-card {
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    margin-bottom: 0 !important; /* No overlap, just list */
+    position: relative;
+    z-index: 1;
+    background: rgba(10, 10, 10, 0.9); /* Dark background */
+    border: 1px solid #333;
+    overflow: hidden;
+    max-height: 80px; /* Only show title initially */
+    cursor: pointer;
+    box-shadow: none;
+}
+
+/* Hide content by default */
+.project-card img, .cert-card img {
+    height: 0;
+    opacity: 0;
+    transition: all 0.5s ease;
+    object-fit: cover;
+}
+
+.project-info p, .cert-info p, .btn-small {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: none; /* remove from flow to fix height */
+}
+
+/* Title Styling (Visible by default) */
+.project-info h3, .cert-info h3 {
+    margin: 0;
+    padding: 20px;
+    font-size: 1.8rem;
+    color: var(--main-color); /* Red */
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+/* Hover State - EXPAND */
+.project-card:hover, .cert-card:hover {
+    z-index: 100;
+    max-height: 600px; /* Allow full expansion */
+    transform: scale(1.02);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+    border-color: var(--main-color);
+}
+
+.project-card:hover img, .cert-card:hover img {
+    height: 300px; /* Reveal Image */
+    opacity: 1;
+}
+
+.project-card:hover .project-info p, 
+.cert-card:hover .cert-info p,
+.project-card:hover .btn-small {
+    display: block;
+    opacity: 1;
+    transition-delay: 0.2s; /* Delay text reveal */
+}
+
+/* Specific fix for container padding in info */
+.project-info, .cert-info {
+    padding: 0; /* Remove default padding to fit in collapsed state */
+}
+
+.project-card:hover .project-info, 
+.cert-card:hover .cert-info {
+    padding: 2rem; /* Restore padding on hover */
+}
+
+
+/* --- PROJECT CARD SPECIFIC BUTTON STYLE --- */
+.project-card .btn-small {
+    padding: 0.4rem 1rem; /* Smaller padding */
+    font-size: 0.9rem; /* Smaller font */
+    margin-top: 15px;
+    display: none; /* Hidden by default (handled by hover logic above) */
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Ensure button is visible on hover (re-iterating for specificity if needed) */
+.project-card:hover .btn-small {
+    display: inline-block;
+    animation: fadeIn 0.5s ease forwards;
+}
+
