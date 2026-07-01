@@ -11,8 +11,8 @@ export const metrics = [
     description: "Contributions to repositories, open source, and personal products."
   },
   {
-    value: "1st",
-    label: "CODESPRINT WINNER",
-    description: "Secured first place in the local rapid prototyping and coding challenge."
+    value: "30+",
+    label: "GITHUB REPOS",
+    description: "Public and private repositories built, deployed, and maintained."
   }
 ];
