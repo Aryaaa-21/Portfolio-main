@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { Github, ExternalLink, Shield, Compass, Key, BookOpen, ChevronDown, ChevronUp } from 'lucide-react';
 
 export default function Projects({ currentPage, setCurrentPage }) {
@@ -82,10 +82,8 @@ export default function Projects({ currentPage, setCurrentPage }) {
     }
   ];
 
-
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
-  const scrolling = useRef(false);
-  const containerRef = useRef(null);
+  const trackRef = useRef(null);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -94,57 +92,37 @@ export default function Projects({ currentPage, setCurrentPage }) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el || windowWidth < 1024) return;
+  // Framer Motion native scroll tracking
+  const { scrollYProgress } = useScroll({
+    target: trackRef,
+    offset: ["start start", "end end"]
+  });
 
-    const handleWheel = (e) => {
-      const rect = el.getBoundingClientRect();
-      const isTopAligned = Math.abs(rect.top) < 15;
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    if (windowWidth < 1024) return;
+    // Map scroll progress (0.0 to 1.0) to active page slide index (1 to 4)
+    let page = Math.floor(latest * featured.length) + 1;
+    if (page > featured.length) page = featured.length;
+    if (page < 1) page = 1;
+    setCurrentPage(page);
+  });
 
-      // If scrolling down:
-      if (e.deltaY > 0) {
-        // If we are at the last slide, let normal scroll down happen
-        if (currentPage === featured.length) {
-          return;
-        }
-        // If container top is not yet aligned with viewport top, let normal scroll down happen
-        if (rect.top > 5) {
-          return;
-        }
-      }
-
-      // If scrolling up:
-      if (e.deltaY < 0) {
-        // If we are at the first slide, let normal scroll up happen
-        if (currentPage === 1) {
-          return;
-        }
-        // If container top is not aligned with viewport top (scrolled too far down), let normal scroll up happen
-        if (rect.top < -5) {
-          return;
-        }
-      }
-
-      // Prevent window scroll while navigating slides inside aligned container
-      e.preventDefault();
-      if (scrolling.current) return;
-      scrolling.current = true;
-
-      if (e.deltaY > 0) {
-        setCurrentPage(p => Math.min(p + 1, featured.length));
-      } else {
-        setCurrentPage(p => Math.max(p - 1, 1));
-      }
-
-      setTimeout(() => {
-        scrolling.current = false;
-      }, 1000);
-    };
-
-    el.addEventListener('wheel', handleWheel, { passive: false });
-    return () => el.removeEventListener('wheel', handleWheel);
-  }, [currentPage, windowWidth, featured.length]);
+  const handleLaunchProject = (idx) => {
+    const track = document.getElementById('featured-track');
+    if (track) {
+      const rect = track.getBoundingClientRect();
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const trackTop = rect.top + scrollTop;
+      const viewportHeight = window.innerHeight;
+      
+      const targetScroll = trackTop + (idx - 1) * viewportHeight + 50;
+      
+      window.scrollTo({
+        top: targetScroll,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   // Mobile layout
   if (windowWidth < 1024) {
@@ -233,288 +211,290 @@ export default function Projects({ currentPage, setCurrentPage }) {
 
   // Desktop ScrollAdventure Layout
   return (
-    <section ref={containerRef} id="featured" className="relative overflow-hidden h-screen bg-black select-none z-20">
-      {/* Scroll indicator overlay */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-1.5 pointer-events-none">
-        <span className="font-body text-[9px] font-bold tracking-[0.25em] text-white/40 uppercase">
-          Slide {currentPage} / {featured.length}
-        </span>
-        <div className="flex gap-1">
-          {featured.map((_, i) => (
-            <div
-              key={i}
-              className={`h-[3px] transition-all duration-300 rounded-full ${
-                currentPage === i + 1 ? 'w-6 bg-white' : 'w-1.5 bg-white/20'
-              }`}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Floating control buttons */}
-      <div className="absolute right-8 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-2">
-        <button
-          onClick={() => setCurrentPage(p => Math.max(p - 1, 1))}
-          disabled={currentPage === 1}
-          className={`p-2 rounded-full border border-white/10 bg-white/5 text-white/50 hover:text-white hover:bg-white/10 transition-all ${
-            currentPage === 1 ? 'opacity-30 cursor-not-allowed' : 'opacity-100 cursor-pointer'
-          }`}
-        >
-          <ChevronUp className="w-4 h-4" />
-        </button>
-        <button
-          onClick={() => setCurrentPage(p => Math.min(p + 1, featured.length))}
-          disabled={currentPage === featured.length}
-          className={`p-2 rounded-full border border-white/10 bg-white/5 text-white/50 hover:text-white hover:bg-white/10 transition-all ${
-            currentPage === featured.length ? 'opacity-30 cursor-not-allowed' : 'opacity-100 cursor-pointer'
-          }`}
-        >
-          <ChevronDown className="w-4 h-4" />
-        </button>
-      </div>
-
-      {featured.map((project, i) => {
-        const idx = i + 1;
-        const isActive = currentPage === idx;
-        const upOff = 'translateY(-100%)';
-        const downOff = 'translateY(100%)';
-        
-        // Alternating split screen sliding animations
-        const isEven = idx % 2 === 0;
-        const leftTrans = isActive ? 'translateY(0)' : (isEven ? upOff : downOff);
-        const rightTrans = isActive ? 'translateY(0)' : (isEven ? downOff : upOff);
-        const ProjectIcon = project.icon;
-
-        return (
-          <div key={project.id} className="absolute inset-0 w-full h-full">
-            {/* Left Column (Alternates Content / Image) */}
-            <div
-              className="absolute top-0 left-0 w-1/2 h-full transition-transform duration-[1000ms] ease-in-out"
-              style={{ transform: leftTrans }}
-            >
-              {!isEven ? (
-                // Image Half
-                <div className="w-full h-full relative">
-                  <div className="absolute inset-0 bg-black/40 z-10" />
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover filter grayscale"
-                  />
-                  {/* Decorative badge */}
-                  <div className="absolute top-12 left-12 z-20 font-body text-[10px] tracking-widest font-semibold text-white/40 uppercase">
-                    [ WORK 0{idx} ]
-                  </div>
-                </div>
-              ) : (
-                // Content Half
-                <div className="w-full h-full bg-[#070707] flex flex-col justify-center px-16 xl:px-24 text-white border-r border-white/5">
-                  <div className="flex items-center gap-3 mb-6">
-                    <ProjectIcon className="w-4 h-4 text-white/60" />
-                    <span className="font-body text-[10px] font-bold tracking-widest text-white/40 uppercase">
-                      {project.category}
-                    </span>
-                  </div>
-
-                  <h3 className="font-display text-4xl xl:text-5xl font-bold tracking-tight mb-8">
-                    {project.title}
-                  </h3>
-
-                  <div className="space-y-6 text-xs xl:text-sm font-body leading-relaxed text-white/70 max-w-xl">
-                    <div>
-                      <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">
-                        The Mission
-                      </span>
-                      <p>{project.story}</p>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-6 pt-4 border-t border-white/5">
-                      <div>
-                        <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">
-                          The Problem
-                        </span>
-                        <p className="text-[11px] leading-relaxed text-white/60">{project.problem}</p>
-                      </div>
-                      <div>
-                        <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">
-                          The Solution
-                        </span>
-                        <p className="text-[11px] leading-relaxed text-white/60">{project.solution}</p>
-                      </div>
-                    </div>
-
-                    <div className="pt-4 border-t border-white/5">
-                      <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-2.5">
-                        Key Specifications
-                      </span>
-                      <ul className="grid grid-cols-2 gap-2 text-white/80">
-                        {project.features.map((feat, fidx) => (
-                          <li key={fidx} className="flex items-center gap-2 text-[11px]">
-                            <span className="w-1.5 h-1.5 bg-white/40 rounded-full" />
-                            <span>{feat}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div className="pt-4">
-                      <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-2">
-                        System Architecture Stack
-                      </span>
-                      <div className="flex flex-wrap gap-1.5">
-                        {project.techStack.map((tech) => (
-                          <span
-                            key={tech}
-                            className="px-2 py-0.5 border border-white/10 text-[9px] tracking-wider font-semibold uppercase text-white/60"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="flex gap-4 pt-6">
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-5 py-2 border border-white text-white hover:bg-white hover:text-black font-semibold tracking-wider text-[10px] uppercase flex items-center gap-2 transition-all duration-300"
-                      >
-                        <Github className="w-3.5 h-3.5" />
-                        Repository
-                      </a>
-                      {project.demo && project.demo !== '#' && (
-                        <a
-                          href={project.demo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-5 py-2 bg-white text-black hover:bg-white/80 font-semibold tracking-wider text-[10px] uppercase flex items-center gap-2 transition-all duration-300"
-                        >
-                          <ExternalLink className="w-3.5 h-3.5" />
-                          Live Demo
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Right Column (Alternates Image / Content) */}
-            <div
-              className="absolute top-0 left-1/2 w-1/2 h-full transition-transform duration-[1000ms] ease-in-out"
-              style={{ transform: rightTrans }}
-            >
-              {isEven ? (
-                // Image Half
-                <div className="w-full h-full relative">
-                  <div className="absolute inset-0 bg-black/40 z-10" />
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover filter grayscale"
-                  />
-                  {/* Decorative badge */}
-                  <div className="absolute top-12 right-12 z-20 font-body text-[10px] tracking-widest font-semibold text-white/40 uppercase">
-                    [ WORK 0{idx} ]
-                  </div>
-                </div>
-              ) : (
-                // Content Half
-                <div className="w-full h-full bg-[#070707] flex flex-col justify-center px-16 xl:px-24 text-white border-l border-white/5">
-                  <div className="flex items-center gap-3 mb-6">
-                    <ProjectIcon className="w-4 h-4 text-white/60" />
-                    <span className="font-body text-[10px] font-bold tracking-widest text-white/40 uppercase">
-                      {project.category}
-                    </span>
-                  </div>
-
-                  <h3 className="font-display text-4xl xl:text-5xl font-bold tracking-tight mb-8">
-                    {project.title}
-                  </h3>
-
-                  <div className="space-y-6 text-xs xl:text-sm font-body leading-relaxed text-white/70 max-w-xl">
-                    <div>
-                      <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">
-                        The Mission
-                      </span>
-                      <p>{project.story}</p>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-6 pt-4 border-t border-white/5">
-                      <div>
-                        <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">
-                          The Problem
-                        </span>
-                        <p className="text-[11px] leading-relaxed text-white/60">{project.problem}</p>
-                      </div>
-                      <div>
-                        <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">
-                          The Solution
-                        </span>
-                        <p className="text-[11px] leading-relaxed text-white/60">{project.solution}</p>
-                      </div>
-                    </div>
-
-                    <div className="pt-4 border-t border-white/5">
-                      <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-2.5">
-                        Key Specifications
-                      </span>
-                      <ul className="grid grid-cols-2 gap-2 text-white/80">
-                        {project.features.map((feat, fidx) => (
-                          <li key={fidx} className="flex items-center gap-2 text-[11px]">
-                            <span className="w-1.5 h-1.5 bg-white/40 rounded-full" />
-                            <span>{feat}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div className="pt-4">
-                      <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-2">
-                        System Architecture Stack
-                      </span>
-                      <div className="flex flex-wrap gap-1.5">
-                        {project.techStack.map((tech) => (
-                          <span
-                            key={tech}
-                            className="px-2 py-0.5 border border-white/10 text-[9px] tracking-wider font-semibold uppercase text-white/60"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="flex gap-4 pt-6">
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-5 py-2 border border-white text-white hover:bg-white hover:text-black font-semibold tracking-wider text-[10px] uppercase flex items-center gap-2 transition-all duration-300"
-                      >
-                        <Github className="w-3.5 h-3.5" />
-                        Repository
-                      </a>
-                      {project.demo && project.demo !== '#' && (
-                        <a
-                          href={project.demo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-5 py-2 bg-white text-black hover:bg-white/80 font-semibold tracking-wider text-[10px] uppercase flex items-center gap-2 transition-all duration-300"
-                        >
-                          <ExternalLink className="w-3.5 h-3.5" />
-                          Live Demo
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
+    <div ref={trackRef} id="featured-track" className="relative h-[400vh] bg-black">
+      <section id="featured" className="sticky top-0 overflow-hidden h-screen w-full bg-black select-none z-20">
+        {/* Scroll indicator overlay */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-1.5 pointer-events-none">
+          <span className="font-body text-[9px] font-bold tracking-[0.25em] text-white/40 uppercase">
+            Slide {currentPage} / {featured.length}
+          </span>
+          <div className="flex gap-1">
+            {featured.map((_, i) => (
+              <div
+                key={i}
+                className={`h-[3px] transition-all duration-300 rounded-full ${
+                  currentPage === i + 1 ? 'w-6 bg-white' : 'w-1.5 bg-white/20'
+                }`}
+              />
+            ))}
           </div>
-        );
-      })}
-    </section>
+        </div>
+
+        {/* Floating control buttons */}
+        <div className="absolute right-8 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-2">
+          <button
+            onClick={() => handleLaunchProject(Math.max(currentPage - 1, 1))}
+            disabled={currentPage === 1}
+            className={`p-2 rounded-full border border-white/10 bg-white/5 text-white/50 hover:text-white hover:bg-white/10 transition-all ${
+              currentPage === 1 ? 'opacity-30 cursor-not-allowed' : 'opacity-100 cursor-pointer'
+            }`}
+          >
+            <ChevronUp className="w-4 h-4" />
+          </button>
+          <button
+            onClick={() => handleLaunchProject(Math.min(currentPage + 1, featured.length))}
+            disabled={currentPage === featured.length}
+            className={`p-2 rounded-full border border-white/10 bg-white/5 text-white/50 hover:text-white hover:bg-white/10 transition-all ${
+              currentPage === featured.length ? 'opacity-30 cursor-not-allowed' : 'opacity-100 cursor-pointer'
+            }`}
+          >
+            <ChevronDown className="w-4 h-4" />
+          </button>
+        </div>
+
+        {featured.map((project, i) => {
+          const idx = i + 1;
+          const isActive = currentPage === idx;
+          const upOff = 'translateY(-100%)';
+          const downOff = 'translateY(100%)';
+          
+          // Alternating split screen sliding animations
+          const isEven = idx % 2 === 0;
+          const leftTrans = isActive ? 'translateY(0)' : (isEven ? upOff : downOff);
+          const rightTrans = isActive ? 'translateY(0)' : (isEven ? downOff : upOff);
+          const ProjectIcon = project.icon;
+
+          return (
+            <div key={project.id} className="absolute inset-0 w-full h-full">
+              {/* Left Column (Alternates Content / Image) */}
+              <div
+                className="absolute top-0 left-0 w-1/2 h-full transition-transform duration-[1000ms] ease-in-out"
+                style={{ transform: leftTrans }}
+              >
+                {!isEven ? (
+                  // Image Half
+                  <div className="w-full h-full relative">
+                    <div className="absolute inset-0 bg-black/40 z-10" />
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover filter grayscale"
+                    />
+                    {/* Decorative badge */}
+                    <div className="absolute top-12 left-12 z-20 font-body text-[10px] tracking-widest font-semibold text-white/40 uppercase">
+                      [ WORK 0{idx} ]
+                    </div>
+                  </div>
+                ) : (
+                  // Content Half
+                  <div className="w-full h-full bg-[#070707] flex flex-col justify-center px-16 xl:px-24 text-white border-r border-white/5">
+                    <div className="flex items-center gap-3 mb-6">
+                      <ProjectIcon className="w-4 h-4 text-white/60" />
+                      <span className="font-body text-[10px] font-bold tracking-widest text-white/40 uppercase">
+                        {project.category}
+                      </span>
+                    </div>
+
+                    <h3 className="font-display text-4xl xl:text-5xl font-bold tracking-tight mb-8">
+                      {project.title}
+                    </h3>
+
+                    <div className="space-y-6 text-xs xl:text-sm font-body leading-relaxed text-white/70 max-w-xl">
+                      <div>
+                        <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">
+                          The Mission
+                        </span>
+                        <p>{project.story}</p>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-6 pt-4 border-t border-white/5">
+                        <div>
+                          <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">
+                            The Problem
+                          </span>
+                          <p className="text-[11px] leading-relaxed text-white/60">{project.problem}</p>
+                        </div>
+                        <div>
+                          <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">
+                            The Solution
+                          </span>
+                          <p className="text-[11px] leading-relaxed text-white/60">{project.solution}</p>
+                        </div>
+                      </div>
+
+                      <div className="pt-4 border-t border-white/5">
+                        <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-2.5">
+                          Key Specifications
+                        </span>
+                        <ul className="grid grid-cols-2 gap-2 text-white/80">
+                          {project.features.map((feat, fidx) => (
+                            <li key={fidx} className="flex items-center gap-2 text-[11px]">
+                              <span className="w-1.5 h-1.5 bg-white/40 rounded-full" />
+                              <span>{feat}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div className="pt-4">
+                        <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-2">
+                          System Architecture Stack
+                        </span>
+                        <div className="flex flex-wrap gap-1.5">
+                          {project.techStack.map((tech) => (
+                            <span
+                              key={tech}
+                              className="px-2 py-0.5 border border-white/10 text-[9px] tracking-wider font-semibold uppercase text-white/60"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="flex gap-4 pt-6">
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-5 py-2 border border-white text-white hover:bg-white hover:text-black font-semibold tracking-wider text-[10px] uppercase flex items-center gap-2 transition-all duration-300"
+                        >
+                          <Github className="w-3.5 h-3.5" />
+                          Repository
+                        </a>
+                        {project.demo && project.demo !== '#' && (
+                          <a
+                            href={project.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-5 py-2 bg-white text-black hover:bg-white/80 font-semibold tracking-wider text-[10px] uppercase flex items-center gap-2 transition-all duration-300"
+                          >
+                            <ExternalLink className="w-3.5 h-3.5" />
+                            Live Demo
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Right Column (Alternates Image / Content) */}
+              <div
+                className="absolute top-0 left-1/2 w-1/2 h-full transition-transform duration-[1000ms] ease-in-out"
+                style={{ transform: rightTrans }}
+              >
+                {isEven ? (
+                  // Image Half
+                  <div className="w-full h-full relative">
+                    <div className="absolute inset-0 bg-black/40 z-10" />
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover filter grayscale"
+                    />
+                    {/* Decorative badge */}
+                    <div className="absolute top-12 right-12 z-20 font-body text-[10px] tracking-widest font-semibold text-white/40 uppercase">
+                      [ WORK 0{idx} ]
+                    </div>
+                  </div>
+                ) : (
+                  // Content Half
+                  <div className="w-full h-full bg-[#070707] flex flex-col justify-center px-16 xl:px-24 text-white border-l border-white/5">
+                    <div className="flex items-center gap-3 mb-6">
+                      <ProjectIcon className="w-4 h-4 text-white/60" />
+                      <span className="font-body text-[10px] font-bold tracking-widest text-white/40 uppercase">
+                        {project.category}
+                      </span>
+                    </div>
+
+                    <h3 className="font-display text-4xl xl:text-5xl font-bold tracking-tight mb-8">
+                      {project.title}
+                    </h3>
+
+                    <div className="space-y-6 text-xs xl:text-sm font-body leading-relaxed text-white/70 max-w-xl">
+                      <div>
+                        <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">
+                          The Mission
+                        </span>
+                        <p>{project.story}</p>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-6 pt-4 border-t border-white/5">
+                        <div>
+                          <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">
+                            The Problem
+                          </span>
+                          <p className="text-[11px] leading-relaxed text-white/60">{project.problem}</p>
+                        </div>
+                        <div>
+                          <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">
+                            The Solution
+                          </span>
+                          <p className="text-[11px] leading-relaxed text-white/60">{project.solution}</p>
+                        </div>
+                      </div>
+
+                      <div className="pt-4 border-t border-white/5">
+                        <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-2.5">
+                          Key Specifications
+                        </span>
+                        <ul className="grid grid-cols-2 gap-2 text-white/80">
+                          {project.features.map((feat, fidx) => (
+                            <li key={fidx} className="flex items-center gap-2 text-[11px]">
+                              <span className="w-1.5 h-1.5 bg-white/40 rounded-full" />
+                              <span>{feat}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div className="pt-4">
+                        <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-2">
+                          System Architecture Stack
+                        </span>
+                        <div className="flex flex-wrap gap-1.5">
+                          {project.techStack.map((tech) => (
+                            <span
+                              key={tech}
+                              className="px-2 py-0.5 border border-white/10 text-[9px] tracking-wider font-semibold uppercase text-white/60"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="flex gap-4 pt-6">
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-5 py-2 border border-white text-white hover:bg-white hover:text-black font-semibold tracking-wider text-[10px] uppercase flex items-center gap-2 transition-all duration-300"
+                        >
+                          <Github className="w-3.5 h-3.5" />
+                          Repository
+                        </a>
+                        {project.demo && project.demo !== '#' && (
+                          <a
+                            href={project.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-5 py-2 bg-white text-black hover:bg-white/80 font-semibold tracking-wider text-[10px] uppercase flex items-center gap-2 transition-all duration-300"
+                          >
+                            <ExternalLink className="w-3.5 h-3.5" />
+                            Live Demo
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </section>
+    </div>
   );
 }
