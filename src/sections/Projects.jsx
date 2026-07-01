@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
+import { motion, useScroll, useMotionValueEvent, useTransform } from 'framer-motion';
 import { Github, ExternalLink, Shield, Compass, Key, BookOpen, ChevronDown, ChevronUp } from 'lucide-react';
 
 export default function Projects({ currentPage, setCurrentPage }) {
@@ -98,14 +98,20 @@ export default function Projects({ currentPage, setCurrentPage }) {
     offset: ["start start", "end end"]
   });
 
+  // Calculate pages for display indicators
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     if (windowWidth < 1024) return;
-    // Map scroll progress (0.0 to 1.0) to active page slide index (1 to 4)
     let page = Math.floor(latest * featured.length) + 1;
     if (page > featured.length) page = featured.length;
     if (page < 1) page = 1;
     setCurrentPage(page);
   });
+
+  // Map scroll progress to column translations
+  // Left column goes from 0% (Slide 1 Left) to -300% (Slide 4 Left)
+  const yLeft = useTransform(scrollYProgress, [0, 1], ["0%", "-300%"]);
+  // Right column goes from -300% (Slide 1 Right) to 0% (Slide 4 Right)
+  const yRight = useTransform(scrollYProgress, [0, 1], ["-300%", "0%"]);
 
   const handleLaunchProject = (idx) => {
     const track = document.getElementById('featured-track');
@@ -213,6 +219,7 @@ export default function Projects({ currentPage, setCurrentPage }) {
   return (
     <div ref={trackRef} id="featured-track" className="relative h-[400vh] bg-black">
       <section id="featured" className="sticky top-0 overflow-hidden h-screen w-full bg-black select-none z-20">
+        
         {/* Scroll indicator overlay */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-1.5 pointer-events-none">
           <span className="font-body text-[9px] font-bold tracking-[0.25em] text-white/40 uppercase">
@@ -252,248 +259,264 @@ export default function Projects({ currentPage, setCurrentPage }) {
           </button>
         </div>
 
-        {featured.map((project, i) => {
-          const idx = i + 1;
-          const isActive = currentPage === idx;
-          const upOff = 'translateY(-100%)';
-          const downOff = 'translateY(100%)';
+        {/* The Split Screen Parallax Columns */}
+        <div className="absolute inset-0 w-full h-full flex">
           
-          // Alternating split screen sliding animations
-          const isEven = idx % 2 === 0;
-          const leftTrans = isActive ? 'translateY(0)' : (isEven ? upOff : downOff);
-          const rightTrans = isActive ? 'translateY(0)' : (isEven ? downOff : upOff);
-          const ProjectIcon = project.icon;
-
-          return (
-            <div key={project.id} className="absolute inset-0 w-full h-full">
-              {/* Left Column (Alternates Content / Image) */}
-              <div
-                className="absolute top-0 left-0 w-1/2 h-full transition-transform duration-[1000ms] ease-in-out"
-                style={{ transform: leftTrans }}
-              >
-                {!isEven ? (
-                  // Image Half
-                  <div className="w-full h-full relative">
-                    <div className="absolute inset-0 bg-black/40 z-10" />
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover filter grayscale"
-                    />
-                    {/* Decorative badge */}
-                    <div className="absolute top-12 left-12 z-20 font-body text-[10px] tracking-widest font-semibold text-white/40 uppercase">
-                      [ WORK 0{idx} ]
-                    </div>
-                  </div>
-                ) : (
-                  // Content Half
-                  <div className="w-full h-full bg-[#070707] flex flex-col justify-center px-16 xl:px-24 text-white border-r border-white/5">
-                    <div className="flex items-center gap-3 mb-6">
-                      <ProjectIcon className="w-4 h-4 text-white/60" />
-                      <span className="font-body text-[10px] font-bold tracking-widest text-white/40 uppercase">
-                        {project.category}
-                      </span>
-                    </div>
-
-                    <h3 className="font-display text-4xl xl:text-5xl font-bold tracking-tight mb-8">
-                      {project.title}
-                    </h3>
-
-                    <div className="space-y-6 text-xs xl:text-sm font-body leading-relaxed text-white/70 max-w-xl">
-                      <div>
-                        <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">
-                          The Mission
-                        </span>
-                        <p>{project.story}</p>
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-6 pt-4 border-t border-white/5">
-                        <div>
-                          <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">
-                            The Problem
-                          </span>
-                          <p className="text-[11px] leading-relaxed text-white/60">{project.problem}</p>
-                        </div>
-                        <div>
-                          <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">
-                            The Solution
-                          </span>
-                          <p className="text-[11px] leading-relaxed text-white/60">{project.solution}</p>
-                        </div>
-                      </div>
-
-                      <div className="pt-4 border-t border-white/5">
-                        <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-2.5">
-                          Key Specifications
-                        </span>
-                        <ul className="grid grid-cols-2 gap-2 text-white/80">
-                          {project.features.map((feat, fidx) => (
-                            <li key={fidx} className="flex items-center gap-2 text-[11px]">
-                              <span className="w-1.5 h-1.5 bg-white/40 rounded-full" />
-                              <span>{feat}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      <div className="pt-4">
-                        <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-2">
-                          System Architecture Stack
-                        </span>
-                        <div className="flex flex-wrap gap-1.5">
-                          {project.techStack.map((tech) => (
-                            <span
-                              key={tech}
-                              className="px-2 py-0.5 border border-white/10 text-[9px] tracking-wider font-semibold uppercase text-white/60"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="flex gap-4 pt-6">
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-5 py-2 border border-white text-white hover:bg-white hover:text-black font-semibold tracking-wider text-[10px] uppercase flex items-center gap-2 transition-all duration-300"
-                        >
-                          <Github className="w-3.5 h-3.5" />
-                          Repository
-                        </a>
-                        {project.demo && project.demo !== '#' && (
-                          <a
-                            href={project.demo}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="px-5 py-2 bg-white text-black hover:bg-white/80 font-semibold tracking-wider text-[10px] uppercase flex items-center gap-2 transition-all duration-300"
-                          >
-                            <ExternalLink className="w-3.5 h-3.5" />
-                            Live Demo
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Right Column (Alternates Image / Content) */}
-              <div
-                className="absolute top-0 left-1/2 w-1/2 h-full transition-transform duration-[1000ms] ease-in-out"
-                style={{ transform: rightTrans }}
-              >
-                {isEven ? (
-                  // Image Half
-                  <div className="w-full h-full relative">
-                    <div className="absolute inset-0 bg-black/40 z-10" />
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover filter grayscale"
-                    />
-                    {/* Decorative badge */}
-                    <div className="absolute top-12 right-12 z-20 font-body text-[10px] tracking-widest font-semibold text-white/40 uppercase">
-                      [ WORK 0{idx} ]
-                    </div>
-                  </div>
-                ) : (
-                  // Content Half
-                  <div className="w-full h-full bg-[#070707] flex flex-col justify-center px-16 xl:px-24 text-white border-l border-white/5">
-                    <div className="flex items-center gap-3 mb-6">
-                      <ProjectIcon className="w-4 h-4 text-white/60" />
-                      <span className="font-body text-[10px] font-bold tracking-widest text-white/40 uppercase">
-                        {project.category}
-                      </span>
-                    </div>
-
-                    <h3 className="font-display text-4xl xl:text-5xl font-bold tracking-tight mb-8">
-                      {project.title}
-                    </h3>
-
-                    <div className="space-y-6 text-xs xl:text-sm font-body leading-relaxed text-white/70 max-w-xl">
-                      <div>
-                        <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">
-                          The Mission
-                        </span>
-                        <p>{project.story}</p>
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-6 pt-4 border-t border-white/5">
-                        <div>
-                          <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">
-                            The Problem
-                          </span>
-                          <p className="text-[11px] leading-relaxed text-white/60">{project.problem}</p>
-                        </div>
-                        <div>
-                          <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">
-                            The Solution
-                          </span>
-                          <p className="text-[11px] leading-relaxed text-white/60">{project.solution}</p>
-                        </div>
-                      </div>
-
-                      <div className="pt-4 border-t border-white/5">
-                        <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-2.5">
-                          Key Specifications
-                        </span>
-                        <ul className="grid grid-cols-2 gap-2 text-white/80">
-                          {project.features.map((feat, fidx) => (
-                            <li key={fidx} className="flex items-center gap-2 text-[11px]">
-                              <span className="w-1.5 h-1.5 bg-white/40 rounded-full" />
-                              <span>{feat}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      <div className="pt-4">
-                        <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-2">
-                          System Architecture Stack
-                        </span>
-                        <div className="flex flex-wrap gap-1.5">
-                          {project.techStack.map((tech) => (
-                            <span
-                              key={tech}
-                              className="px-2 py-0.5 border border-white/10 text-[9px] tracking-wider font-semibold uppercase text-white/60"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="flex gap-4 pt-6">
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-5 py-2 border border-white text-white hover:bg-white hover:text-black font-semibold tracking-wider text-[10px] uppercase flex items-center gap-2 transition-all duration-300"
-                        >
-                          <Github className="w-3.5 h-3.5" />
-                          Repository
-                        </a>
-                        {project.demo && project.demo !== '#' && (
-                          <a
-                            href={project.demo}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="px-5 py-2 bg-white text-black hover:bg-white/80 font-semibold tracking-wider text-[10px] uppercase flex items-center gap-2 transition-all duration-300"
-                          >
-                            <ExternalLink className="w-3.5 h-3.5" />
-                            Live Demo
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                )}
+          {/* Left Column (Slides up, mapped from 0% to -300%) */}
+          <motion.div 
+            className="w-1/2 h-full flex flex-col"
+            style={{ y: yLeft }}
+          >
+            {/* 1. RakshaMarg (Odd: Image) */}
+            <div className="h-screen w-full relative shrink-0">
+              <div className="absolute inset-0 bg-black/40 z-10" />
+              <img src={featured[0].image} alt={featured[0].title} className="w-full h-full object-cover filter grayscale" />
+              <div className="absolute top-12 left-12 z-20 font-body text-[10px] tracking-widest font-semibold text-white/40 uppercase">
+                [ WORK 01 ]
               </div>
             </div>
-          );
-        })}
+
+            {/* 2. ChainRent (Even: Content) */}
+            <div className="h-screen w-full bg-[#070707] flex flex-col justify-center px-16 xl:px-24 text-white border-r border-white/5 shrink-0">
+              <div className="flex items-center gap-3 mb-6">
+                <Compass className="w-4 h-4 text-white/60" />
+                <span className="font-body text-[10px] font-bold tracking-widest text-white/40 uppercase">
+                  {featured[1].category}
+                </span>
+              </div>
+              <h3 className="font-display text-4xl xl:text-5xl font-bold tracking-tight mb-8">{featured[1].title}</h3>
+              <div className="space-y-6 text-xs xl:text-sm font-body leading-relaxed text-white/70 max-w-xl">
+                <div>
+                  <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">The Mission</span>
+                  <p>{featured[1].story}</p>
+                </div>
+                <div className="grid grid-cols-2 gap-6 pt-4 border-t border-white/5">
+                  <div>
+                    <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">The Problem</span>
+                    <p className="text-[11px] leading-relaxed text-white/60">{featured[1].problem}</p>
+                  </div>
+                  <div>
+                    <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">The Solution</span>
+                    <p className="text-[11px] leading-relaxed text-white/60">{featured[1].solution}</p>
+                  </div>
+                </div>
+                <div className="pt-4 border-t border-white/5">
+                  <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-2.5">Key Specifications</span>
+                  <ul className="grid grid-cols-2 gap-2 text-white/80">
+                    {featured[1].features.map((feat, fidx) => (
+                      <li key={fidx} className="flex items-center gap-2 text-[11px]">
+                        <span className="w-1.5 h-1.5 bg-white/40 rounded-full" />
+                        <span>{feat}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="pt-4">
+                  <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-2">System Architecture Stack</span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {featured[1].techStack.map((tech) => (
+                      <span key={tech} className="px-2 py-0.5 border border-white/10 text-[9px] tracking-wider font-semibold uppercase text-white/60">{tech}</span>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex gap-4 pt-6">
+                  <a href={featured[1].github} target="_blank" rel="noopener noreferrer" className="px-5 py-2 border border-white text-white hover:bg-white hover:text-black font-semibold tracking-wider text-[10px] uppercase flex items-center gap-2 transition-all duration-300">
+                    <Github className="w-3.5 h-3.5" /> Repository
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* 3. StellarPay (Odd: Image) */}
+            <div className="h-screen w-full relative shrink-0">
+              <div className="absolute inset-0 bg-black/40 z-10" />
+              <img src={featured[2].image} alt={featured[2].title} className="w-full h-full object-cover filter grayscale" />
+              <div className="absolute top-12 left-12 z-20 font-body text-[10px] tracking-widest font-semibold text-white/40 uppercase">
+                [ WORK 03 ]
+              </div>
+            </div>
+
+            {/* 4. VEDAX (Even: Content) */}
+            <div className="h-screen w-full bg-[#070707] flex flex-col justify-center px-16 xl:px-24 text-white border-r border-white/5 shrink-0">
+              <div className="flex items-center gap-3 mb-6">
+                <BookOpen className="w-4 h-4 text-white/60" />
+                <span className="font-body text-[10px] font-bold tracking-widest text-white/40 uppercase">
+                  {featured[3].category}
+                </span>
+              </div>
+              <h3 className="font-display text-4xl xl:text-5xl font-bold tracking-tight mb-8">{featured[3].title}</h3>
+              <div className="space-y-6 text-xs xl:text-sm font-body leading-relaxed text-white/70 max-w-xl">
+                <div>
+                  <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">The Mission</span>
+                  <p>{featured[3].story}</p>
+                </div>
+                <div className="grid grid-cols-2 gap-6 pt-4 border-t border-white/5">
+                  <div>
+                    <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">The Problem</span>
+                    <p className="text-[11px] leading-relaxed text-white/60">{featured[3].problem}</p>
+                  </div>
+                  <div>
+                    <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">The Solution</span>
+                    <p className="text-[11px] leading-relaxed text-white/60">{featured[3].solution}</p>
+                  </div>
+                </div>
+                <div className="pt-4 border-t border-white/5">
+                  <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-2.5">Key Specifications</span>
+                  <ul className="grid grid-cols-2 gap-2 text-white/80">
+                    {featured[3].features.map((feat, fidx) => (
+                      <li key={fidx} className="flex items-center gap-2 text-[11px]">
+                        <span className="w-1.5 h-1.5 bg-white/40 rounded-full" />
+                        <span>{feat}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="pt-4">
+                  <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-2">System Architecture Stack</span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {featured[3].techStack.map((tech) => (
+                      <span key={tech} className="px-2 py-0.5 border border-white/10 text-[9px] tracking-wider font-semibold uppercase text-white/60">{tech}</span>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex gap-4 pt-6">
+                  <a href={featured[3].github} target="_blank" rel="noopener noreferrer" className="px-5 py-2 border border-white text-white hover:bg-white hover:text-black font-semibold tracking-wider text-[10px] uppercase flex items-center gap-2 transition-all duration-300">
+                    <Github className="w-3.5 h-3.5" /> Repository
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </motion.div>
+
+          {/* Right Column (Slides down, mapped from -300% to 0%) */}
+          <motion.div 
+            className="w-1/2 h-full flex flex-col"
+            style={{ y: yRight }}
+          >
+            {/* 4. VEDAX (Even: Image) */}
+            <div className="h-screen w-full relative shrink-0">
+              <div className="absolute inset-0 bg-black/40 z-10" />
+              <img src={featured[3].image} alt={featured[3].title} className="w-full h-full object-cover filter grayscale" />
+              <div className="absolute top-12 right-12 z-20 font-body text-[10px] tracking-widest font-semibold text-white/40 uppercase">
+                [ WORK 04 ]
+              </div>
+            </div>
+
+            {/* 3. StellarPay (Odd: Content) */}
+            <div className="h-screen w-full bg-[#070707] flex flex-col justify-center px-16 xl:px-24 text-white border-l border-white/5 shrink-0">
+              <div className="flex items-center gap-3 mb-6">
+                <Key className="w-4 h-4 text-white/60" />
+                <span className="font-body text-[10px] font-bold tracking-widest text-white/40 uppercase">
+                  {featured[2].category}
+                </span>
+              </div>
+              <h3 className="font-display text-4xl xl:text-5xl font-bold tracking-tight mb-8">{featured[2].title}</h3>
+              <div className="space-y-6 text-xs xl:text-sm font-body leading-relaxed text-white/70 max-w-xl">
+                <div>
+                  <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">The Mission</span>
+                  <p>{featured[2].story}</p>
+                </div>
+                <div className="grid grid-cols-2 gap-6 pt-4 border-t border-white/5">
+                  <div>
+                    <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">The Problem</span>
+                    <p className="text-[11px] leading-relaxed text-white/60">{featured[2].problem}</p>
+                  </div>
+                  <div>
+                    <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">The Solution</span>
+                    <p className="text-[11px] leading-relaxed text-white/60">{featured[2].solution}</p>
+                  </div>
+                </div>
+                <div className="pt-4 border-t border-white/5">
+                  <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-2.5">Key Specifications</span>
+                  <ul className="grid grid-cols-2 gap-2 text-white/80">
+                    {featured[2].features.map((feat, fidx) => (
+                      <li key={fidx} className="flex items-center gap-2 text-[11px]">
+                        <span className="w-1.5 h-1.5 bg-white/40 rounded-full" />
+                        <span>{feat}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="pt-4">
+                  <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-2">System Architecture Stack</span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {featured[2].techStack.map((tech) => (
+                      <span key={tech} className="px-2 py-0.5 border border-white/10 text-[9px] tracking-wider font-semibold uppercase text-white/60">{tech}</span>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex gap-4 pt-6">
+                  <a href={featured[2].github} target="_blank" rel="noopener noreferrer" className="px-5 py-2 border border-white text-white hover:bg-white hover:text-black font-semibold tracking-wider text-[10px] uppercase flex items-center gap-2 transition-all duration-300">
+                    <Github className="w-3.5 h-3.5" /> Repository
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* 2. ChainRent (Even: Image) */}
+            <div className="h-screen w-full relative shrink-0">
+              <div className="absolute inset-0 bg-black/40 z-10" />
+              <img src={featured[1].image} alt={featured[1].title} className="w-full h-full object-cover filter grayscale" />
+              <div className="absolute top-12 right-12 z-20 font-body text-[10px] tracking-widest font-semibold text-white/40 uppercase">
+                [ WORK 02 ]
+              </div>
+            </div>
+
+            {/* 1. RakshaMarg (Odd: Content) */}
+            <div className="h-screen w-full bg-[#070707] flex flex-col justify-center px-16 xl:px-24 text-white border-l border-white/5 shrink-0">
+              <div className="flex items-center gap-3 mb-6">
+                <Shield className="w-4 h-4 text-white/60" />
+                <span className="font-body text-[10px] font-bold tracking-widest text-white/40 uppercase">
+                  {featured[0].category}
+                </span>
+              </div>
+              <h3 className="font-display text-4xl xl:text-5xl font-bold tracking-tight mb-8">{featured[0].title}</h3>
+              <div className="space-y-6 text-xs xl:text-sm font-body leading-relaxed text-white/70 max-w-xl">
+                <div>
+                  <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">The Mission</span>
+                  <p>{featured[0].story}</p>
+                </div>
+                <div className="grid grid-cols-2 gap-6 pt-4 border-t border-white/5">
+                  <div>
+                    <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">The Problem</span>
+                    <p className="text-[11px] leading-relaxed text-white/60">{featured[0].problem}</p>
+                  </div>
+                  <div>
+                    <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">The Solution</span>
+                    <p className="text-[11px] leading-relaxed text-white/60">{featured[0].solution}</p>
+                  </div>
+                </div>
+                <div className="pt-4 border-t border-white/5">
+                  <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-2.5">Key Specifications</span>
+                  <ul className="grid grid-cols-2 gap-2 text-white/80">
+                    {featured[0].features.map((feat, fidx) => (
+                      <li key={fidx} className="flex items-center gap-2 text-[11px]">
+                        <span className="w-1.5 h-1.5 bg-white/40 rounded-full" />
+                        <span>{feat}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="pt-4">
+                  <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-2">System Architecture Stack</span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {featured[0].techStack.map((tech) => (
+                      <span key={tech} className="px-2 py-0.5 border border-white/10 text-[9px] tracking-wider font-semibold uppercase text-white/60">{tech}</span>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex gap-4 pt-6">
+                  <a href={featured[0].github} target="_blank" rel="noopener noreferrer" className="px-5 py-2 border border-white text-white hover:bg-white hover:text-black font-semibold tracking-wider text-[10px] uppercase flex items-center gap-2 transition-all duration-300">
+                    <Github className="w-3.5 h-3.5" /> Repository
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </motion.div>
+
+        </div>
       </section>
     </div>
   );

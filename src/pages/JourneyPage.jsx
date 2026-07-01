@@ -113,7 +113,7 @@ export default function JourneyPage() {
       ]
     },
     {
-      date: "January 17, 2026",
+      date: "January 16, 2026",
       title: "First Offline Hackathon Victory",
       icon: Award,
       points: [

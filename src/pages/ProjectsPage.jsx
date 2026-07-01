@@ -48,10 +48,19 @@ export default function ProjectsPage() {
   ];
 
   const handleLaunchProject = (idx) => {
-    setCurrentPage(idx);
-    const element = document.getElementById('featured');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    const track = document.getElementById('featured-track');
+    if (track) {
+      const rect = track.getBoundingClientRect();
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const trackTop = rect.top + scrollTop;
+      const viewportHeight = window.innerHeight;
+      
+      const targetScroll = trackTop + (idx - 1) * viewportHeight + 50;
+      
+      window.scrollTo({
+        top: targetScroll,
+        behavior: 'smooth'
+      });
     }
   };
 
