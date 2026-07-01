@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Award } from 'lucide-react';
 import Hero from '../sections/Hero';
 import Identity from '../sections/Identity';
-import Philosophy from '../sections/Philosophy';
 import Skills from '../sections/Skills';
 import Impact from '../sections/Impact';
 import { certificates } from '../data/certificates';
@@ -20,9 +19,6 @@ export default function Home() {
 
       {/* Identity section */}
       <Identity />
-
-      {/* Philosophy section */}
-      <Philosophy />
 
       {/* Tech Ecosystem section */}
       <Skills />
