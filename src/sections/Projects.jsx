@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
+import { motion, useScroll, useMotionValueEvent, useTransform } from 'framer-motion';
 import { Github, ExternalLink, Shield, Compass, Key, BookOpen, ChevronDown, ChevronUp } from 'lucide-react';
 
 export default function Projects({ currentPage, setCurrentPage }) {
@@ -98,7 +98,7 @@ export default function Projects({ currentPage, setCurrentPage }) {
     offset: ["start start", "end end"]
   });
 
-  // Calculate discrete active slide index from scroll progress (0.0 to 1.0)
+  // Calculate pages for display indicators
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     if (windowWidth < 1024) return;
     let page = Math.floor(latest * featured.length) + 1;
@@ -107,9 +107,11 @@ export default function Projects({ currentPage, setCurrentPage }) {
     setCurrentPage(page);
   });
 
-  // Discrete snap Y translates for left and right columns
-  const targetLeftY = `-${(currentPage - 1) * 100}vh`;
-  const targetRightY = `-${(featured.length - currentPage) * 100}vh`;
+  // Map scroll progress to column translations
+  // Left column goes from 0% (Slide 1 Left) to -300% (Slide 4 Left)
+  const yLeft = useTransform(scrollYProgress, [0, 1], ["0%", "-300%"]);
+  // Right column goes from -300% (Slide 1 Right) to 0% (Slide 4 Right)
+  const yRight = useTransform(scrollYProgress, [0, 1], ["-300%", "0%"]);
 
   const handleLaunchProject = (idx) => {
     const track = document.getElementById('featured-track');
@@ -176,7 +178,7 @@ export default function Projects({ currentPage, setCurrentPage }) {
                       <ul className="grid grid-cols-2 gap-1 text-[11px] font-body text-text/80 dark:text-text-dark/80">
                         {project.features.map((f, i) => (
                           <li key={i} className="flex items-center gap-2">
-                            <span className="w-1.5 h-1.5 bg-text dark:bg-text-dark rounded-full" />
+                            <span className="w-1 h-1 bg-text dark:bg-text-dark rounded-full" />
                             {f}
                           </li>
                         ))}
@@ -257,14 +259,13 @@ export default function Projects({ currentPage, setCurrentPage }) {
           </button>
         </div>
 
-        {/* The Split Screen Columns (Discrete snaps using animate state) */}
-        <div className="absolute inset-0 w-full h-full flex overflow-hidden">
+        {/* The Split Screen Parallax Columns */}
+        <div className="absolute inset-0 w-full h-full flex">
           
-          {/* Left Column (Slides up, animated to targetLeftY) */}
+          {/* Left Column (Slides up, mapped from 0% to -300%) */}
           <motion.div 
             className="w-1/2 h-full flex flex-col"
-            animate={{ y: targetLeftY }}
-            transition={{ duration: 0.7, ease: [0.25, 1, 0.5, 1] }}
+            style={{ y: yLeft }}
           >
             {/* 1. RakshaMarg (Odd: Image) */}
             <div className="h-screen w-full relative shrink-0">
@@ -388,11 +389,10 @@ export default function Projects({ currentPage, setCurrentPage }) {
 
           </motion.div>
 
-          {/* Right Column (Slides down, animated to targetRightY) */}
+          {/* Right Column (Slides down, mapped from -300% to 0%) */}
           <motion.div 
             className="w-1/2 h-full flex flex-col"
-            animate={{ y: targetRightY }}
-            transition={{ duration: 0.7, ease: [0.25, 1, 0.5, 1] }}
+            style={{ y: yRight }}
           >
             {/* 4. VEDAX (Even: Image) */}
             <div className="h-screen w-full relative shrink-0">
