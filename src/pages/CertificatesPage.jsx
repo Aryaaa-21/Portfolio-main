@@ -9,13 +9,13 @@ export default function CertificatesPage() {
   const [selectedCert, setSelectedCert] = useState(null);
   const [shareSuccess, setShareSuccess] = useState(false);
 
-  const categories = ['All', 'Hackathons', 'Web3', 'Development', 'Academic', 'Cloud', 'Leadership', 'Volunteering'];
+  const categories = ['All', 'Hackathons', 'Web3', 'Development', 'Academic', 'Volunteering', 'Extra-Curricular'];
 
   const stats = [
-    { label: "Certificates Earned", value: "25+", icon: Award },
-    { label: "Hackathons Won", value: "6", icon: Trophy },
-    { label: "Prize Money", value: "₹15K+", icon: Landmark },
-    { label: "Events Attended", value: "12+", icon: Filter }
+    { label: "Certificates Earned", value: "21", icon: Award },
+    { label: "Hackathons Won", value: "4", icon: Trophy },
+    { label: "Prize Money", value: "₹25K+", icon: Landmark },
+    { label: "Events Attended", value: "21", icon: Filter }
   ];
 
   const filtered = certificates.filter((cert) => {

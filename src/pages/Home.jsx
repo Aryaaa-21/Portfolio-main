@@ -67,7 +67,7 @@ export default function Home() {
                   </h4>
                   <div className="font-body text-[10px] text-text/50 dark:text-text-dark/50 flex justify-between">
                     <span>{cert.issuer}</span>
-                    <span>{cert.date.split(' ')[1]}</span>
+                    <span>{cert.year}</span>
                   </div>
                 </div>
               </div>
