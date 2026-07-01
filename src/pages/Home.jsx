@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Award } from 'lucide-react';
 import Hero from '../sections/Hero';
+import About from '../sections/About';
 import Identity from '../sections/Identity';
 import Skills from '../sections/Skills';
 import Impact from '../sections/Impact';
@@ -16,6 +17,9 @@ export default function Home() {
     <div className="w-full flex flex-col">
       {/* Hero section */}
       <Hero />
+
+      {/* About section */}
+      <About />
 
       {/* Identity section */}
       <Identity />
