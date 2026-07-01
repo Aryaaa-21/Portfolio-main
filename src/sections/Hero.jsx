@@ -63,7 +63,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
             className="flex flex-wrap gap-x-3 gap-y-1 font-body text-sm font-semibold uppercase tracking-wider text-text/50 dark:text-text-dark/50 mb-4"
           >
-            <span>Full Stack Developer</span>
+            <span>Aspiring Full Stack Developer</span>
             <span className="text-text/20 dark:text-text-dark/20">|</span>
             <span>Web3 Builder</span>
             <span className="text-text/20 dark:text-text-dark/20">|</span>
@@ -142,7 +142,7 @@ export default function Hero() {
           >
             {/* Soft Shadow Backing */}
             <div className="absolute inset-0 bg-text/5 dark:bg-text-dark/5 blur-2xl z-[-1]" />
-            
+
             {/* The Image */}
             <motion.div
               animate={{
