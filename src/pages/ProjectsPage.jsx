@@ -84,9 +84,7 @@ export default function ProjectsPage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <span className="font-body text-xs font-semibold tracking-[0.25em] text-text/50 dark:text-text-dark/50 block mb-4 uppercase">
-              System Directory [04 Active Modules]
-            </span>
+
             <h1 className="font-display text-4xl sm:text-6xl font-bold tracking-tight text-text dark:text-text-dark uppercase mb-6">
               Core Engineering Deployments
             </h1>

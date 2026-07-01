@@ -46,14 +46,7 @@ export default function Hero() {
       <div className="relative z-10 w-full max-w-7xl grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center h-full">
         {/* Left Column - Content */}
         <div className="col-span-1 lg:col-span-7 flex flex-col justify-center text-left">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="inline-block self-start px-3 py-1 border border-border dark:border-border-dark font-body text-xs font-semibold tracking-[0.2em] mb-6 text-text/80 dark:text-text-dark/80"
-          >
-            NARULA INSTITUTE OF TECHNOLOGY
-          </motion.div>
+
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}

@@ -208,9 +208,7 @@ export default function JourneyPage() {
 
         {/* Page Hero */}
         <div className="text-center mb-20">
-          <span className="font-body text-xs font-semibold tracking-[0.25em] text-text/50 dark:text-text-dark/50 block mb-4 uppercase">
-            Chronology Registry
-          </span>
+
           <h1 className="font-display text-4xl sm:text-6xl font-bold tracking-tight text-text dark:text-text-dark mb-4">
             MY ENGINEERING JOURNEY
           </h1>

@@ -44,9 +44,7 @@ export default function CertificatesPage() {
         
         {/* Page Hero */}
         <div className="mb-16">
-          <span className="font-body text-xs font-semibold tracking-[0.2em] text-text/50 dark:text-text-dark/50 block mb-4 uppercase">
-            Milestone Vault
-          </span>
+
           <h1 className="font-display text-4xl sm:text-6xl font-bold tracking-tight text-text dark:text-text-dark mb-4">
             CERTIFICATE VAULT
           </h1>
