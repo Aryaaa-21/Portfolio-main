@@ -11,7 +11,7 @@ import CertificatesPage from './pages/CertificatesPage';
 
 // Components
 import ShaderBackground from './components/ShaderBackground';
-import CustomCursor from './components/CustomCursor';
+import TargetCursor from './components/ui/TargetCursor';
 
 // Helper component to scroll to top on route change
 function ScrollToTop() {
@@ -56,8 +56,13 @@ export default function App() {
         {/* Adaptive background canvas */}
         <ShaderBackground theme={theme} />
 
-        {/* Custom Circular Follower Cursor */}
-        <CustomCursor />
+        {/* Target Cursor from React Bits */}
+        <TargetCursor 
+          targetSelector="a, button, .cursor-target, .interactive"
+          spinDuration={2}
+          hideDefaultCursor={true}
+          parallaxOn={true}
+        />
 
         {/* Multi-page Header */}
         <Navbar theme={theme} toggleTheme={toggleTheme} />
