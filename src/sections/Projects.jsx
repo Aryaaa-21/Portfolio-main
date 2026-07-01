@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Github, ExternalLink, Shield, Compass, Key, BookOpen, ChevronDown, ChevronUp } from 'lucide-react';
 
-export default function Projects() {
+export default function Projects({ currentPage, setCurrentPage }) {
   const featured = [
     {
       id: "rakshamarg",
@@ -82,7 +82,7 @@ export default function Projects() {
     }
   ];
 
-  const [currentPage, setCurrentPage] = useState(1);
+
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
   const scrolling = useRef(false);
   const containerRef = useRef(null);

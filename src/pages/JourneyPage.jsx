@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, Compass, Award, Frown, BookOpen, Rocket, CheckCircle, Flame } from 'lucide-react';
@@ -6,18 +6,10 @@ import { Calendar, Compass, Award, Frown, BookOpen, Rocket, CheckCircle, Flame }
 export default function JourneyPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const activeYear = parseInt(searchParams.get('year') || '1', 10);
-  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
 
   const handleYearChange = (year) => {
     setSearchParams({ year: year.toString() });
   };
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   useEffect(() => {
     // Scroll to top of timeline upon year toggle
@@ -140,7 +132,7 @@ export default function JourneyPage() {
     },
     {
       date: "February 2026",
-      title: "Semester Examinations",
+      title: "1st Semester Examinations",
       icon: BookOpen,
       points: [
         "Balanced academics and hackathon builds."
@@ -181,12 +173,20 @@ export default function JourneyPage() {
         "Reduced hackathons.",
         "Prioritized academics."
       ]
+    },
+    {
+      date: "June 2026",
+      title: "2nd Semester Exam",
+      icon: BookOpen,
+      points: [
+        "Fully focus on study"
+      ]
     }
   ];
 
   return (
     <div className="w-full min-h-screen bg-background dark:bg-background-dark pt-32 pb-24 theme-transition relative overflow-hidden">
-      
+
       {/* Background Watermark Faded Typography */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden z-0">
         <span className="text-[12vw] font-bold text-mono-42/5 dark:text-mono-161/5 whitespace-nowrap tracking-wider font-display">
@@ -195,7 +195,7 @@ export default function JourneyPage() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-16">
-        
+
         {/* Page Hero */}
         <div className="text-center mb-20">
           <span className="font-body text-xs font-semibold tracking-[0.25em] text-text/50 dark:text-text-dark/50 block mb-4 uppercase">
@@ -217,11 +217,10 @@ export default function JourneyPage() {
               <button
                 key={year}
                 onClick={() => handleYearChange(year)}
-                className={`py-6 border font-body text-xs font-bold tracking-widest uppercase transition-all duration-500 ${
-                  isActive
-                    ? 'bg-text border-text text-background dark:bg-text-dark dark:border-text-dark dark:text-background-dark scale-[1.02]'
-                    : 'border-border dark:border-border-dark text-text/50 dark:text-text-dark/50 hover:text-text dark:hover:text-text-dark hover:border-text dark:hover:border-text-dark'
-                }`}
+                className={`py-6 border font-body text-xs font-bold tracking-widest uppercase transition-all duration-500 ${isActive
+                  ? 'bg-text border-text text-background dark:bg-text-dark dark:border-text-dark dark:text-background-dark scale-[1.02]'
+                  : 'border-border dark:border-border-dark text-text/50 dark:text-text-dark/50 hover:text-text dark:hover:text-text-dark hover:border-text dark:hover:border-text-dark'
+                  }`}
               >
                 [ YEAR {year} ]
               </button>
@@ -264,7 +263,7 @@ export default function JourneyPage() {
                     const MilestoneIcon = milestone.icon;
                     return (
                       <div key={idx} className="relative flex flex-col sm:flex-row items-stretch">
-                        
+
                         {/* Left Column (Desktop Offset) */}
                         <div className={`flex-1 hidden sm:flex ${isEven ? 'justify-end' : 'justify-start'} order-2 sm:order-1`}>
                           {isEven && (
@@ -272,9 +271,8 @@ export default function JourneyPage() {
                               <span className="font-body text-[10px] font-bold text-text/40 dark:text-text-dark/40 uppercase tracking-widest block mb-2">
                                 {milestone.date}
                               </span>
-                              <h3 className="font-display text-base font-bold text-text dark:text-text-dark mb-4 flex items-center justify-end gap-2">
+                              <h3 className="font-display text-base font-bold text-text dark:text-text-dark mb-4">
                                 {milestone.title}
-                                <MilestoneIcon className="w-4 h-4 text-text/60 dark:text-text-dark/60" />
                               </h3>
                               <ul className="space-y-2 text-xs font-body text-text/60 dark:text-text-dark/60 list-none">
                                 {milestone.points.map((p, pidx) => (
@@ -290,13 +288,12 @@ export default function JourneyPage() {
 
                         {/* Right Column (Desktop Offset) */}
                         <div className={`flex-1 flex ${!isEven ? 'justify-start' : 'justify-end'} pl-8 sm:pl-16 order-3 sm:order-2`}>
-                          {(!isEven || windowWidth < 640) && (
+                          {(!isEven || window.innerWidth < 640) && (
                             <div className="w-full max-w-md p-6 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-left">
                               <span className="font-body text-[10px] font-bold text-text/40 dark:text-text-dark/40 uppercase tracking-widest block mb-2">
                                 {milestone.date}
                               </span>
-                              <h3 className="font-display text-base font-bold text-text dark:text-text-dark mb-4 flex items-center gap-2">
-                                <MilestoneIcon className="w-4 h-4 text-text/60 dark:text-text-dark/60" />
+                              <h3 className="font-display text-base font-bold text-text dark:text-text-dark mb-4">
                                 {milestone.title}
                               </h3>
                               <ul className="space-y-2 text-xs font-body text-text/60 dark:text-text-dark/60 list-none">
@@ -320,7 +317,7 @@ export default function JourneyPage() {
                   <h3 className="font-display text-xl font-bold mb-8 uppercase tracking-widest text-center border-b border-border/10 pb-4">
                     YEAR END SUMMARY
                   </h3>
-                  
+
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
                     <div className="p-4 border border-border dark:border-border-dark">
                       <span className="font-display text-3xl font-bold block mb-1">25+</span>
@@ -367,7 +364,7 @@ export default function JourneyPage() {
                 </p>
                 <div className="border-t border-border/10 pt-6 max-w-lg mx-auto">
                   <p className="font-body text-xs italic text-text/50 dark:text-text-dark/50">
-                    {"\"The first year wasn't about becoming the best. It was about becoming better than the person I was when I started.\""}
+                    "The first year wasn't about becoming the best. It was about becoming better than the person I was when I started."
                   </p>
                 </div>
               </div>
