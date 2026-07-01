@@ -5,7 +5,7 @@ import { Calendar, Compass, Award, Frown, BookOpen, Rocket, CheckCircle, Flame }
 
 export default function JourneyPage() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const activeSection = searchParams.get('section') || 'engineering'; // 'engineering' or 'academic'
+  const activeSection = searchParams.get('section') || 'academic'; // 'academic' or 'engineering'
   const activeYear = parseInt(searchParams.get('year') || '1', 10);
   
   const milestonesContainerRef = useRef(null);
@@ -394,15 +394,6 @@ export default function JourneyPage() {
         {/* Journey Type Tabs */}
         <div id="timeline-header" className="flex flex-col sm:flex-row justify-center gap-4 mb-16 max-w-2xl mx-auto">
           <button
-            onClick={() => handleSectionChange('engineering')}
-            className={`flex-1 py-4 border font-body text-xs font-bold tracking-widest uppercase transition-all duration-300 ${activeSection === 'engineering'
-              ? 'bg-text border-text text-background dark:bg-text-dark dark:border-text-dark dark:text-background-dark scale-[1.02]'
-              : 'border-border dark:border-border-dark text-text/50 dark:text-text-dark/50 hover:text-text dark:hover:text-text-dark hover:border-text dark:hover:border-text-dark'
-              }`}
-          >
-            [ Engineering Journey ]
-          </button>
-          <button
             onClick={() => handleSectionChange('academic')}
             className={`flex-1 py-4 border font-body text-xs font-bold tracking-widest uppercase transition-all duration-300 ${activeSection === 'academic'
               ? 'bg-text border-text text-background dark:bg-text-dark dark:border-text-dark dark:text-background-dark scale-[1.02]'
@@ -410,6 +401,15 @@ export default function JourneyPage() {
               }`}
           >
             [ Academic Journey ]
+          </button>
+          <button
+            onClick={() => handleSectionChange('engineering')}
+            className={`flex-1 py-4 border font-body text-xs font-bold tracking-widest uppercase transition-all duration-300 ${activeSection === 'engineering'
+              ? 'bg-text border-text text-background dark:bg-text-dark dark:border-text-dark dark:text-background-dark scale-[1.02]'
+              : 'border-border dark:border-border-dark text-text/50 dark:text-text-dark/50 hover:text-text dark:hover:text-text-dark hover:border-text dark:hover:border-text-dark'
+              }`}
+          >
+            [ Engineering Journey ]
           </button>
         </div>
 
