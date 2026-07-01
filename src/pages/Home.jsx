@@ -55,7 +55,7 @@ export default function Home() {
                   <img
                     src={cert.thumbnail}
                     alt={cert.title}
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-750"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-all duration-750"
                   />
                 </div>
                 <div>

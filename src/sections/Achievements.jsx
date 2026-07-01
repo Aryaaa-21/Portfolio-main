@@ -81,13 +81,8 @@ export default function Achievements() {
                 <img
                   src={cert.thumbnail}
                   alt={cert.title}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700"
+                  className="w-full h-full object-cover group-hover:scale-[1.03] transition-all duration-700"
                 />
-                <div className="absolute inset-0 bg-background/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300">
-                  <span className="px-3 py-1.5 bg-background dark:bg-background-dark text-text dark:text-text-dark border border-border dark:border-border-dark font-body text-[10px] font-bold tracking-widest uppercase">
-                    Preview Credential
-                  </span>
-                </div>
               </div>
 
               {/* Text Meta info */}
