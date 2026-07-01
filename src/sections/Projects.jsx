@@ -1,13 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Github, ExternalLink, Shield, Compass, Key, BookOpen, ArrowDown } from 'lucide-react';
+import { Github, ExternalLink, Shield, Compass, Key, BookOpen, Layers } from 'lucide-react';
+import ScrollAdventure from '@/components/ui/animated-scroll';
 
 export default function Projects() {
+  const [showAdventure, setShowAdventure] = useState(false);
+
   const featured = [
     {
       id: "rakshamarg",
       title: "RakshaMarg",
-      image: "https://images.unsplash.com/photo-1508962914676-134849a727f0?w=1200&auto=format&fit=crop&q=80",
+      image: "/images/2.png",
       category: "AI + Safety Platform",
       icon: Shield,
       story: "Born out of the need to address women and citizen safety in cities, RakshaMarg provides a low-latency navigation mechanism that routes individuals away from high-crime areas.",
@@ -16,17 +19,19 @@ export default function Projects() {
       features: [
         "Safe Route Recommendation",
         "Crime Awareness Mapping",
-        "Low-Latency SOS System",
-        "Geospatial Risk Analysis"
+        "Low-Latency SOS Notification System",
+        "Geospatial Risk Analysis Module",
+        "Nearest Hospital Finder",
+        "Nearest Police Station Finder"
       ],
-      techStack: ["React Native", "Python", "TensorFlow", "Google Maps API", "MongoDB"],
+      techStack: ["React Native", "Python (Flask)", "TensorFlow", "Google Maps API", "MongoDB"],
       github: "https://github.com/Aryaaa-21/RakshaMarg_app",
       demo: "#"
     },
     {
       id: "chainrent",
       title: "ChainRent",
-      image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1200&auto=format&fit=crop&q=80",
+      image: "/images/3.png",
       category: "Web3 Rental Platform",
       icon: Compass,
       story: "Industrial and luxury equipment leasing is historically plagued by contract disputes, deposit withholding, and high transaction broker fees. ChainRent was built to disrupt this space.",
@@ -35,8 +40,9 @@ export default function Projects() {
       features: [
         "Escrow Smart Contracts",
         "Transparent Leasing Agreements",
-        "Decentralized Verification",
-        "Automated Penalty & Refunds"
+        "Decentralized User Verification",
+        "Automated Penalty and Refund Triggers",
+        "Multi-Signature Dispute Settlement"
       ],
       techStack: ["Solidity", "Next.js", "Hardhat", "Ethers.js", "IPFS"],
       github: "https://github.com/Aryaaa-21",
@@ -45,17 +51,18 @@ export default function Projects() {
     {
       id: "stellarpay",
       title: "StellarPay",
-      image: "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?w=1200&auto=format&fit=crop&q=80",
+      image: "/images/4.png",
       category: "Payment Infrastructure",
       icon: Key,
       story: "Micro-transactions and cross-border remittances are expensive and slow on legacy payment networks. StellarPay serves as a developer-friendly API infrastructure for low-fee rails.",
       problem: "Traditional cross-border business invoices face settlement delays of up to 5 days, accompanied by high currency conversion markup fees.",
       solution: "A Soroban smart contract-driven payment layer that settles tokenized transactions in seconds for sub-penny fees using trustlines.",
       features: [
-        "Soroban Smart Contracts",
-        "Multi-Asset Trustline Support",
-        "Developer SDK for Payments",
-        "Real-Time Activity Feed"
+        "Soroban Escrow Smart Contracts",
+        "Multi-Asset Trustline support",
+        "Developer SDK for API Payments",
+        "Real-Time Transaction Activity Feed",
+        "Automated Foreign Exchange (FX) Settlement"
       ],
       techStack: ["Rust (Soroban)", "React", "Stellar SDK", "Tailwind CSS", "NodeJS"],
       github: "https://github.com/Aryaaa-21",
@@ -64,17 +71,18 @@ export default function Projects() {
     {
       id: "vedax",
       title: "VEDAX",
-      image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1200&auto=format&fit=crop&q=80",
+      image: "/images/5.png",
       category: "Educational Technology",
       icon: BookOpen,
       story: "Mental arithmetic skills are declining, yet standard learning platforms present math in dull formats. VEDAX gamifies Vedic Mathematics principles to spark computational speed.",
       problem: "Students struggle with fast mental calculation techniques due to passive learning materials and a lack of step-by-step guidance.",
       solution: "A gamified learning app featuring an interactive solver engine that teaches 16 core Vedic Math sutras through customized challenges.",
       features: [
-        "Vedic Mathematics Library",
+        "Vedic Mathematics Sutras Library",
         "Gamified Level Progression",
-        "Interactive Practice Board",
-        "Speed Metrics Dashboard"
+        "Interactive Practice Math Board",
+        "Speed Metrics Dashboard",
+        "Live AI Hints Generator"
       ],
       techStack: ["React", "Tailwind CSS", "Framer Motion", "JavaScript", "HTML5 Canvas"],
       github: "https://github.com/Aryaaa-21",
@@ -82,431 +90,324 @@ export default function Projects() {
     }
   ];
 
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
-  const containerRef = useRef(null);
+  const adventurePages = [
+    {
+      leftBgImage: "https://images.unsplash.com/photo-1508962914676-134849a727f0?w=1200&auto=format&fit=crop&q=80",
+      rightBgImage: null,
+      leftContent: null,
+      rightContent: {
+        heading: "01 // RakshaMarg",
+        description: (
+          <div className="space-y-4">
+            <span className="inline-block px-2 py-0.5 border border-white/20 text-[9px] font-mono tracking-widest text-white/60 uppercase">
+              AI + Safety Platform
+            </span>
+            <p className="text-xs text-white/70 leading-relaxed font-body">
+              Born out of the need to address women and citizen safety in cities, RakshaMarg provides a low-latency navigation mechanism that routes individuals away from high-crime areas.
+            </p>
+            <div className="pt-4 border-t border-white/10 space-y-2">
+              <span className="text-[9px] uppercase tracking-wider block text-white/40 font-mono">Core Specifications</span>
+              <ul className="text-[10px] space-y-1 text-white/70 font-mono">
+                <li>• Safe Route Recommendation</li>
+                <li>• Crime Awareness Mapping</li>
+                <li>• Low-Latency SOS Alerts</li>
+              </ul>
+            </div>
+            <div className="pt-4 border-t border-white/10 space-y-2">
+              <span className="text-[9px] uppercase tracking-wider block text-white/40 font-mono">Tech Stack</span>
+              <div className="flex flex-wrap gap-1">
+                {["React Native", "Python", "TensorFlow", "MongoDB"].map(t => (
+                  <span key={t} className="px-1.5 py-0.5 bg-white/5 border border-white/10 text-[8px] font-mono uppercase text-white/60">{t}</span>
+                ))}
+              </div>
+            </div>
+            <div className="pt-4">
+              <a href="https://github.com/Aryaaa-21/RakshaMarg_app" target="_blank" rel="noopener noreferrer" className="px-4 py-1.5 border border-white text-white hover:bg-white hover:text-black text-[10px] font-mono uppercase transition-all inline-block">
+                View Repository
+              </a>
+            </div>
+          </div>
+        )
+      }
+    },
+    {
+      leftBgImage: null,
+      rightBgImage: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1200&auto=format&fit=crop&q=80",
+      leftContent: {
+        heading: "02 // ChainRent",
+        description: (
+          <div className="space-y-4">
+            <span className="inline-block px-2 py-0.5 border border-white/20 text-[9px] font-mono tracking-widest text-white/60 uppercase">
+              Web3 Rental Platform
+            </span>
+            <p className="text-xs text-white/70 leading-relaxed font-body">
+              Industrial and luxury equipment leasing is historically plagued by contract disputes, deposit withholding, and high transaction broker fees. ChainRent was built to disrupt this space.
+            </p>
+            <div className="pt-4 border-t border-white/10 space-y-2">
+              <span className="text-[9px] uppercase tracking-wider block text-white/40 font-mono">Core Specifications</span>
+              <ul className="text-[10px] space-y-1 text-white/70 font-mono">
+                <li>• Escrow Smart Contracts</li>
+                <li>• Transparent P2P Leasing</li>
+                <li>• Automated Dispute Settlements</li>
+              </ul>
+            </div>
+            <div className="pt-4 border-t border-white/10 space-y-2">
+              <span className="text-[9px] uppercase tracking-wider block text-white/40 font-mono">Tech Stack</span>
+              <div className="flex flex-wrap gap-1">
+                {["Solidity", "Next.js", "Hardhat", "IPFS"].map(t => (
+                  <span key={t} className="px-1.5 py-0.5 bg-white/5 border border-white/10 text-[8px] font-mono uppercase text-white/60">{t}</span>
+                ))}
+              </div>
+            </div>
+            <div className="pt-4">
+              <a href="https://github.com/Aryaaa-21" target="_blank" rel="noopener noreferrer" className="px-4 py-1.5 border border-white text-white hover:bg-white hover:text-black text-[10px] font-mono uppercase transition-all inline-block">
+                View Repository
+              </a>
+            </div>
+          </div>
+        )
+      },
+      rightContent: null
+    },
+    {
+      leftBgImage: "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?w=1200&auto=format&fit=crop&q=80",
+      rightBgImage: null,
+      leftContent: null,
+      rightContent: {
+        heading: "03 // StellarPay",
+        description: (
+          <div className="space-y-4">
+            <span className="inline-block px-2 py-0.5 border border-white/20 text-[9px] font-mono tracking-widest text-white/60 uppercase">
+              Payment Infrastructure
+            </span>
+            <p className="text-xs text-white/70 leading-relaxed font-body">
+              Micro-transactions and cross-border remittances are expensive and slow on legacy payment networks. StellarPay serves as a developer-friendly API infrastructure for low-fee rails.
+            </p>
+            <div className="pt-4 border-t border-white/10 space-y-2">
+              <span className="text-[9px] uppercase tracking-wider block text-white/40 font-mono">Core Specifications</span>
+              <ul className="text-[10px] space-y-1 text-white/70 font-mono">
+                <li>• Soroban Smart Contracts</li>
+                <li>• Multi-Asset Trustlines</li>
+                <li>• Developer Payment API</li>
+              </ul>
+            </div>
+            <div className="pt-4 border-t border-white/10 space-y-2">
+              <span className="text-[9px] uppercase tracking-wider block text-white/40 font-mono">Tech Stack</span>
+              <div className="flex flex-wrap gap-1">
+                {["Rust (Soroban)", "React", "Stellar SDK", "NodeJS"].map(t => (
+                  <span key={t} className="px-1.5 py-0.5 bg-white/5 border border-white/10 text-[8px] font-mono uppercase text-white/60">{t}</span>
+                ))}
+              </div>
+            </div>
+            <div className="pt-4">
+              <a href="https://github.com/Aryaaa-21" target="_blank" rel="noopener noreferrer" className="px-4 py-1.5 border border-white text-white hover:bg-white hover:text-black text-[10px] font-mono uppercase transition-all inline-block">
+                View Repository
+              </a>
+            </div>
+          </div>
+        )
+      }
+    },
+    {
+      leftBgImage: null,
+      rightBgImage: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1200&auto=format&fit=crop&q=80",
+      leftContent: {
+        heading: "04 // VEDAX",
+        description: (
+          <div className="space-y-4">
+            <span className="inline-block px-2 py-0.5 border border-white/20 text-[9px] font-mono tracking-widest text-white/60 uppercase">
+              Educational Technology
+            </span>
+            <p className="text-xs text-white/70 leading-relaxed font-body">
+              Mental arithmetic skills are declining, yet standard learning platforms present math in dull formats. VEDAX gamifies Vedic Mathematics principles to spark computational speed.
+            </p>
+            <div className="pt-4 border-t border-white/10 space-y-2">
+              <span className="text-[9px] uppercase tracking-wider block text-white/40 font-mono">Core Specifications</span>
+              <ul className="text-[10px] space-y-1 text-white/70 font-mono">
+                <li>• Gamified Level Progress</li>
+                <li>• Vedic Math Sutras Library</li>
+                <li>• Speed Metrics Dashboard</li>
+              </ul>
+            </div>
+            <div className="pt-4 border-t border-white/10 space-y-2">
+              <span className="text-[9px] uppercase tracking-wider block text-white/40 font-mono">Tech Stack</span>
+              <div className="flex flex-wrap gap-1">
+                {["React", "Tailwind CSS", "Framer Motion", "HTML5 Canvas"].map(t => (
+                  <span key={t} className="px-1.5 py-0.5 bg-white/5 border border-white/10 text-[8px] font-mono uppercase text-white/60">{t}</span>
+                ))}
+              </div>
+            </div>
+            <div className="pt-4">
+              <a href="https://github.com/Aryaaa-21" target="_blank" rel="noopener noreferrer" className="px-4 py-1.5 border border-white text-white hover:bg-white hover:text-black text-[10px] font-mono uppercase transition-all inline-block">
+                View Repository
+              </a>
+            </div>
+          </div>
+        )
+      },
+      rightContent: null
+    }
+  ];
 
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  useEffect(() => {
-    if (typeof window === 'undefined' || windowWidth < 1024) return;
-
-    const handleScroll = () => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const scrolled = -rect.top;
-      const scrollHeight = rect.height - window.innerHeight;
-      const progress = Math.max(0, Math.min(1, scrolled / scrollHeight));
+  return (
+    <section id="featured" className="py-0 bg-background dark:bg-background-dark overflow-hidden theme-transition">
+      {showAdventure && (
+        <ScrollAdventure pages={adventurePages} onClose={() => setShowAdventure(false)} />
+      )}
       
-      const index = Math.min(
-        Math.floor(progress * featured.length),
-        featured.length - 1
-      );
-      setActiveIndex(index);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [windowWidth, featured.length]);
-
-  const scrollToSlide = (index) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const containerTop = rect.top + window.scrollY;
-    const scrollHeight = rect.height - window.innerHeight;
-    const targetScroll = containerTop + (index / (featured.length - 1)) * scrollHeight;
-    
-    window.scrollTo({
-      top: targetScroll,
-      behavior: 'smooth'
-    });
-  };
-
-  const getTransforms = (idx) => {
-    const isEven = idx % 2 === 0;
-    
-    // Active slide: centered
-    if (activeIndex + 1 === idx) {
-      return { left: 'translateY(0)', right: 'translateY(0)' };
-    }
-    
-    // Exit slides (already scrolled past)
-    if (activeIndex + 1 > idx) {
-      return {
-        left: isEven ? 'translateY(100%)' : 'translateY(-100%)',
-        right: isEven ? 'translateY(-100%)' : 'translateY(100%)'
-      };
-    }
-    
-    // Future slides (waiting to slide in)
-    return {
-      left: isEven ? 'translateY(-100%)' : 'translateY(100%)',
-      right: isEven ? 'translateY(100%)' : 'translateY(-100%)'
-    };
-  };
-
-  // Mobile layout
-  if (windowWidth < 1024) {
-    return (
-      <section id="featured" className="py-24 bg-background dark:bg-background-dark theme-transition">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-12">
+      <div className="max-w-7xl mx-auto px-6 lg:px-16 pt-32 pb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-left flex flex-col md:flex-row md:items-end justify-between gap-6"
+        >
+          <div>
             <span className="font-body text-xs font-semibold tracking-[0.2em] text-text/50 dark:text-text-dark/50 block mb-4 uppercase">
               Signature Works
             </span>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-text dark:text-text-dark">
+            <h2 className="font-display text-4xl sm:text-5xl font-bold tracking-tight text-text dark:text-text-dark mb-4 md:mb-0">
               FEATURED PROJECTS
             </h2>
           </div>
+          
+          <button
+            onClick={() => setShowAdventure(true)}
+            className="self-start md:self-auto px-5 py-3 border border-text/20 dark:border-text-dark/20 text-text/80 dark:text-text-dark/80 hover:border-text dark:hover:border-text-dark hover:text-text dark:hover:text-text-dark bg-surface/50 dark:bg-surface-dark/50 backdrop-blur-sm font-mono text-[10px] tracking-widest uppercase transition-all duration-300 flex items-center gap-2.5 rounded-none"
+          >
+            <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
+            Launch Immersive Showcase
+          </button>
+        </motion.div>
+      </div>
 
-          <div className="space-y-16">
-            {featured.map((project) => {
-              const ProjectIcon = project.icon;
-              return (
-                <div key={project.id} className="border border-border dark:border-border-dark bg-surface/30 dark:bg-surface-dark/30 p-6 flex flex-col gap-6">
-                  <div className="aspect-[16/10] overflow-hidden bg-zinc-900">
-                    <img src={project.image} alt={project.title} className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700" />
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2 mb-3">
-                      <ProjectIcon className="w-4 h-4 text-text/60 dark:text-text-dark/60" />
-                      <span className="font-body text-[10px] font-bold tracking-widest text-text/40 dark:text-text-dark/40 uppercase">
-                        {project.category}
-                      </span>
-                    </div>
-                    <h3 className="font-display text-2xl font-bold text-text dark:text-text-dark mb-4">{project.title}</h3>
-                    <p className="font-body text-xs text-text/70 dark:text-text-dark/70 mb-6 leading-relaxed">{project.story}</p>
-                    
-                    <div className="grid grid-cols-1 gap-4 mb-6 pt-4 border-t border-border/10 dark:border-border-dark/10">
-                      <div>
-                        <span className="font-bold text-[10px] uppercase tracking-wider block text-text/40 dark:text-text-dark/40 mb-1">Problem</span>
-                        <p className="font-body text-[11px] text-text/70 dark:text-text-dark/70 leading-relaxed">{project.problem}</p>
-                      </div>
-                      <div>
-                        <span className="font-bold text-[10px] uppercase tracking-wider block text-text/40 dark:text-text-dark/40 mb-1">Solution</span>
-                        <p className="font-body text-[11px] text-text/70 dark:text-text-dark/70 leading-relaxed">{project.solution}</p>
-                      </div>
-                    </div>
-
-                    <div className="mb-6">
-                      <span className="font-bold text-[10px] uppercase tracking-wider block text-text/40 dark:text-text-dark/40 mb-2">Capabilities</span>
-                      <ul className="grid grid-cols-2 gap-1 text-[11px] font-body text-text/80 dark:text-text-dark/80">
-                        {project.features.map((f, i) => (
-                          <li key={i} className="flex items-center gap-2">
-                            <span className="w-1 h-1 bg-text dark:bg-text-dark rounded-full" />
-                            {f}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div className="mb-6">
-                      <div className="flex flex-wrap gap-1">
-                        {project.techStack.map((tech) => (
-                          <span key={tech} className="px-2 py-0.5 border border-border dark:border-border-dark text-[9px] font-semibold uppercase tracking-wider text-text/70 dark:text-text-dark/70">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="flex gap-4">
-                      <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex-1 py-2 text-center border border-text dark:border-text-dark hover:bg-text hover:text-background dark:hover:bg-text-dark dark:hover:text-background-dark font-semibold tracking-wider text-[10px] uppercase flex items-center justify-center gap-2 transition-all">
-                        <Github className="w-3.5 h-3.5" /> Code
-                      </a>
-                      {project.demo !== '#' && (
-                        <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex-1 py-2 text-center bg-text dark:bg-text-dark text-background dark:text-background-dark hover:bg-text/80 dark:hover:bg-text-dark/80 font-semibold tracking-wider text-[10px] uppercase flex items-center justify-center gap-2 transition-all">
-                          <ExternalLink className="w-3.5 h-3.5" /> Demo
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  // Desktop Snapping Sticky-Scroll Layout
-  return (
-    <section ref={containerRef} id="featured" className="relative h-[300vh] bg-black select-none z-20">
-      <div className="sticky top-0 w-full h-screen overflow-hidden">
-        
-        {/* Sidebar pagination dot list */}
-        <div className="absolute right-8 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-2">
-          {featured.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => scrollToSlide(i)}
-              className="group p-2 flex items-center gap-3 focus:outline-none"
-            >
-              <span className={`font-body text-[9px] font-bold tracking-widest text-white/30 group-hover:text-white transition-opacity ${
-                activeIndex === i ? 'opacity-100' : 'opacity-0'
-              }`}>
-                [ 0{i + 1} ]
-              </span>
-              <div
-                className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                  activeIndex === i ? 'bg-white scale-150' : 'bg-white/20 group-hover:bg-white/50'
-                }`}
-              />
-            </button>
-          ))}
-        </div>
-
-        {/* Scroll helper */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-1.5 pointer-events-none">
-          <span className="font-body text-[9px] font-bold tracking-[0.25em] text-white/40 uppercase">
-            Scroll to Navigate
-          </span>
-          <ArrowDown className="w-3.5 h-3.5 text-white/40 animate-bounce" />
-        </div>
-
-        {featured.map((project, i) => {
-          const idx = i + 1;
+      <div className="space-y-0">
+        {featured.map((project, idx) => {
           const isEven = idx % 2 === 0;
-          const transforms = getTransforms(idx);
           const ProjectIcon = project.icon;
-
           return (
-            <div key={project.id} className="absolute inset-0 w-full h-full">
-              
-              {/* Left Column */}
-              <div
-                className="absolute top-0 left-0 w-1/2 h-full transition-transform duration-[800ms] ease-[cubic-bezier(0.25,1,0.5,1)]"
-                style={{ transform: transforms.left }}
-              >
-                {!isEven ? (
-                  // Image Half
-                  <div className="w-full h-full relative">
-                    <div className="absolute inset-0 bg-black/40 z-10" />
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover filter grayscale"
-                    />
-                    <div className="absolute top-12 left-12 z-20 font-body text-[10px] tracking-widest font-semibold text-white/40 uppercase">
-                      [ WORK 0{idx} ]
-                    </div>
-                  </div>
-                ) : (
-                  // Content Half
-                  <div className="w-full h-full bg-[#070707] flex flex-col justify-center px-16 xl:px-24 text-white border-r border-white/5">
-                    <div className="flex items-center gap-3 mb-6">
-                      <ProjectIcon className="w-4 h-4 text-white/60" />
-                      <span className="font-body text-[10px] font-bold tracking-widest text-white/40 uppercase">
-                        {project.category}
-                      </span>
-                    </div>
-
-                    <h3 className="font-display text-4xl xl:text-5xl font-bold tracking-tight mb-8">
-                      {project.title}
-                    </h3>
-
-                    <div className="space-y-6 text-xs xl:text-sm font-body leading-relaxed text-white/70 max-w-xl">
-                      <div>
-                        <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">
-                          The Mission
-                        </span>
-                        <p>{project.story}</p>
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-6 pt-4 border-t border-white/5">
-                        <div>
-                          <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">
-                            The Problem
-                          </span>
-                          <p className="text-[11px] leading-relaxed text-white/60">{project.problem}</p>
-                        </div>
-                        <div>
-                          <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">
-                            The Solution
-                          </span>
-                          <p className="text-[11px] leading-relaxed text-white/60">{project.solution}</p>
-                        </div>
-                      </div>
-
-                      <div className="pt-4 border-t border-white/5">
-                        <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-2.5">
-                          Key Specifications
-                        </span>
-                        <ul className="grid grid-cols-2 gap-2 text-white/80">
-                          {project.features.map((feat, fidx) => (
-                            <li key={fidx} className="flex items-center gap-2 text-[11px]">
-                              <span className="w-1.5 h-1.5 bg-white/40 rounded-full" />
-                              <span>{feat}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      <div className="pt-4">
-                        <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-2">
-                          System Architecture Stack
-                        </span>
-                        <div className="flex flex-wrap gap-1.5">
-                          {project.techStack.map((tech) => (
-                            <span
-                              key={tech}
-                              className="px-2 py-0.5 border border-white/10 text-[9px] tracking-wider font-semibold uppercase text-white/60"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="flex gap-4 pt-6">
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-5 py-2 border border-white text-white hover:bg-white hover:text-black font-semibold tracking-wider text-[10px] uppercase flex items-center gap-2 transition-all duration-300"
-                        >
-                          <Github className="w-3.5 h-3.5" />
-                          Repository
-                        </a>
-                        {project.demo && project.demo !== '#' && (
-                          <a
-                            href={project.demo}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="px-5 py-2 bg-white text-black hover:bg-white/80 font-semibold tracking-wider text-[10px] uppercase flex items-center gap-2 transition-all duration-300"
-                          >
-                            <ExternalLink className="w-3.5 h-3.5" />
-                            Live Demo
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Right Column */}
             <div
-              className="absolute top-0 left-1/2 w-1/2 h-full transition-transform duration-[800ms] ease-[cubic-bezier(0.25,1,0.5,1)]"
-              style={{ transform: transforms.right }}
+              key={project.id}
+              className={`min-h-screen flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} border-b border-border/20 dark:border-border-dark/20 theme-transition`}
             >
-              {isEven ? (
-                // Image Half
-                <div className="w-full h-full relative">
-                  <div className="absolute inset-0 bg-black/40 z-10" />
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover filter grayscale"
-                  />
-                  <div className="absolute top-12 right-12 z-20 font-body text-[10px] tracking-widest font-semibold text-white/40 uppercase">
-                    [ WORK 0{idx} ]
-                  </div>
+              {/* Left Column: Story/Info */}
+              <div className="w-full lg:w-1/2 p-6 sm:p-12 lg:p-20 flex flex-col justify-center bg-surface/30 dark:bg-surface-dark/30">
+                <div className="flex items-center gap-3 mb-6">
+                  <ProjectIcon className="w-5 h-5 text-text/80 dark:text-text-dark/80" />
+                  <span className="font-body text-xs font-bold tracking-widest text-text/50 dark:text-text-dark/50 uppercase">
+                    {project.category}
+                  </span>
                 </div>
-              ) : (
-                // Content Half
-                <div className="w-full h-full bg-[#070707] flex flex-col justify-center px-16 xl:px-24 text-white border-l border-white/5">
-                  <div className="flex items-center gap-3 mb-6">
-                    <ProjectIcon className="w-4 h-4 text-white/60" />
-                    <span className="font-body text-[10px] font-bold tracking-widest text-white/40 uppercase">
-                      {project.category}
+
+                <h3 className="font-display text-3xl sm:text-5xl font-bold text-text dark:text-text-dark mb-8 tracking-tight">
+                  {project.title}
+                </h3>
+
+                <div className="space-y-6 max-w-xl text-xs sm:text-sm font-body">
+                  <div>
+                    <span className="font-bold uppercase tracking-wider block text-text/40 dark:text-text-dark/40 mb-1">
+                      The Story
                     </span>
+                    <p className="text-text/70 dark:text-text-dark/70 leading-relaxed">
+                      {project.story}
+                    </p>
                   </div>
 
-                  <h3 className="font-display text-4xl xl:text-5xl font-bold tracking-tight mb-8">
-                    {project.title}
-                  </h3>
-
-                  <div className="space-y-6 text-xs xl:text-sm font-body leading-relaxed text-white/70 max-w-xl">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4 border-t border-border/10 dark:border-border-dark/10">
                     <div>
-                      <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">
-                        The Mission
+                      <span className="font-bold uppercase tracking-wider block text-text/40 dark:text-text-dark/40 mb-1">
+                        The Problem
                       </span>
-                      <p>{project.story}</p>
+                      <p className="text-text/70 dark:text-text-dark/70 leading-relaxed">
+                        {project.problem}
+                      </p>
                     </div>
+                    <div>
+                      <span className="font-bold uppercase tracking-wider block text-text/40 dark:text-text-dark/40 mb-1">
+                        The Solution
+                      </span>
+                      <p className="text-text/70 dark:text-text-dark/70 leading-relaxed">
+                        {project.solution}
+                      </p>
+                    </div>
+                  </div>
 
-                    <div className="grid grid-cols-2 gap-6 pt-4 border-t border-white/5">
-                      <div>
-                        <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">
-                          The Problem
+                  <div className="pt-4">
+                    <span className="font-bold uppercase tracking-wider block text-text/40 dark:text-text-dark/40 mb-3">
+                      Key Capabilities
+                    </span>
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-text/80 dark:text-text-dark/80">
+                      {project.features.map((feat, fidx) => (
+                        <li key={fidx} className="flex items-center gap-2">
+                          <span className="w-1.5 h-1.5 bg-text dark:bg-text-dark" />
+                          <span>{feat}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="pt-4">
+                    <span className="font-bold uppercase tracking-wider block text-text/40 dark:text-text-dark/40 mb-3">
+                      Technology Stack
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {project.techStack.map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-2.5 py-1 border border-border dark:border-border-dark text-[10px] tracking-wider font-semibold uppercase text-text/80 dark:text-text-dark/80"
+                        >
+                          {tech}
                         </span>
-                        <p className="text-[11px] leading-relaxed text-white/60">{project.problem}</p>
-                      </div>
-                      <div>
-                        <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-1">
-                          The Solution
-                        </span>
-                        <p className="text-[11px] leading-relaxed text-white/60">{project.solution}</p>
-                      </div>
+                      ))}
                     </div>
+                  </div>
 
-                    <div className="pt-4 border-t border-white/5">
-                      <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-2.5">
-                        Key Specifications
-                      </span>
-                      <ul className="grid grid-cols-2 gap-2 text-white/80">
-                        {project.features.map((feat, fidx) => (
-                          <li key={fidx} className="flex items-center gap-2 text-[11px]">
-                            <span className="w-1.5 h-1.5 bg-white/40 rounded-full" />
-                            <span>{feat}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div className="pt-4">
-                      <span className="font-bold text-[9px] uppercase tracking-wider block text-white/30 mb-2">
-                        System Architecture Stack
-                      </span>
-                      <div className="flex flex-wrap gap-1.5">
-                        {project.techStack.map((tech) => (
-                          <span
-                            key={tech}
-                            className="px-2 py-0.5 border border-white/10 text-[9px] tracking-wider font-semibold uppercase text-white/60"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="flex gap-4 pt-6">
+                  <div className="flex gap-4 pt-6">
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 border border-text dark:border-text-dark hover:bg-text hover:text-background dark:hover:bg-text-dark dark:hover:text-background-dark font-semibold tracking-wider text-xs uppercase flex items-center gap-2 transition-all duration-300"
+                    >
+                      <Github className="w-4 h-4" />
+                      Repository
+                    </a>
+                    {project.demo && project.demo !== '#' && (
                       <a
-                        href={project.github}
+                        href={project.demo}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-5 py-2 border border-white text-white hover:bg-white hover:text-black font-semibold tracking-wider text-[10px] uppercase flex items-center gap-2 transition-all duration-300"
+                        className="px-4 py-2 bg-text dark:bg-text-dark text-background dark:text-background-dark hover:bg-mono-42 dark:hover:bg-mono-161 font-semibold tracking-wider text-xs uppercase flex items-center gap-2 transition-colors duration-300"
                       >
-                        <Github className="w-3.5 h-3.5" />
-                        Repository
+                        <ExternalLink className="w-4 h-4" />
+                        Live Demo
                       </a>
-                      {project.demo && project.demo !== '#' && (
-                        <a
-                          href={project.demo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-5 py-2 bg-white text-black hover:bg-white/80 font-semibold tracking-wider text-[10px] uppercase flex items-center gap-2 transition-all duration-300"
-                        >
-                          <ExternalLink className="w-3.5 h-3.5" />
-                          Live Demo
-                        </a>
-                      )}
-                    </div>
+                    )}
                   </div>
                 </div>
-              )}
-            </div>
+              </div>
 
-          </div>
-        );
-      })}
-    </div>
-  </section>
+              {/* Right Column: High Quality Image */}
+              <div className="w-full lg:w-1/2 bg-surface-container-high dark:bg-surface-container-lowest overflow-hidden relative group min-h-[300px] lg:min-h-0">
+                <motion.div
+                  initial={{ opacity: 0.9, scale: 1.05 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.2 }}
+                  className="w-full h-full"
+                >
+                  <img
+                    src={project.image}
+                    alt={`${project.title} Interface screenshot`}
+                    className="w-full h-full object-cover select-none filter grayscale group-hover:grayscale-0 transition-all duration-1000"
+                  />
+                </motion.div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
   );
 }
