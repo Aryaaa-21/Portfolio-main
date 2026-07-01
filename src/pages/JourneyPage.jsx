@@ -250,7 +250,7 @@ export default function JourneyPage() {
               className="w-full"
             >
               {/* Year Intro Header */}
-              <div className="text-center mb-24 max-w-2xl mx-auto border border-border dark:border-border-dark bg-surface/50 dark:bg-surface-dark/50 p-8">
+              <div className="text-center mb-24 max-w-2xl mx-auto border border-border dark:border-border-dark bg-surface/50 dark:bg-surface-dark/50 p-8 cursor-target">
                 <span className="font-body text-xs font-bold text-text/40 dark:text-text-dark/40 uppercase tracking-widest">
                   2025 — 2026
                 </span>
@@ -288,7 +288,7 @@ export default function JourneyPage() {
                         {/* Left Column (Desktop Offset) */}
                         <div className={`flex-1 hidden sm:flex ${isEven ? 'justify-end' : 'justify-start'} order-2 sm:order-1`}>
                           {isEven && (
-                            <div className="w-full max-w-md p-6 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-right">
+                            <div className="w-full max-w-md p-6 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-right cursor-target">
                               <span className="font-body text-[10px] font-bold text-text/40 dark:text-text-dark/40 uppercase tracking-widest block mb-2">
                                 {milestone.date}
                               </span>
@@ -310,7 +310,7 @@ export default function JourneyPage() {
                         {/* Right Column (Desktop Offset) */}
                         <div className={`flex-1 flex ${!isEven ? 'justify-start' : 'justify-end'} pl-8 sm:pl-16 order-3 sm:order-2`}>
                           {(!isEven || window.innerWidth < 640) && (
-                            <div className="w-full max-w-md p-6 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-left">
+                            <div className="w-full max-w-md p-6 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-left cursor-target">
                               <span className="font-body text-[10px] font-bold text-text/40 dark:text-text-dark/40 uppercase tracking-widest block mb-2">
                                 {milestone.date}
                               </span>
@@ -334,40 +334,40 @@ export default function JourneyPage() {
 
               {/* Year End Summary Dashboard */}
               <div className="max-w-4xl mx-auto mt-24">
-                <div className="border border-border dark:border-border-dark bg-surface/30 dark:bg-surface-dark/30 p-8 sm:p-12">
+                <div className="border border-border dark:border-border-dark bg-surface/30 dark:bg-surface-dark/30 p-8 sm:p-12 cursor-target">
                   <h3 className="font-display text-xl font-bold mb-8 uppercase tracking-widest text-center border-b border-border/10 pb-4">
                     YEAR END SUMMARY
                   </h3>
 
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                    <div className="p-4 border border-border dark:border-border-dark">
+                    <div className="p-4 border border-border dark:border-border-dark cursor-target">
                       <span className="font-display text-3xl font-bold block mb-1">25+</span>
                       <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/40">Certificates</span>
                     </div>
-                    <div className="p-4 border border-border dark:border-border-dark">
+                    <div className="p-4 border border-border dark:border-border-dark cursor-target">
                       <span className="font-display text-3xl font-bold block mb-1">6</span>
                       <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/40">Hackathons Won</span>
                     </div>
-                    <div className="p-4 border border-border dark:border-border-dark">
+                    <div className="p-4 border border-border dark:border-border-dark cursor-target">
                       <span className="font-display text-3xl font-bold block mb-1">4</span>
                       <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/40">Online Wins</span>
                     </div>
-                    <div className="p-4 border border-border dark:border-border-dark">
+                    <div className="p-4 border border-border dark:border-border-dark cursor-target">
                       <span className="font-display text-3xl font-bold block mb-1">2</span>
                       <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/40">Offline Wins</span>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-6 text-center">
-                    <div className="p-4 border border-border dark:border-border-dark">
+                    <div className="p-4 border border-border dark:border-border-dark cursor-target">
                       <span className="font-display text-sm font-bold block mb-1">RakshaMarg</span>
                       <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/40">Built MVP</span>
                     </div>
-                    <div className="p-4 border border-border dark:border-border-dark">
+                    <div className="p-4 border border-border dark:border-border-dark cursor-target">
                       <span className="font-display text-sm font-bold block mb-1">5 Colleges</span>
                       <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/40">Explored Network</span>
                     </div>
-                    <div className="p-4 border border-border dark:border-border-dark">
+                    <div className="p-4 border border-border dark:border-border-dark cursor-target">
                       <span className="font-display text-sm font-bold block mb-1">DNA Coded</span>
                       <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/40">Formed Team</span>
                     </div>
@@ -376,7 +376,7 @@ export default function JourneyPage() {
               </div>
 
               {/* Final Card - Transformation */}
-              <div className="max-w-4xl mx-auto mt-12 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-8 sm:p-12 text-center">
+              <div className="max-w-4xl mx-auto mt-12 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-8 sm:p-12 text-center cursor-target">
                 <span className="font-body text-[10px] font-bold tracking-widest text-text/40 dark:text-text-dark/40 uppercase block mb-3">
                   Transformation
                 </span>

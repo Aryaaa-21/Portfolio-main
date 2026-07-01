@@ -161,7 +161,20 @@ const TargetCursor = ({
 
     tickerFnRef.current = tickerFn;
 
-    const moveHandler = e => moveCursor(e.clientX, e.clientY);
+    const moveHandler = e => {
+      moveCursor(e.clientX, e.clientY);
+      
+      // Safety check: if the mouse leaves the activeTarget without triggering mouseleave, cleanup.
+      if (activeTarget) {
+        const el = document.elementFromPoint(e.clientX, e.clientY);
+        const isStillOver = el && (el === activeTarget || activeTarget.contains(el));
+        if (!isStillOver) {
+          if (currentLeaveHandler) {
+            currentLeaveHandler();
+          }
+        }
+      }
+    };
     window.addEventListener('mousemove', moveHandler);
 
     const scrollHandler = () => {

@@ -289,7 +289,7 @@ export default function Skills() {
           {/* Left Column: Skill Clusters Grid */}
           <div className="col-span-1 lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-8">
             {Object.keys(categories).map((catName) => (
-              <div key={catName} className="p-6 border border-border dark:border-border-dark bg-background/55 dark:bg-background-dark/55">
+              <div key={catName} className="p-6 border border-border dark:border-border-dark bg-background/55 dark:bg-background-dark/55 cursor-target">
                 <h3 className="font-display text-sm font-bold tracking-widest text-text/40 dark:text-text-dark/40 uppercase mb-4 pb-2 border-b border-border/10 dark:border-border-dark/10">
                   {catName}
                 </h3>
@@ -317,7 +317,7 @@ export default function Skills() {
 
           {/* Right Column: Interaction details panel */}
           <div className="col-span-1 lg:col-span-4 lg:sticky lg:top-28">
-            <div className="p-8 border border-border dark:border-border-dark bg-background dark:bg-background-dark/80 backdrop-blur min-h-[300px] flex flex-col justify-between">
+            <div className="p-8 border border-border dark:border-border-dark bg-background dark:bg-background-dark/80 backdrop-blur min-h-[300px] flex flex-col justify-between cursor-target">
               <AnimatePresence mode="wait">
                 {selectedSkill ? (
                   <motion.div

@@ -58,10 +58,9 @@ export default function App() {
 
         {/* Target Cursor from React Bits */}
         <TargetCursor 
-          targetSelector="a, button, .cursor-target, .interactive"
-          spinDuration={2}
+          targetSelector="a, button, input, select, textarea, .cursor-target, .interactive, .glass-card, .cursor-pointer, [role='button']"
+          spinDuration={4}
           hideDefaultCursor={true}
-          parallaxOn={true}
         />
 
         {/* Multi-page Header */}

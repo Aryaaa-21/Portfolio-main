@@ -60,7 +60,7 @@ export default function CertificatesPage() {
           {stats.map((stat, idx) => {
             const Icon = stat.icon;
             return (
-              <div key={idx} className="border border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-6 flex items-center justify-between">
+              <div key={idx} className="border border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-6 flex items-center justify-between cursor-target">
                 <div>
                   <span className="font-body text-[10px] font-bold tracking-widest text-text/40 dark:text-text-dark/40 uppercase block mb-1">
                     {stat.label}
