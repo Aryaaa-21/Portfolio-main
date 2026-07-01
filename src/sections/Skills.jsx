@@ -136,8 +136,6 @@ function Pointer({ vec = new THREE.Vector3(), isActive }) {
 
 export default function Skills() {
   const isActive = true;
-  const [selectedSkill, setSelectedSkill] = useState(null);
-
   const categories = {
     Languages: [
       { name: 'C', projects: ['VEDAX'] },
@@ -178,16 +176,6 @@ export default function Skills() {
         })
     );
   }, []);
-
-  const handleSelectTech = (techName) => {
-    for (const cat in categories) {
-      const found = categories[cat].find(s => s.name.toLowerCase() === techName.toLowerCase());
-      if (found) {
-        setSelectedSkill(found);
-        return;
-      }
-    }
-  };
 
   return (
     <section id="ecosystem" className="py-24 bg-surface dark:bg-surface-dark border-b border-border/20 dark:border-border-dark/20 theme-transition relative overflow-hidden">
@@ -243,7 +231,7 @@ export default function Skills() {
                     {...props}
                     material={materials[props.techIndex % materials.length]}
                     isActive={isActive}
-                    onSelect={handleSelectTech}
+                    onSelect={() => {}}
                   />
                 ))}
               </Physics>
@@ -261,105 +249,30 @@ export default function Skills() {
           {/* Interactive Help Hint Overlay */}
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center pointer-events-none z-10 w-full px-4">
             <span className="font-body text-[10px] tracking-widest text-text/30 dark:text-text-dark/30 uppercase bg-background/80 dark:bg-background-dark/80 px-3 py-1 border border-border/20 dark:border-border-dark/20 backdrop-blur-sm">
-              Hover cursor to collide • Click spheres or buttons to view details
+              Hover cursor to collide with the 3D ecosystem spheres
             </span>
           </div>
         </div>
 
-        {/* Detailed Grid & Interactivity Panel */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start w-full">
-          {/* Left Column: Skill Clusters Grid */}
-          <div className="col-span-1 lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-8">
-            {Object.keys(categories).map((catName) => (
-              <div key={catName} className="p-6 border border-border dark:border-border-dark bg-background/55 dark:bg-background-dark/55 cursor-target">
-                <h3 className="font-display text-sm font-bold tracking-widest text-text/40 dark:text-text-dark/40 uppercase mb-4 pb-2 border-b border-border/10 dark:border-border-dark/10">
-                  {catName}
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {categories[catName].map((skill) => {
-                    const isSelected = selectedSkill?.name === skill.name;
-                    return (
-                      <button
-                        key={skill.name}
-                        onClick={() => setSelectedSkill(skill)}
-                        className={`px-3 py-1.5 border text-xs font-semibold uppercase tracking-wider transition-all duration-300 cursor-target ${
-                          isSelected
-                            ? 'bg-text border-text text-background dark:bg-text-dark dark:border-text-dark dark:text-background-dark'
-                            : 'border-border dark:border-border-dark text-text/80 dark:text-text-dark/80 hover:border-text dark:hover:border-text-dark'
-                        }`}
-                      >
-                        {skill.name}
-                      </button>
-                    );
-                  })}
-                </div>
+        {/* Detailed Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+          {Object.keys(categories).map((catName) => (
+            <div key={catName} className="p-6 border border-border dark:border-border-dark bg-background/55 dark:bg-background-dark/55 cursor-target">
+              <h3 className="font-display text-sm font-bold tracking-widest text-text/40 dark:text-text-dark/40 uppercase mb-4 pb-2 border-b border-border/10 dark:border-border-dark/10">
+                {catName}
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {categories[catName].map((skill) => (
+                  <span
+                    key={skill.name}
+                    className="px-3 py-1.5 border border-border dark:border-border-dark text-text/80 dark:text-text-dark/80 text-xs font-semibold uppercase tracking-wider hover:border-text dark:hover:border-text-dark transition-all duration-300 cursor-default"
+                  >
+                    {skill.name}
+                  </span>
+                ))}
               </div>
-            ))}
-          </div>
-
-          {/* Right Column: Interaction details panel */}
-          <div className="col-span-1 lg:col-span-4 lg:sticky lg:top-28">
-            <div className="p-8 border border-border dark:border-border-dark bg-background dark:bg-background-dark/80 backdrop-blur min-h-[300px] flex flex-col justify-between cursor-target">
-              <AnimatePresence mode="wait">
-                {selectedSkill ? (
-                  <motion.div
-                    key={selectedSkill.name}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3 }}
-                    className="flex-1 flex flex-col justify-between"
-                  >
-                    <div>
-                      <span className="font-body text-[10px] font-bold tracking-widest text-text/40 dark:text-text-dark/40 uppercase">
-                        SKILL DETAILS
-                      </span>
-                      <h4 className="font-display text-2xl font-bold text-text dark:text-text-dark mt-2 mb-6">
-                        {selectedSkill.name}
-                      </h4>
-                      
-                      <span className="font-body text-[10px] font-bold tracking-widest text-text/40 dark:text-text-dark/40 uppercase block mb-3">
-                        INTEGRATED WITHIN
-                      </span>
-                      
-                      <div className="space-y-3">
-                        {selectedSkill.projects.map((proj) => (
-                          <div
-                            key={proj}
-                            className="p-3 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark flex items-center justify-between"
-                          >
-                            <span className="font-body text-xs font-semibold text-text dark:text-text-dark uppercase">
-                              {proj}
-                            </span>
-                            <span className="w-1.5 h-1.5 bg-text dark:bg-text-dark" />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="pt-6 border-t border-border/10 dark:border-border-dark/10 text-xs font-body text-text/40 dark:text-text-dark/40 italic">
-                      This technology forms a critical part of Arya's real-world product engineering workflow.
-                    </div>
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="placeholder"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="flex-1 flex flex-col items-center justify-center text-center p-6 text-text/40 dark:text-text-dark/40"
-                  >
-                    <span className="material-symbols-outlined text-4xl mb-4 opacity-30">
-                      hub
-                    </span>
-                    <p className="font-body text-xs leading-relaxed uppercase tracking-wider">
-                      Select any technology skill on the left or click a 3D sphere to discover its integration across Arya's projects.
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
             </div>
-          </div>
+          ))}
         </div>
 
       </div>
