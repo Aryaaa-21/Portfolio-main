@@ -186,6 +186,15 @@ export default function JourneyPage() {
     },
     {
       date: "June 2026",
+      title: "VEDAX Development",
+      icon: Rocket,
+      points: [
+        "Started building VEDAX - a gamified Vedic mathematics engine.",
+        "Designed interactive computational boards and core logic."
+      ]
+    },
+    {
+      date: "June 2026",
       title: "2nd Semester Exam",
       icon: BookOpen,
       points: [
