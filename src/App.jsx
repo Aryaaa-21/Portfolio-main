@@ -48,7 +48,7 @@ export default function App() {
   return (
     <Router>
       <ScrollToTop />
-      <div className="relative min-h-screen w-full bg-background dark:bg-background-dark text-text dark:text-text-dark font-body select-text overflow-hidden transition-colors duration-500">
+      <div className="relative min-h-screen w-full bg-background dark:bg-background-dark text-text dark:text-text-dark font-body select-text overflow-x-clip transition-colors duration-500">
         
         {/* Decorative noise overlay */}
         <div className="grain-overlay pointer-events-none" />

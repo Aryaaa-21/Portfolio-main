@@ -48,19 +48,24 @@ export default function ProjectsPage() {
   ];
 
   const handleLaunchProject = (idx) => {
-    const track = document.getElementById('featured-track');
-    if (track) {
-      const rect = track.getBoundingClientRect();
+    setCurrentPage(idx);
+    const featuredEl = document.getElementById('featured');
+    if (featuredEl) {
+      const rect = featuredEl.getBoundingClientRect();
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const trackTop = rect.top + scrollTop;
-      const viewportHeight = window.innerHeight;
+      const containerTop = rect.top + scrollTop;
+      const scrollableDistance = rect.height - window.innerHeight;
       
-      const targetScroll = trackTop + (idx - 1) * viewportHeight + 50;
-      
-      window.scrollTo({
-        top: targetScroll,
-        behavior: 'smooth'
-      });
+      if (window.innerWidth >= 1024) {
+        const targetProgress = (idx - 1) / 4; // 4 is totalSlides
+        const targetScroll = containerTop + (targetProgress * scrollableDistance) + 5;
+        window.scrollTo({
+          top: targetScroll,
+          behavior: 'smooth'
+        });
+      } else {
+        featuredEl.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
