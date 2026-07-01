@@ -15,24 +15,24 @@ import {
 const textureLoader = new THREE.TextureLoader();
 const imageUrls = [
   '/images/react2.webp',
-  '/images/next2.webp',
-  '/images/node2.webp',
-  '/images/express.webp',
   '/images/mongo.webp',
-  '/images/mysql.webp',
-  '/images/typescript.webp',
   '/images/javascript.webp',
 ];
 const textures = imageUrls.map((url) => textureLoader.load(url));
 const techNames = [
+  'C',
+  'Java',
+  'JavaScript',
   'React',
-  'Next.js',
-  'Node.js',
-  'Express',
+  'Tailwind CSS',
+  'Framer Motion',
   'MongoDB',
-  'MySQL',
-  'TypeScript',
-  'JavaScript'
+  'AWS',
+  'Docker',
+  'Vercel',
+  'Git',
+  'Vite',
+  'Postman'
 ];
 
 const sphereGeometry = new THREE.SphereGeometry(1, 28, 28);
@@ -140,40 +140,22 @@ export default function Skills() {
 
   const categories = {
     Languages: [
-      { name: 'TypeScript', projects: ['ChainRent', 'VEDAX'] },
+      { name: 'C', projects: ['VEDAX'] },
+      { name: 'Java', projects: ['VEDAX'] },
       { name: 'JavaScript', projects: ['VEDAX', 'StellarPay', 'ChainRent'] },
-      { name: 'Python', projects: ['RakshaMarg'] },
-      { name: 'Rust', projects: ['StellarPay'] },
-      { name: 'Go', projects: ['StellarPay'] },
     ],
     Frontend: [
       { name: 'React', projects: ['StellarPay', 'VEDAX', 'RakshaMarg'] },
-      { name: 'Next.js', projects: ['ChainRent'] },
       { name: 'Tailwind CSS', projects: ['VEDAX', 'StellarPay'] },
       { name: 'Framer Motion', projects: ['VEDAX'] },
     ],
-    Backend: [
-      { name: 'Node.js', projects: ['StellarPay', 'ChainRent'] },
-      { name: 'Express', projects: ['ChainRent'] },
-      { name: 'Flask', projects: ['RakshaMarg'] },
-    ],
     Database: [
       { name: 'MongoDB', projects: ['RakshaMarg'] },
-      { name: 'PostgreSQL', projects: ['StellarPay'] },
-      { name: 'Redis', projects: ['RakshaMarg'] },
     ],
     Cloud: [
       { name: 'AWS', projects: ['RakshaMarg'] },
       { name: 'Docker', projects: ['StellarPay'] },
       { name: 'Vercel', projects: ['ChainRent', 'VEDAX'] },
-    ],
-    Web3: [
-      { name: 'Solidity', projects: ['ChainRent'] },
-      { name: 'Soroban', projects: ['StellarPay'] },
-      { name: 'Stellar SDK', projects: ['StellarPay'] },
-      { name: 'Ethers.js', projects: ['ChainRent'] },
-      { name: 'Hardhat', projects: ['ChainRent'] },
-      { name: 'IPFS', projects: ['ChainRent'] },
     ],
     Tools: [
       { name: 'Git', projects: ['RakshaMarg', 'ChainRent', 'StellarPay', 'VEDAX'] },
@@ -259,7 +241,7 @@ export default function Skills() {
                   <SphereGeo
                     key={i}
                     {...props}
-                    material={materials[props.techIndex]}
+                    material={materials[props.techIndex % materials.length]}
                     isActive={isActive}
                     onSelect={handleSelectTech}
                   />
