@@ -349,34 +349,34 @@ export default function JourneyPage() {
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
                     <div className="p-4 border border-border dark:border-border-dark cursor-target">
                       <span className="font-display text-3xl font-bold block mb-1">25+</span>
-                      <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/40">Certificates</span>
+                      <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/60 dark:text-text-dark/60">Certificates</span>
                     </div>
                     <div className="p-4 border border-border dark:border-border-dark cursor-target">
                       <span className="font-display text-3xl font-bold block mb-1">6</span>
-                      <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/40">Hackathons Won</span>
+                      <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/60 dark:text-text-dark/60">Hackathons Won</span>
                     </div>
                     <div className="p-4 border border-border dark:border-border-dark cursor-target">
                       <span className="font-display text-3xl font-bold block mb-1">4</span>
-                      <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/40">Online Wins</span>
+                      <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/60 dark:text-text-dark/60">Online Wins</span>
                     </div>
                     <div className="p-4 border border-border dark:border-border-dark cursor-target">
                       <span className="font-display text-3xl font-bold block mb-1">2</span>
-                      <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/40">Offline Wins</span>
+                      <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/60 dark:text-text-dark/60">Offline Wins</span>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-6 text-center">
                     <div className="p-4 border border-border dark:border-border-dark cursor-target">
                       <span className="font-display text-sm font-bold block mb-1">RakshaMarg</span>
-                      <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/40">Built MVP</span>
+                      <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/60 dark:text-text-dark/60">Built MVP</span>
                     </div>
                     <div className="p-4 border border-border dark:border-border-dark cursor-target">
                       <span className="font-display text-sm font-bold block mb-1">5 Colleges</span>
-                      <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/40">Explored Network</span>
+                      <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/60 dark:text-text-dark/60">Explored Network</span>
                     </div>
                     <div className="p-4 border border-border dark:border-border-dark cursor-target">
                       <span className="font-display text-sm font-bold block mb-1">DNA Coded</span>
-                      <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/40">Formed Team</span>
+                      <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/60 dark:text-text-dark/60">Formed Team</span>
                     </div>
                   </div>
                 </div>
