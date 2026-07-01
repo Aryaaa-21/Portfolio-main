@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Shield, Compass, Key, BookOpen, ArrowDown } from 'lucide-react';
-import Projects from '../sections/Projects';
+import ProjectShowcaseTimeline from '../sections/ProjectShowcaseTimeline';
 import Archive from '../sections/Archive';
 import BuildLog from '../sections/BuildLog';
 
@@ -157,7 +157,7 @@ export default function ProjectsPage() {
       </section>
 
       {/* 2. Interactive Pinned Detail Showcase Section */}
-      <Projects currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      <ProjectShowcaseTimeline />
 
       {/* 3. Project Archive Listing Section */}
       <Archive />
