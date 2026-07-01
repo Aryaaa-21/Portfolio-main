@@ -16,7 +16,7 @@ export default function Navbar({ theme, toggleTheme }) {
   ];
 
   return (
-    <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-32px)] max-w-7xl z-50 rounded-none bg-surface/80 dark:bg-surface-dark/80 backdrop-blur-md border border-border/40 dark:border-border-dark/40 px-6 py-4 theme-transition">
+    <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-32px)] max-w-7xl z-50 rounded-none bg-surface/30 dark:bg-surface-dark/30 backdrop-blur-lg border border-border/40 dark:border-border-dark/40 px-6 py-4 theme-transition">
       <div className="flex justify-between items-center w-full">
         <Link to="/" className="font-display text-xl font-bold tracking-widest text-text dark:text-text-dark select-none">
           ARYA BHAGAT
