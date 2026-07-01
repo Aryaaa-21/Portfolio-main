@@ -5,7 +5,6 @@ import { ArrowRight, Award } from 'lucide-react';
 import Hero from '../sections/Hero';
 import About from '../sections/About';
 import Identity from '../sections/Identity';
-import Skills from '../sections/Skills';
 import Impact from '../sections/Impact';
 import { certificates } from '../data/certificates';
 
@@ -24,8 +23,7 @@ export default function Home() {
       {/* Identity section */}
       <Identity />
 
-      {/* Tech Ecosystem section */}
-      <Skills />
+
 
       {/* Top Certificates Showcase Section */}
       <section className="py-32 bg-background dark:bg-background-dark border-b border-border/20 dark:border-border-dark/20 theme-transition">

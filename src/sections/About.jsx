@@ -77,7 +77,8 @@ export default function About() {
             <span className="font-semibold text-text dark:text-text-dark underline decoration-border dark:decoration-border-dark underline-offset-4">
               Narula Institute of Technology
             </span>{" "}
-            passionate about building software that solves real-world problems. I am currently focusing on Web Development and strengthening my fundamentals in Data Structures.
+            passionate about building software that solves real-world problems.
+            <br />I am currently focusing on Web Development and strengthening my fundamentals in Data Structures.
           </motion.p>
         </div>
 
