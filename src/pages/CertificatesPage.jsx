@@ -12,10 +12,10 @@ export default function CertificatesPage() {
   const categories = ['All', 'Hackathons', 'Web3', 'Development', 'Academic', 'Volunteering', 'Extra-Curricular'];
 
   const stats = [
-    { label: "Certificates Earned", value: "21", icon: Award },
-    { label: "Hackathons Won", value: "4", icon: Trophy },
-    { label: "Prize Money", value: "₹25K+", icon: Landmark },
-    { label: "Events Attended", value: "21", icon: Filter }
+    { label: "Certificates Earned", value: "20+", icon: Award },
+    { label: "Hackathons Won", value: "6+", icon: Trophy },
+    { label: "Prize Money", value: "₹16K+", icon: Landmark },
+    { label: "Events Attended", value: "15+", icon: Filter }
   ];
 
   const filtered = certificates.filter((cert) => {
