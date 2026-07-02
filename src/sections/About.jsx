@@ -122,7 +122,7 @@ export default function About() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="flex items-start gap-4 p-5 border border-border dark:border-border-dark bg-surface/20 dark:bg-surface-dark/20 hover:border-text/30 dark:hover:border-text-dark/30 transition-all duration-300 group"
+                className="flex items-start gap-4 p-5 border border-border dark:border-border-dark bg-surface/20 dark:bg-surface-dark/20 hover:border-text/30 dark:hover:border-text-dark/30 transition-all duration-300 group cursor-target"
               >
                 <div className="p-2.5 border border-border dark:border-border-dark bg-background dark:bg-background-dark text-text/60 dark:text-text-dark/60 group-hover:text-text dark:group-hover:text-text-dark transition-colors duration-300">
                   <Icon className="w-5 h-5" />

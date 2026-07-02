@@ -81,7 +81,7 @@ export default function Journey() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true, margin: '-50px' }}
                         transition={{ duration: 0.6 }}
-                        className="w-full md:max-w-md p-6 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark md:text-right"
+                        className="w-full md:max-w-md p-6 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark md:text-right cursor-target"
                       >
                         <span className="font-display text-2xl font-bold text-mono-42 dark:text-mono-161 block mb-2">
                           {item.year}
@@ -107,7 +107,7 @@ export default function Journey() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true, margin: '-50px' }}
                         transition={{ duration: 0.6 }}
-                        className="w-full md:max-w-md p-6 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-left"
+                        className="w-full md:max-w-md p-6 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-left cursor-target"
                       >
                         <span className="font-display text-2xl font-bold text-mono-42 dark:text-mono-161 block mb-2">
                           {item.year}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import GridScan from './GridScan';
 
 export default function Preloader({ onComplete }) {
   const [progress, setProgress] = useState(0);
@@ -104,6 +105,34 @@ export default function Preloader({ onComplete }) {
 
       {/* Subtle Noise/Grain Overlay */}
       <div className="absolute inset-0 opacity-[0.015] pointer-events-none bg-[url('data:image/svg+xml;utf8,<svg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22><filter id=%22noiseFilter%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%223%22 stitchTiles=%22stitch%22/></filter><rect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/></svg>')] bg-repeat" />
+
+      {/* GridScan Preload Effect */}
+      <GridScan
+        enableWebcam={false}
+        showPreview={false}
+        sensitivity={0.55}
+        lineThickness={1.6}
+        linesColor="#2A2335"
+        scanColor="#A498A4"
+        scanOpacity={0.5}
+        gridScale={0.1}
+        lineStyle="dashed"
+        lineJitter={0.25}
+        scanDirection="pingpong"
+        enablePost={true}
+        bloomIntensity={0.6}
+        chromaticAberration={0.002}
+        noiseIntensity={0.01}
+        scanGlow={1.05}
+        scanSoftness={2.0}
+        scanPhaseTaper={0.9}
+        scanDuration={2.0}
+        scanDelay={2.0}
+        enableGyro={false}
+        scanOnClick={true}
+        snapBackDelay={250}
+        style={{ width: '100%', height: '100%', position: 'absolute', inset: 0, zIndex: 1 }}
+      />
 
       {/* Center Content Container */}
       <div className="relative z-10 flex flex-col items-center text-center px-6">

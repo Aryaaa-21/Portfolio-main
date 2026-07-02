@@ -516,7 +516,7 @@ export default function Projects({ currentPage: propPage, setCurrentPage: propSe
           return (
             <div 
               key={project.id} 
-              className="border border-border dark:border-border-dark bg-surface/30 dark:bg-surface-dark/30 rounded-none overflow-hidden flex flex-col"
+              className="border border-border dark:border-border-dark bg-surface/30 dark:bg-surface-dark/30 rounded-none overflow-hidden flex flex-col cursor-target"
             >
               <div className="w-full h-48 relative overflow-hidden">
                 <img 
