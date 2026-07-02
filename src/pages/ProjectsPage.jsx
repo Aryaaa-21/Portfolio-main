@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { Shield, Compass, Key, BookOpen, ArrowDown, Heart } from 'lucide-react';
 import Projects from '../sections/Projects';
 import Archive from '../sections/Archive';
-import BuildLog from '../sections/BuildLog';
 
 export default function ProjectsPage() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -154,9 +153,6 @@ export default function ProjectsPage() {
 
       {/* 3. Project Archive Listing Section */}
       <Archive />
-
-      {/* 4. Development Build Changelog Section */}
-      <BuildLog />
     </div>
   );
 }
