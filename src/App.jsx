@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import Navbar from './sections/Navbar';
 import Contact from './sections/Contact';
 
@@ -12,6 +13,7 @@ import CertificatesPage from './pages/CertificatesPage';
 // Components
 import ShaderBackground from './components/ShaderBackground';
 import TargetCursor from './components/ui/TargetCursor';
+import Preloader from './components/Preloader';
 
 // Helper component to scroll to top on route change
 function ScrollToTop() {
@@ -28,6 +30,17 @@ export default function App() {
     if (savedTheme) return savedTheme;
     return 'dark';
   });
+
+  const [isLoading, setIsLoading] = useState(() => {
+    // Skip preloader if visited in the current session
+    if (sessionStorage.getItem('visited')) return false;
+    return true;
+  });
+
+  const handlePreloaderComplete = () => {
+    sessionStorage.setItem('visited', 'true');
+    setIsLoading(false);
+  };
 
   useEffect(() => {
     const root = window.document.documentElement;
@@ -50,6 +63,13 @@ export default function App() {
       <ScrollToTop />
       <div className="relative min-h-screen w-full bg-background dark:bg-background-dark text-text dark:text-text-dark font-body select-text overflow-x-clip transition-colors duration-500">
         
+        {/* Premium Preloader Experience */}
+        <AnimatePresence mode="wait">
+          {isLoading && (
+            <Preloader onComplete={handlePreloaderComplete} />
+          )}
+        </AnimatePresence>
+
         {/* Decorative noise overlay */}
         <div className="grain-overlay pointer-events-none" />
 
