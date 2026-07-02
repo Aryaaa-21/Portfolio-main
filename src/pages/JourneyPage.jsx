@@ -565,11 +565,12 @@ export default function JourneyPage() {
                             <span className="font-display text-sm font-bold block mb-1">Sprinters</span>
                             <span className="text-[8px] opacity-60">{sprintersExpanded ? '▲' : '▼'}</span>
                           </div>
-                          <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/60 dark:text-text-dark/60">Formed Team</span>
+                          <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/60 dark:text-text-dark/60 block">
+                            Formed Team @ JIS University
+                          </span>
                           {sprintersExpanded && (
                             <div className="mt-3 pt-3 border-t border-border/10 text-left font-mono text-[9px] leading-relaxed text-text/70 dark:text-text-dark/70 space-y-1">
-                              <div>Formed At: <span className="text-text dark:text-text-dark font-bold">JIS University</span></div>
-                              <div className="mt-2 text-[8px] uppercase tracking-wider text-text/40 dark:text-text-dark/40">Teammates:</div>
+                              <div className="text-[8px] uppercase tracking-wider text-text/40 dark:text-text-dark/40 mb-1">Teammates:</div>
                               <div className="pl-2 space-y-0.5">
                                 <div>• Dipak Kumar Agrahari</div>
                                 <div>• Deep Saha</div>
@@ -606,11 +607,12 @@ export default function JourneyPage() {
                             <span className="font-display text-sm font-bold block mb-1">DNA Coded</span>
                             <span className="text-[8px] opacity-60">{dnaExpanded ? '▲' : '▼'}</span>
                           </div>
-                          <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/60 dark:text-text-dark/60">Formed Team</span>
+                          <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/60 dark:text-text-dark/60 block">
+                            Formed Team @ Narula Institute of Tech
+                          </span>
                           {dnaExpanded && (
                             <div className="mt-3 pt-3 border-t border-border/10 text-left font-mono text-[9px] leading-relaxed text-text/70 dark:text-text-dark/70 space-y-1">
-                              <div>Formed At: <span className="text-text dark:text-text-dark font-bold">Narula Institute of Technology</span></div>
-                              <div className="mt-2 text-[8px] uppercase tracking-wider text-text/40 dark:text-text-dark/40">Teammates:</div>
+                              <div className="text-[8px] uppercase tracking-wider text-text/40 dark:text-text-dark/40 mb-1">Teammates:</div>
                               <div className="pl-2 space-y-0.5">
                                 <div>• Deep Saha</div>
                                 <div>• Nivriti Pandey</div>
