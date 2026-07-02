@@ -106,7 +106,7 @@ export default function About() {
               to="/certificates"
               className="px-6 py-3 border border-border dark:border-border-dark text-text dark:text-text-dark font-body text-xs font-semibold tracking-wider uppercase flex items-center gap-2 hover:bg-text hover:text-background dark:hover:bg-text-dark dark:hover:text-background-dark transition-all duration-300"
             >
-              Credentials
+              Achievements
             </Link>
           </motion.div>
         </div>
