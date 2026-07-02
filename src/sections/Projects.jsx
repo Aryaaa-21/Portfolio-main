@@ -6,6 +6,7 @@ const featured = [
     id: "rakshamarg",
     title: "RakshaMarg",
     image: "/img/project/rakshamarg.png",
+    imagePosition: "object-left",
     category: "AI + PUBLIC SAFETY PLATFORM",
     status: "BETA RELEASE",
     icon: Shield,
@@ -29,6 +30,7 @@ const featured = [
     id: "vedax",
     title: "VEDAX",
     image: "/img/project/vedax.png",
+    imagePosition: "object-center",
     category: "EDTECH + COGNITIVE LEARNING PLATFORM",
     status: "PRODUCTION READY",
     icon: BookOpen,
@@ -52,6 +54,7 @@ const featured = [
     id: "swasthi",
     title: "Swasthi",
     image: "/img/project/swasthi.png",
+    imagePosition: "object-left",
     category: "HEALTHCARE + AI ASSISTANCE PLATFORM",
     status: "RESEARCH PROTOTYPE",
     icon: Heart,
@@ -304,7 +307,7 @@ export default function Projects({ currentPage: propPage, setCurrentPage: propSe
                     <img 
                       src={project.image} 
                       alt={project.title} 
-                      className="w-full h-full object-cover filter grayscale brightness-[0.45] transition-transform duration-[1200ms] hover:scale-105" 
+                      className={`w-full h-full object-cover ${project.imagePosition || 'object-center'} filter grayscale brightness-[0.45] transition-transform duration-[1200ms] hover:scale-105`} 
                     />
                     {/* Visual filter overlay */}
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent to-neutral-950/90 pointer-events-none z-10" />
@@ -417,7 +420,7 @@ export default function Projects({ currentPage: propPage, setCurrentPage: propSe
                     <img 
                       src={project.image} 
                       alt={project.title} 
-                      className="w-full h-full object-cover filter grayscale brightness-[0.45] transition-transform duration-[1200ms] hover:scale-105" 
+                      className={`w-full h-full object-cover ${project.imagePosition || 'object-center'} filter grayscale brightness-[0.45] transition-transform duration-[1200ms] hover:scale-105`} 
                     />
                     {/* Visual filter overlay */}
                     <div className="absolute inset-0 bg-gradient-to-l from-transparent to-neutral-950/90 pointer-events-none z-10" />
@@ -533,7 +536,7 @@ export default function Projects({ currentPage: propPage, setCurrentPage: propSe
                 <img 
                   src={project.image} 
                   alt={project.title} 
-                  className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700" 
+                  className={`w-full h-full object-cover ${project.imagePosition || 'object-center'} filter grayscale hover:grayscale-0 transition-all duration-700`} 
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10" />
                 <div className="absolute bottom-4 left-4 z-20 flex items-center gap-2">
