@@ -568,7 +568,6 @@ export default function JourneyPage() {
                           <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/60 dark:text-text-dark/60">Formed Team</span>
                           {sprintersExpanded && (
                             <div className="mt-3 pt-3 border-t border-border/10 text-left font-mono text-[9px] leading-relaxed text-text/70 dark:text-text-dark/70 space-y-1">
-                              <div>Team: <span className="text-text dark:text-text-dark font-bold">Sprinters</span></div>
                               <div>Formed At: <span className="text-text dark:text-text-dark font-bold">JIS University</span></div>
                               <div className="mt-2 text-[8px] uppercase tracking-wider text-text/40 dark:text-text-dark/40">Teammates:</div>
                               <div className="pl-2 space-y-0.5">
@@ -610,7 +609,6 @@ export default function JourneyPage() {
                           <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/60 dark:text-text-dark/60">Formed Team</span>
                           {dnaExpanded && (
                             <div className="mt-3 pt-3 border-t border-border/10 text-left font-mono text-[9px] leading-relaxed text-text/70 dark:text-text-dark/70 space-y-1">
-                              <div>Team: <span className="text-text dark:text-text-dark font-bold">DNA Coded</span></div>
                               <div>Formed At: <span className="text-text dark:text-text-dark font-bold">Narula Institute of Technology</span></div>
                               <div className="mt-2 text-[8px] uppercase tracking-wider text-text/40 dark:text-text-dark/40">Teammates:</div>
                               <div className="pl-2 space-y-0.5">
