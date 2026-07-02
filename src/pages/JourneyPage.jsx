@@ -575,7 +575,7 @@ export default function JourneyPage() {
                                 <div>• Dipak Kumar Agrahari</div>
                                 <div>• Deep Saha</div>
                                 <div>• Adiba Ali</div>
-                                <div>•Akshat Tiwari</div>
+                                <div>• Akshat Tiwari</div>
                               </div>
                             </div>
                           )}
