@@ -7,7 +7,7 @@ export default function JourneyPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const activeSection = searchParams.get('section') || 'academic'; // 'academic' or 'engineering'
   const activeYear = parseInt(searchParams.get('year') || '1', 10);
-  
+
   const [collegesExpanded, setCollegesExpanded] = useState(false);
   const [sprintersExpanded, setSprintersExpanded] = useState(false);
   const [dnaExpanded, setDnaExpanded] = useState(false);
@@ -388,7 +388,7 @@ export default function JourneyPage() {
             {activeSection === 'engineering' ? 'MY ENGINEERING JOURNEY' : 'ACADEMIC JOURNEY'}
           </h1>
           <p className="font-body text-xs sm:text-sm uppercase tracking-widest text-text/60 dark:text-text-dark/60 max-w-xl mx-auto">
-            {activeSection === 'engineering' 
+            {activeSection === 'engineering'
               ? 'Four years of learning, building, failing, winning and growing.'
               : 'Every institution shaped a different part of who I am today.'}
           </p>
@@ -464,13 +464,13 @@ export default function JourneyPage() {
                   {/* Milestone Timeline Connected Path */}
                   <div ref={milestonesContainerRef} className="relative max-w-4xl mx-auto pl-8 sm:pl-0">
                     <div className="absolute left-3 sm:left-1/2 -translate-x-[0.5px] top-0 bottom-0 w-[1px] bg-border/40 dark:bg-border-dark/40 pointer-events-none" />
-                    
-                    <motion.div 
+
+                    <motion.div
                       className="absolute left-3 sm:left-1/2 -translate-x-[0.5px] top-0 w-[1px] bg-text dark:bg-text-dark origin-top pointer-events-none"
                       style={{ scaleY: rayHeight, height: "100%" }}
                     />
 
-                    <motion.div 
+                    <motion.div
                       className="absolute left-3 sm:left-1/2 -translate-x-[6px] w-3 h-3 rounded-full bg-text dark:bg-text-dark shadow-[0_0_12px_rgba(255,255,255,0.8)] pointer-events-none z-20"
                       style={{ top: rayDotTop }}
                     />
@@ -557,7 +557,7 @@ export default function JourneyPage() {
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-6 text-center">
-                        <div 
+                        <div
                           onClick={() => setSprintersExpanded(!sprintersExpanded)}
                           className="p-4 border border-border dark:border-border-dark cursor-pointer select-none transition-colors hover:bg-white/5 relative"
                         >
@@ -566,7 +566,7 @@ export default function JourneyPage() {
                             <span className="text-[8px] opacity-60">{sprintersExpanded ? '▲' : '▼'}</span>
                           </div>
                           <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/60 dark:text-text-dark/60 block">
-                            Formed Team @ JIS University
+                            Formed Team @ JISU
                           </span>
                           {sprintersExpanded && (
                             <div className="mt-3 pt-3 border-t border-border/10 text-left font-mono text-[9px] leading-relaxed text-text/70 dark:text-text-dark/70 space-y-1">
@@ -575,11 +575,12 @@ export default function JourneyPage() {
                                 <div>• Dipak Kumar Agrahari</div>
                                 <div>• Deep Saha</div>
                                 <div>• Adiba Ali</div>
+                                <div>•Akshat Tiwari</div>
                               </div>
                             </div>
                           )}
                         </div>
-                        <div 
+                        <div
                           onClick={() => setCollegesExpanded(!collegesExpanded)}
                           className="p-4 border border-border dark:border-border-dark cursor-pointer select-none transition-colors hover:bg-white/5 relative"
                         >
@@ -599,7 +600,7 @@ export default function JourneyPage() {
                             </div>
                           )}
                         </div>
-                        <div 
+                        <div
                           onClick={() => setDnaExpanded(!dnaExpanded)}
                           className="p-4 border border-border dark:border-border-dark cursor-pointer select-none transition-colors hover:bg-white/5 relative"
                         >
@@ -608,7 +609,7 @@ export default function JourneyPage() {
                             <span className="text-[8px] opacity-60">{dnaExpanded ? '▲' : '▼'}</span>
                           </div>
                           <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/60 dark:text-text-dark/60 block">
-                            Formed Team @ Narula Institute of Tech
+                            Formed Team @ NiTK
                           </span>
                           {dnaExpanded && (
                             <div className="mt-3 pt-3 border-t border-border/10 text-left font-mono text-[9px] leading-relaxed text-text/70 dark:text-text-dark/70 space-y-1">
@@ -695,13 +696,13 @@ export default function JourneyPage() {
               {/* Academic Milestone Timeline Connected Path */}
               <div ref={academicContainerRef} className="relative max-w-4xl mx-auto pl-8 sm:pl-0">
                 <div className="absolute left-3 sm:left-1/2 -translate-x-[0.5px] top-0 bottom-0 w-[1px] bg-border/40 dark:bg-border-dark/40 pointer-events-none" />
-                
-                <motion.div 
+
+                <motion.div
                   className="absolute left-3 sm:left-1/2 -translate-x-[0.5px] top-0 w-[1px] bg-text dark:bg-text-dark origin-top pointer-events-none"
                   style={{ scaleY: academicRayHeight, height: "100%" }}
                 />
 
-                <motion.div 
+                <motion.div
                   className="absolute left-3 sm:left-1/2 -translate-x-[6px] w-3 h-3 rounded-full bg-text dark:bg-text-dark shadow-[0_0_12px_rgba(255,255,255,0.8)] pointer-events-none z-20"
                   style={{ top: academicRayDotTop }}
                 />
