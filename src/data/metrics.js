@@ -1,12 +1,12 @@
 // Real statistics and metrics for Arya Bhagat
 export const metrics = [
   {
-    value: "6+",
-    label: "ACTIVE PROJECTS",
+    value: "10+",
+    label: "GITHUB PROJECTS",
     description: "Production-grade AI, Web3, and Full Stack applications deployed."
   },
   {
-    value: "200+",
+    value: "300+",
     label: "GITHUB COMMITS",
     description: "Contributions to repositories, open source, and personal products."
   },
