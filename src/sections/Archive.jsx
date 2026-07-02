@@ -1,83 +1,62 @@
-import React, { useState } from 'react';
-import { Search, Filter, ExternalLink, Github, Cpu, Terminal, Shield, BookOpen, Heart, Layers, Activity, Code, Award, Check } from 'lucide-react';
+import React from 'react';
+import { Search, Filter, ExternalLink, Github, Cpu, Layers, Activity } from 'lucide-react';
 
-export default function Archive() {
-  const [search, setSearch] = useState('');
-  const [filterStatus, setFilterStatus] = useState('All');
+// 1. SYSTEM REGISTRY HEADER & FILTERS
+export function ArchiveHeader({ search, setSearch, filterStatus, setFilterStatus }) {
+  const statuses = ['All', '[ACTIVE]', '[DEPLOYED]', '[RESEARCH]', '[BLOCKCHAIN]', '[SOROBAN]', '[ARCHIVED]'];
 
-  // Featured Projects
-  const featuredProjects = [
-    {
-      id: 'RM-001',
-      title: 'RakshaMarg',
-      classification: 'AI + PUBLIC SAFETY PLATFORM',
-      mission: 'Building navigation systems that prioritize human safety over travel speed.',
-      overview: 'RakshaMarg is a safety-centric geospatial routing engine. While legacy platforms focus purely on routing speed, this system analyzes urban telemetry—such as historical crime databases, street illumination indices, real-time user crowd-sourcing, and police precinct proximity—to calculate risk vectors. It generates routing alternatives that prioritize secure pathways for users navigating high-risk urban centers.',
-      problem: 'Conventional navigation engines optimize for distance and time, often routing users through poorly lit streets, isolated zones, and locations with elevated crime risk.',
-      solution: 'An AI-assisted safety routing framework that evaluates road segments using crime statistics, environmental conditions, crowd density, community reports, and infrastructure coverage before generating navigation paths.',
-      capabilities: [
-        'Safe Route Recommendation Engine',
-        'Real-Time Environmental Illumination Scoring',
-        'Location-Based Emergency SOS Broadcasts',
-        'Automated Nearest Police Station & Hospital Routing'
-      ],
-      tech: ['REACT NATIVE', 'FLASK', 'TENSORFLOW', 'MONGODB', 'GOOGLE MAPS API', 'GEMINI AI', 'FIREBASE', 'GEOSPATIAL ANALYTICS'],
-      status: ['[ACTIVE]', '[DEPLOYED]', '[FEATURED]'],
-      complexity: 'RANK #02',
-      impact: 'Reduced critical routing exposures in high-risk sectors by 40% during beta testing, rendering path alternatives in under 200ms.',
-      github: 'https://github.com/DNA-Coded/RakshaMarg',
-      demo: 'https://www.rakshamarg.app/',
-      icon: Shield,
-      accent: 'emerald'
-    },
-    {
-      id: 'VX-002',
-      title: 'VEDAX',
-      classification: 'EDTECH + COGNITIVE LEARNING',
-      mission: 'Preserving and modernizing Vedic Mathematics through interactive digital learning.',
-      overview: 'VedaX is a mental calculation simulator designed to gamify and digitize classical Vedic Mathematics sutras. The application leverages an interactive rendering engine to illustrate the 16 ancient sutras, converting complex arithmetic operations into visual pattern matching. It tracks computational throughput, accuracy rates, and response latency to adapt training modules in real time.',
-      problem: 'Traditional mathematics education often emphasizes memorization over mental computation and pattern recognition.',
-      solution: 'A gamified learning ecosystem that teaches Vedic Mathematics techniques through guided practice, adaptive challenges, and performance tracking.',
-      capabilities: [
-        'Interactive Step-by-Step Sutra Simulator',
-        'Adaptive Mental Calculation Drills',
-        'Accuracy and Latency Analytics Tracker',
-        'Offline-First Vector Render Math Board'
-      ],
-      tech: ['REACT', 'TYPESCRIPT', 'FIREBASE', 'MONGODB', 'NODE.JS', 'VERCEL', 'TAILWIND CSS'],
-      status: ['[DEPLOYED]', '[FEATURED]'],
-      complexity: 'RANK #07',
-      impact: 'Enhanced math calculation speeds by 35% in active users within 14 days of engagement, hosting over 1,500 active learners.',
-      github: 'https://github.com/DNA-Coded/vedic_math',
-      demo: 'https://vedax-math.vercel.app/',
-      icon: BookOpen,
-      accent: 'orange'
-    },
-    {
-      id: 'SW-003',
-      title: 'Swasthi',
-      classification: 'HEALTHCARE + AI ASSISTANCE',
-      mission: 'Making preventive healthcare more accessible through intelligent digital assistance.',
-      overview: 'Swasthi is a localized healthcare assistant that translates medical queries and analyzes early-stage symptoms. The system processes input across multiple Indian regional dialects, utilizing NLP to extract symptom nodes, match them with historical medical ontologies, and supply non-diagnostic wellness suggestions while dispatching users to certified local clinics.',
-      problem: 'Individuals often ignore early symptoms and struggle to access reliable health guidance before conditions become severe.',
-      solution: 'A healthcare intelligence platform that combines symptom assessment, wellness monitoring, and personalized recommendations to support informed health decisions.',
-      capabilities: [
-        'Multilingual NLP Dialect Parsing',
-        'Symptom-to-Clinic Geo-Routing',
-        'Non-Diagnostic Health Risk Scoring',
-        'Privacy-Preserving Patient Profiles'
-      ],
-      tech: ['REACT', 'PYTHON', 'FLASK', 'MONGODB', 'GEMINI AI', 'FIREBASE', 'NLTK'],
-      status: ['[RESEARCH]', '[FEATURED]'],
-      complexity: 'RANK #06',
-      impact: 'Resolved query-to-resource matching with 92% accuracy across 12 target dialects in mock simulations, eliminating local health access delays.',
-      github: 'https://github.com/Codesprint25/Sprinters',
-      demo: '',
-      icon: Heart,
-      accent: 'violet'
-    }
-  ];
+  return (
+    <div className="w-full bg-background dark:bg-background-dark px-6 lg:px-16 pt-8 pb-4 relative z-10 theme-transition">
+      <div className="max-w-7xl mx-auto">
+        {/* Telemetry Control Header */}
+        <div className="border border-border/30 dark:border-border-dark/30 bg-surface/40 dark:bg-surface-dark/40 p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
+          <div className="space-y-2">
+            <span className="font-mono text-[9px] tracking-[0.3em] text-text/40 dark:text-text-dark/40 flex items-center gap-2 uppercase">
+              <Cpu className="w-3.5 h-3.5 text-emerald-500 animate-pulse" />
+              SYSTEM_CORE // SECURITY_INTEGRATION_ARCHIVE
+            </span>
+            <h2 className="font-display text-3xl font-bold tracking-tight text-text dark:text-text-dark uppercase">
+              SYSTEM REGISTRY
+            </h2>
+          </div>
 
+          <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center w-full md:w-auto">
+            {/* Search Input */}
+            <div className="relative flex-1 sm:w-64">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text/40 dark:text-text-dark/40" />
+              <input
+                type="text"
+                placeholder="Search telemetry..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark/50 font-mono text-[10px] text-text dark:text-text-dark focus:outline-none focus:border-text dark:focus:border-text-dark uppercase rounded-none transition-colors"
+              />
+            </div>
+
+            {/* Status Dropdown */}
+            <div className="relative">
+              <select
+                value={filterStatus}
+                onChange={(e) => setFilterStatus(e.target.value)}
+                className="w-full pl-4 pr-10 py-2 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-text dark:text-text-dark font-mono text-[10px] uppercase rounded-none appearance-none focus:outline-none focus:border-text dark:focus:border-text-dark"
+              >
+                {statuses.map(st => (
+                  <option key={st} value={st}>{st === 'All' ? 'FILTER: ALL_SYSTEMS' : `FILTER: ${st}`}</option>
+                ))}
+              </select>
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-text/40">
+                <Filter className="w-3.5 h-3.5" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// 2. SYSTEM REGISTRY DATA GRID
+export function ArchiveGrid({ search, filterStatus }) {
   // Web3 & Soroban Projects
   const web3Projects = [
     {
@@ -182,9 +161,6 @@ export default function Archive() {
     }
   ];
 
-  // Global list for filter calculations
-  const statuses = ['All', '[ACTIVE]', '[DEPLOYED]', '[RESEARCH]', '[BLOCKCHAIN]', '[SOROBAN]', '[ARCHIVED]'];
-
   // Filtering Logic
   const filterList = (list) => {
     return list.filter((item) => {
@@ -195,68 +171,22 @@ export default function Archive() {
         item.tech.some(t => t.toLowerCase().includes(query)) ||
         (item.highlights && item.highlights.toLowerCase().includes(query)) ||
         item.id.toLowerCase().includes(query);
-      
+
       const matchesStatus = filterStatus === 'All' || item.status.includes(filterStatus);
       return matchesSearch && matchesStatus;
     });
   };
 
-  const filteredFeatured = filterList(featuredProjects);
   const filteredWeb3 = filterList(web3Projects);
   const filteredFoundational = filterList(foundationalProjects);
-
   const hasAnyMatches = filteredWeb3.length > 0 || filteredFoundational.length > 0;
 
   return (
-    <section id="archive" className="py-32 bg-background dark:bg-background-dark border-b border-border/20 dark:border-border-dark/20 theme-transition relative">
+    <section id="archive" className="py-24 bg-background dark:bg-background-dark border-b border-border/20 dark:border-border-dark/20 theme-transition relative">
       {/* Visual background lines */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808005_1px,transparent_1px),linear-gradient(to_bottom,#80808005_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-16 relative z-10">
-        
-        {/* Telemetry Control Header */}
-        <div className="border border-border/30 dark:border-border-dark/30 bg-surface/40 dark:bg-surface-dark/40 p-6 mb-16 flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
-          <div className="space-y-2">
-            <span className="font-mono text-[9px] tracking-[0.3em] text-text/40 dark:text-text-dark/40 flex items-center gap-2 uppercase">
-              <Cpu className="w-3.5 h-3.5 text-emerald-500 animate-pulse" />
-              SYSTEM_CORE // SECURITY_INTEGRATION_ARCHIVE
-            </span>
-            <h2 className="font-display text-3xl font-bold tracking-tight text-text dark:text-text-dark uppercase">
-              SYSTEM REGISTRY
-            </h2>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center w-full md:w-auto">
-            {/* Search Input */}
-            <div className="relative flex-1 sm:w-64">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text/40 dark:text-text-dark/40" />
-              <input
-                type="text"
-                placeholder="Search telemetry..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark/50 font-mono text-[10px] text-text dark:text-text-dark focus:outline-none focus:border-text dark:focus:border-text-dark uppercase rounded-none transition-colors"
-              />
-            </div>
-
-            {/* Status Dropdown */}
-            <div className="relative">
-              <select
-                value={filterStatus}
-                onChange={(e) => setFilterStatus(e.target.value)}
-                className="w-full pl-4 pr-10 py-2 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-text dark:text-text-dark font-mono text-[10px] uppercase rounded-none appearance-none focus:outline-none focus:border-text dark:focus:border-text-dark"
-              >
-                {statuses.map(st => (
-                  <option key={st} value={st}>{st === 'All' ? 'FILTER: ALL_SYSTEMS' : `FILTER: ${st}`}</option>
-                ))}
-              </select>
-              <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-text/40">
-                <Filter className="w-3.5 h-3.5" />
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* Global matching telemetry notice */}
         {!hasAnyMatches && (
           <div className="text-center py-24 border border-dashed border-border/20 dark:border-border-dark/20 bg-surface/10">
@@ -271,16 +201,13 @@ export default function Archive() {
 
         {hasAnyMatches && (
           <div className="space-y-24">
-            
-            {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-                01. WEB3 & SOROBAN ARCHIVE (Blockchain nodes - 20-25% attention)
-                ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+            {/* 02. WEB3 & SOROBAN ARCHIVE */}
             {filteredWeb3.length > 0 && (
               <div className="space-y-8">
                 <div className="border-b border-border/30 dark:border-border-dark/30 pb-3 flex items-center justify-between">
                   <span className="font-mono text-xs tracking-[0.25em] text-text/40 dark:text-text-dark/40 flex items-center gap-2">
                     <Layers className="w-4 h-4 text-cyan-500" />
-                    01 // WEB3 & SOROBAN BLOCKCHAIN ARCHIVE
+                    02 // WEB3 & SOROBAN BLOCKCHAIN ARCHIVE
                   </span>
                   <span className="font-mono text-[9px] text-text/30 dark:text-text-dark/30">
                     SYS_WEIGHT: 20%
@@ -289,7 +216,7 @@ export default function Archive() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   {filteredWeb3.map((project) => (
-                    <div 
+                    <div
                       key={project.id}
                       className="border border-cyan-500/25 shadow-[0_0_15px_rgba(6,182,212,0.04)] bg-surface/20 dark:bg-surface-dark/10 p-6 relative flex flex-col justify-between hover:border-cyan-500/50 transition-all duration-300"
                     >
@@ -322,7 +249,7 @@ export default function Archive() {
                           <p className="font-mono text-[9px] tracking-wider text-cyan-400 font-bold uppercase mb-2">
                             {project.classification}
                           </p>
-                          
+
                           {/* Ecosystem Badges */}
                           <div className="flex flex-wrap gap-1 mb-2">
                             {project.badges.map(b => (
@@ -370,18 +297,18 @@ export default function Archive() {
 
                       {/* Links */}
                       <div className="flex gap-3 pt-6 mt-6 border-t border-border/10 dark:border-border-dark/10">
-                        <a 
+                        <a
                           href={project.github}
-                          target="_blank" 
-                          rel="noopener noreferrer" 
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="flex-1 text-center py-2 border border-border dark:border-border-dark text-[9px] font-mono uppercase tracking-wider hover:bg-cyan-500/10 hover:border-cyan-500/40 text-text/80 dark:text-text-dark/80 transition-all flex items-center justify-center gap-1.5"
                         >
                           <Github className="w-3.5 h-3.5" /> REPO
                         </a>
-                        <a 
+                        <a
                           href={project.demo}
-                          target="_blank" 
-                          rel="noopener noreferrer" 
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="flex-1 text-center py-2 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[9px] font-mono uppercase tracking-wider hover:bg-cyan-500 hover:text-black hover:border-cyan-500 transition-all flex items-center justify-center gap-1.5"
                         >
                           <ExternalLink className="w-3.5 h-3.5" /> DEPLOY
@@ -393,15 +320,13 @@ export default function Archive() {
               </div>
             )}
 
-            {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-                02. FOUNDATIONAL WEB PROJECTS (Micro cards - 10-15% attention)
-                ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+            {/* 03. FOUNDATIONAL WEB PROJECTS */}
             {filteredFoundational.length > 0 && (
               <div className="space-y-8">
                 <div className="border-b border-border/30 dark:border-border-dark/30 pb-3 flex items-center justify-between">
                   <span className="font-mono text-xs tracking-[0.25em] text-text/40 dark:text-text-dark/40 flex items-center gap-2">
                     <Activity className="w-4 h-4 text-violet-500" />
-                    02 // FOUNDATIONAL ENGINEERING SYSTEMS
+                    03 // FOUNDATIONAL ENGINEERING SYSTEMS
                   </span>
                   <span className="font-mono text-[9px] text-text/30 dark:text-text-dark/30">
                     SYS_WEIGHT: 10%
@@ -410,7 +335,7 @@ export default function Archive() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {filteredFoundational.map((project) => (
-                    <div 
+                    <div
                       key={project.id}
                       className="border border-border/30 dark:border-border-dark/30 hover:border-text/50 dark:hover:border-text-dark/50 bg-surface/10 dark:bg-surface-dark/5 p-5 relative flex flex-col justify-between transition-all duration-300"
                     >
@@ -447,18 +372,18 @@ export default function Archive() {
                       </div>
 
                       <div className="flex gap-2 pt-4 mt-4 border-t border-border/10 dark:border-border-dark/10">
-                        <a 
+                        <a
                           href={project.github}
-                          target="_blank" 
-                          rel="noopener noreferrer" 
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="flex-1 text-center py-1.5 border border-border dark:border-border-dark text-[8px] font-mono uppercase tracking-wider hover:bg-text hover:text-background dark:hover:bg-text-dark dark:hover:text-background-dark text-text/75 dark:text-text-dark/75 transition-all flex items-center justify-center gap-1"
                         >
                           <Github className="w-3 h-3" /> REPO
                         </a>
-                        <a 
+                        <a
                           href={project.demo}
-                          target="_blank" 
-                          rel="noopener noreferrer" 
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="flex-1 text-center py-1.5 bg-text dark:bg-text-dark text-background dark:text-background-dark text-[8px] font-mono uppercase tracking-wider hover:opacity-90 transition-all flex items-center justify-center gap-1"
                         >
                           <ExternalLink className="w-3 h-3" /> DEMO
@@ -469,10 +394,8 @@ export default function Archive() {
                 </div>
               </div>
             )}
-            
           </div>
         )}
-
       </div>
     </section>
   );

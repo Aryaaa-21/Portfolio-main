@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Projects from '../sections/Projects';
-import Archive from '../sections/Archive';
+import { ArchiveHeader, ArchiveGrid } from '../sections/Archive';
 
 export default function ProjectsPage() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [search, setSearch] = useState('');
+  const [filterStatus, setFilterStatus] = useState('All');
 
   return (
     <div className="w-full flex flex-col">
@@ -31,11 +33,22 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      {/* 2. System Registry (Archive Component) */}
-      <Archive />
+      {/* 2. System Registry Header & Filter controls (In between banner and slideshow) */}
+      <ArchiveHeader 
+        search={search} 
+        setSearch={setSearch} 
+        filterStatus={filterStatus} 
+        setFilterStatus={setFilterStatus} 
+      />
 
       {/* 3. Interactive Pinned Detail Showcase Section (Slideshow Component) */}
       <Projects currentPage={currentPage} setCurrentPage={setCurrentPage} />
+
+      {/* 4. System Registry Cards Grid (Below the slideshow) */}
+      <ArchiveGrid 
+        search={search} 
+        filterStatus={filterStatus} 
+      />
     </div>
   );
 }
