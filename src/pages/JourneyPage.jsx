@@ -626,10 +626,18 @@ export default function JourneyPage() {
                     <p className="font-display text-lg sm:text-xl font-bold text-text dark:text-text-dark max-w-2xl mx-auto leading-relaxed mb-6">
                       From uncertainty to becoming a builder, problem solver, hackathon participant and lifelong learner.
                     </p>
-                    <div className="border-t border-border/10 pt-6 max-w-lg mx-auto">
+                    <div className="border-t border-border/10 pt-6 max-w-lg mx-auto mb-8">
                       <p className="font-body text-xs italic text-text/50 dark:text-text-dark/50">
                         "The first year wasn't about becoming the best. It was about becoming better than the person I was when I started."
                       </p>
+                    </div>
+                    <div className="flex justify-center pt-4 border-t border-border/10">
+                      <button
+                        onClick={() => handleYearChange(2)}
+                        className="px-6 py-3 border border-text dark:border-text-dark hover:bg-text hover:text-background dark:hover:bg-text-dark dark:hover:text-background-dark font-mono text-[10px] uppercase tracking-widest transition-all duration-300 flex items-center gap-2 group cursor-pointer"
+                      >
+                        Unlock Year 2 Timeline <span className="transition-transform group-hover:translate-x-1">→</span>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -787,10 +795,18 @@ export default function JourneyPage() {
                 <p className="font-display text-lg sm:text-xl font-bold text-text dark:text-text-dark max-w-2xl mx-auto leading-relaxed mb-6">
                   From a child learning the alphabet in a classroom to an engineering student building products, participating in hackathons, and preparing for a career in technology.
                 </p>
-                <div className="border-t border-border/10 pt-6 max-w-lg mx-auto">
+                <div className="border-t border-border/10 pt-6 max-w-lg mx-auto mb-8">
                   <p className="font-body text-xs italic text-text/50 dark:text-text-dark/50">
                     "The journey was never perfect. Every success, failure, transfer, and setback became a lesson that shaped who I am today."
                   </p>
+                </div>
+                <div className="flex justify-center pt-4 border-t border-border/10">
+                  <button
+                    onClick={() => handleSectionChange('engineering')}
+                    className="px-6 py-3 border border-text dark:border-text-dark hover:bg-text hover:text-background dark:hover:bg-text-dark dark:hover:text-background-dark font-mono text-[10px] uppercase tracking-widest transition-all duration-300 flex items-center gap-2 group cursor-pointer"
+                  >
+                    Proceed to Engineering Journey <span className="transition-transform group-hover:translate-x-1">→</span>
+                  </button>
                 </div>
               </div>
             </motion.div>
