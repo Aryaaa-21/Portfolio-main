@@ -31,14 +31,9 @@ export default function App() {
     return 'dark';
   });
 
-  const [isLoading, setIsLoading] = useState(() => {
-    // Skip preloader if visited in the current session
-    if (sessionStorage.getItem('visited')) return false;
-    return true;
-  });
+  const [isLoading, setIsLoading] = useState(true);
 
   const handlePreloaderComplete = () => {
-    sessionStorage.setItem('visited', 'true');
     setIsLoading(false);
   };
 
