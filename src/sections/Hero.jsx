@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
-import { Github, Linkedin, ArrowRight, Download } from 'lucide-react';
+import { Github, Linkedin, Instagram, Mail } from 'lucide-react';
 
 export default function Hero() {
   const [windowWidth, setWindowWidth] = useState(0);
@@ -74,7 +74,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: 'easeOut' }}
-            className="font-body text-base lg:text-lg max-w-lg text-text/70 dark:text-text-dark/70 mb-4 leading-relaxed"
+            className="font-body text-base lg:text-lg max-w-lg text-text/70 dark:text-text-dark/70 mb-8 leading-relaxed"
           >
             Building impactful products across AI, Blockchain and Full Stack Development.
           </motion.p>
@@ -82,66 +82,54 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.45, ease: 'easeOut' }}
-            className="flex flex-wrap gap-2 mb-8"
-          >
-            <a href="https://instagram.com/aryaaa._.21" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
-              <img src="https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white" alt="Instagram" />
-            </a>
-            <a href="https://linkedin.com/in/arya-bhagat-2102np" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
-              <img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white" alt="LinkedIn" />
-            </a>
-            <a href="https://x.com/@aryaNP2102" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
-              <img src="https://img.shields.io/badge/X-black.svg?logo=X&logoColor=white" alt="X" />
-            </a>
-            <a href="mailto:aryabhagat249@gamil.com" className="hover:opacity-80 transition-opacity">
-              <img src="https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white" alt="Email" />
-            </a>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }}
-            className="flex flex-wrap gap-4 items-center"
+            className="flex flex-wrap gap-3 items-center"
           >
             <a
-              href="#featured"
-              className="group px-6 py-3 bg-text dark:bg-text-dark text-background dark:text-background-dark font-body text-xs font-semibold tracking-wider uppercase flex items-center gap-2 hover:bg-mono-42 dark:hover:bg-mono-161 transition-colors duration-300"
+              href="https://github.com/Aryaaa-21"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 border border-border dark:border-border-dark text-text/60 dark:text-text-dark/60 hover:text-text dark:hover:text-text-dark hover:border-text dark:hover:border-text-dark transition-colors"
+              aria-label="GitHub"
             >
-              Explore My Work
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <Github className="w-4 h-4" />
             </a>
-
             <a
-              href="/images/certs/blank.png"
-              download="Arya_Bhagat_Resume.pdf"
-              className="px-6 py-3 border border-border dark:border-border-dark text-text dark:text-text-dark font-body text-xs font-semibold tracking-wider uppercase flex items-center gap-2 hover:bg-text hover:text-background dark:hover:bg-text-dark dark:hover:text-background-dark transition-all duration-300"
+              href="https://www.linkedin.com/in/arya-bhagat-2102np"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 border border-border dark:border-border-dark text-text/60 dark:text-text-dark/60 hover:text-text dark:hover:text-text-dark hover:border-text dark:hover:border-text-dark transition-colors"
+              aria-label="LinkedIn"
             >
-              Download Resume
-              <Download className="w-4 h-4" />
+              <Linkedin className="w-4 h-4" />
             </a>
-
-            <div className="flex gap-2 ml-2">
-              <a
-                href="https://github.com/Aryaaa-21"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 border border-border dark:border-border-dark text-text/60 dark:text-text-dark/60 hover:text-text dark:hover:text-text-dark hover:border-text dark:hover:border-text-dark transition-colors"
-                aria-label="GitHub"
-              >
-                <Github className="w-4 h-4" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/arya-bhagat-2102np"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 border border-border dark:border-border-dark text-text/60 dark:text-text-dark/60 hover:text-text dark:hover:text-text-dark hover:border-text dark:hover:border-text-dark transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-4 h-4" />
-              </a>
-            </div>
+            <a
+              href="https://instagram.com/aryaaa._.21"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 border border-border dark:border-border-dark text-text/60 dark:text-text-dark/60 hover:text-text dark:hover:text-text-dark hover:border-text dark:hover:border-text-dark transition-colors"
+              aria-label="Instagram"
+            >
+              <Instagram className="w-4 h-4" />
+            </a>
+            <a
+              href="https://x.com/@aryaNP2102"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 border border-border dark:border-border-dark text-text/60 dark:text-text-dark/60 hover:text-text dark:hover:text-text-dark hover:border-text dark:hover:border-text-dark transition-colors"
+              aria-label="X"
+            >
+              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg>
+            </a>
+            <a
+              href="mailto:aryabhagat249@gamil.com"
+              className="p-3 border border-border dark:border-border-dark text-text/60 dark:text-text-dark/60 hover:text-text dark:hover:text-text-dark hover:border-text dark:hover:border-text-dark transition-colors"
+              aria-label="Email"
+            >
+              <Mail className="w-4 h-4" />
+            </a>
           </motion.div>
         </div>
 
