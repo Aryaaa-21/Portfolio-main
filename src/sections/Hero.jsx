@@ -74,10 +74,30 @@ export default function Hero() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: 'easeOut' }}
-            className="font-body text-base lg:text-lg max-w-lg text-text/70 dark:text-text-dark/70 mb-8 leading-relaxed"
+            className="font-body text-base lg:text-lg max-w-lg text-text/70 dark:text-text-dark/70 mb-4 leading-relaxed"
           >
             Building impactful products across AI, Blockchain and Full Stack Development.
           </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.45, ease: 'easeOut' }}
+            className="flex flex-wrap gap-2 mb-8"
+          >
+            <a href="https://instagram.com/aryaaa._.21" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+              <img src="https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white" alt="Instagram" />
+            </a>
+            <a href="https://linkedin.com/in/arya-bhagat-2102np" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+              <img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white" alt="LinkedIn" />
+            </a>
+            <a href="https://x.com/@aryaNP2102" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+              <img src="https://img.shields.io/badge/X-black.svg?logo=X&logoColor=white" alt="X" />
+            </a>
+            <a href="mailto:aryabhagat249@gamil.com" className="hover:opacity-80 transition-opacity">
+              <img src="https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white" alt="Email" />
+            </a>
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 15 }}
