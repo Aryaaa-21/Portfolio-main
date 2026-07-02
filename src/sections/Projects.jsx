@@ -22,8 +22,8 @@ const featured = [
     ],
     techStack: ["REACT NATIVE", "FLASK", "TENSORFLOW", "MONGODB", "GOOGLE MAPS API", "GEMINI AI", "FIREBASE", "GEOSPATIAL ANALYTICS"],
     impact: "Transforms navigation from speed optimization into risk-aware decision making, enabling safer movement across urban environments.",
-    github: "https://github.com/Aryaaa-21/RakshaMarg_app",
-    demo: "#"
+    github: "https://github.com/DNA-Coded/RakshaMarg",
+    demo: "https://www.rakshamarg.app/"
   },
   {
     id: "vedax",
@@ -45,8 +45,8 @@ const featured = [
     ],
     techStack: ["REACT", "TYPESCRIPT", "FIREBASE", "MONGODB", "NODE.JS", "VERCEL", "TAILWIND CSS"],
     impact: "Improves calculation speed, pattern recognition, and numerical confidence through structured cognitive training.",
-    github: "https://github.com/Aryaaa-21",
-    demo: "#"
+    github: "https://github.com/DNA-Coded/vedic_math",
+    demo: "https://vedax-math.vercel.app/"
   },
   {
     id: "swasthi",
@@ -68,8 +68,8 @@ const featured = [
     ],
     techStack: ["REACT", "PYTHON", "FLASK", "MONGODB", "GEMINI AI", "FIREBASE", "NLTK"],
     impact: "Encourages proactive health management and earlier intervention through accessible digital screening tools.",
-    github: "https://github.com/Aryaaa-21/Swasthi",
-    demo: "#"
+    github: "https://github.com/Codesprint25/Sprinters",
+    demo: ""
   }
 ];
 
@@ -275,18 +275,6 @@ export default function Projects({ currentPage: propPage, setCurrentPage: propSe
                         </div>
                       </div>
 
-                      {/* Tech stack */}
-                      <div className="pt-4 space-y-2">
-                        <span className="text-[9px] font-mono uppercase tracking-wider text-white/40 block">ENGINEERING STACK</span>
-                        <div className="flex flex-wrap gap-1.5">
-                          {project.techStack.map(tech => (
-                            <span key={tech} className="px-2 py-0.5 bg-white/5 border border-white/10 text-[9px] font-mono uppercase text-white/60">
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
                       {/* Call to Actions */}
                       <div className="flex gap-4 pt-6">
                         <a 
@@ -297,14 +285,14 @@ export default function Projects({ currentPage: propPage, setCurrentPage: propSe
                         >
                           <Github className="w-3.5 h-3.5" /> REPOSITORY
                         </a>
-                        {project.demo && project.demo !== '#' && (
+                        {project.demo && project.demo !== '#' && project.demo !== '' && (
                           <a 
                             href={project.demo} 
                             target="_blank" 
                             rel="noopener noreferrer" 
                             className="px-5 py-2.5 bg-white text-black font-mono text-[10px] uppercase tracking-widest transition-all hover:bg-neutral-200 flex items-center gap-2"
                           >
-                            <ExternalLink className="w-3.5 h-3.5" /> LIVE DEMO
+                            <ExternalLink className="w-3.5 h-3.5" /> VISIT LINK
                           </a>
                         )}
                       </div>
@@ -400,18 +388,6 @@ export default function Projects({ currentPage: propPage, setCurrentPage: propSe
                         </div>
                       </div>
 
-                      {/* Tech stack */}
-                      <div className="pt-4 space-y-2">
-                        <span className="text-[9px] font-mono uppercase tracking-wider text-white/40 block">ENGINEERING STACK</span>
-                        <div className="flex flex-wrap gap-1.5">
-                          {project.techStack.map(tech => (
-                            <span key={tech} className="px-2 py-0.5 bg-white/5 border border-white/10 text-[9px] font-mono uppercase text-white/60">
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
                       {/* Call to Actions */}
                       <div className="flex gap-4 pt-6">
                         <a 
@@ -422,14 +398,14 @@ export default function Projects({ currentPage: propPage, setCurrentPage: propSe
                         >
                           <Github className="w-3.5 h-3.5" /> REPOSITORY
                         </a>
-                        {project.demo && project.demo !== '#' && (
+                        {project.demo && project.demo !== '#' && project.demo !== '' && (
                           <a 
                             href={project.demo} 
                             target="_blank" 
                             rel="noopener noreferrer" 
                             className="px-5 py-2.5 bg-white text-black font-mono text-[10px] uppercase tracking-widest transition-all hover:bg-neutral-200 flex items-center gap-2"
                           >
-                            <ExternalLink className="w-3.5 h-3.5" /> LIVE DEMO
+                            <ExternalLink className="w-3.5 h-3.5" /> VISIT LINK
                           </a>
                         )}
                       </div>
@@ -611,17 +587,6 @@ export default function Projects({ currentPage: propPage, setCurrentPage: propSe
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-border/10 dark:border-border-dark/10">
-                  <h4 className="text-[10px] font-mono uppercase tracking-wider text-text/40 dark:text-text-dark/40 mb-2">Tech Stack</h4>
-                  <div className="flex flex-wrap gap-1.5">
-                    {project.techStack.map((tech) => (
-                      <span key={tech} className="px-2 py-0.5 bg-surface/80 dark:bg-surface-dark/80 border border-border dark:border-border-dark text-[9px] font-mono uppercase text-text/80 dark:text-text-dark/80">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
                 <div className="flex gap-3 pt-4 border-t border-border/10 dark:border-border-dark/10">
                   <a 
                     href={project.github} 
@@ -631,14 +596,14 @@ export default function Projects({ currentPage: propPage, setCurrentPage: propSe
                   >
                     <Github className="w-3.5 h-3.5" /> Code
                   </a>
-                  {project.demo && project.demo !== '#' && (
+                  {project.demo && project.demo !== '#' && project.demo !== '' && (
                     <a 
                       href={project.demo} 
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="flex-1 text-center py-2.5 bg-text dark:bg-text-dark text-background dark:text-background-dark text-[10px] font-mono uppercase tracking-wider hover:opacity-90 transition-all flex items-center justify-center gap-2"
                     >
-                      <ExternalLink className="w-3.5 h-3.5" /> Demo
+                      <ExternalLink className="w-3.5 h-3.5" /> Visit Link
                     </a>
                   )}
                 </div>
