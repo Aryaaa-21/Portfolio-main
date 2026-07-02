@@ -9,6 +9,8 @@ export default function JourneyPage() {
   const activeYear = parseInt(searchParams.get('year') || '1', 10);
   
   const [collegesExpanded, setCollegesExpanded] = useState(false);
+  const [sprintersExpanded, setSprintersExpanded] = useState(false);
+  const [dnaExpanded, setDnaExpanded] = useState(false);
   const milestonesContainerRef = useRef(null);
   const academicContainerRef = useRef(null);
 
@@ -555,9 +557,23 @@ export default function JourneyPage() {
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-6 text-center">
-                        <div className="p-4 border border-border dark:border-border-dark cursor-target">
-                          <span className="font-display text-sm font-bold block mb-1">Sprinters</span>
+                        <div 
+                          onClick={() => setSprintersExpanded(!sprintersExpanded)}
+                          className="p-4 border border-border dark:border-border-dark cursor-pointer select-none transition-colors hover:bg-white/5 relative"
+                        >
+                          <div className="flex items-center justify-center gap-1.5">
+                            <span className="font-display text-sm font-bold block mb-1">Sprinters</span>
+                            <span className="text-[8px] opacity-60">{sprintersExpanded ? '▲' : '▼'}</span>
+                          </div>
                           <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/60 dark:text-text-dark/60">Formed Team</span>
+                          {sprintersExpanded && (
+                            <div className="mt-3 pt-3 border-t border-border/10 text-left font-mono text-[9px] leading-relaxed text-text/70 dark:text-text-dark/70 space-y-1">
+                              <div className="text-[8px] uppercase tracking-wider text-text/40 dark:text-text-dark/40 mb-1">JIS University</div>
+                              <div>• Dipak Kumar Agrahari</div>
+                              <div>• Deep Saha</div>
+                              <div>• Adiba Ali</div>
+                            </div>
+                          )}
                         </div>
                         <div 
                           onClick={() => setCollegesExpanded(!collegesExpanded)}
@@ -579,9 +595,24 @@ export default function JourneyPage() {
                             </div>
                           )}
                         </div>
-                        <div className="p-4 border border-border dark:border-border-dark cursor-target">
-                          <span className="font-display text-sm font-bold block mb-1">DNA Coded</span>
+                        <div 
+                          onClick={() => setDnaExpanded(!dnaExpanded)}
+                          className="p-4 border border-border dark:border-border-dark cursor-pointer select-none transition-colors hover:bg-white/5 relative"
+                        >
+                          <div className="flex items-center justify-center gap-1.5">
+                            <span className="font-display text-sm font-bold block mb-1">DNA Coded</span>
+                            <span className="text-[8px] opacity-60">{dnaExpanded ? '▲' : '▼'}</span>
+                          </div>
                           <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/60 dark:text-text-dark/60">Formed Team</span>
+                          {dnaExpanded && (
+                            <div className="mt-3 pt-3 border-t border-border/10 text-left font-mono text-[9px] leading-relaxed text-text/70 dark:text-text-dark/70 space-y-1">
+                              <div className="text-[8px] uppercase tracking-wider text-text/40 dark:text-text-dark/40 mb-1">Narula Institute of Tech</div>
+                              <div>• Deep Saha</div>
+                              <div>• Nivriti Pandey</div>
+                              <div>• Aman Raj Bharti</div>
+                              <div>• Pranjal Gupta</div>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
