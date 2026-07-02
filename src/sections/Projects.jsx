@@ -1,98 +1,74 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Github, ExternalLink, Shield, Compass, Key, BookOpen, ArrowUp, ArrowDown, Cpu, Terminal } from 'lucide-react';
+import { Github, ExternalLink, Shield, Compass, Key, BookOpen, ArrowUp, ArrowDown, Cpu, Terminal, Heart } from 'lucide-react';
 
 const featured = [
   {
     id: "rakshamarg",
     title: "RakshaMarg",
     image: "https://images.unsplash.com/photo-1508962914676-134849a727f0?w=1200&auto=format&fit=crop&q=80",
-    category: "AI + Safety Platform",
+    category: "AI + PUBLIC SAFETY PLATFORM",
     status: "BETA RELEASE",
     icon: Shield,
     accent: "emerald",
     telemetry: { ping: "14ms", integrity: "99.8%", build: "v2.1.4-beta" },
-    story: "Born out of the need to address women and citizen safety in cities, RakshaMarg provides a low-latency navigation mechanism that routes individuals away from high-crime areas.",
-    problem: "Traditional navigation platforms (like Google Maps) optimize purely for speed, often routing users through poorly lit, high-crime, or isolated streets to save minutes.",
-    solution: "An intelligent emergency response navigation framework that scores road segments based on historical crime logs, light pole coverage, and user feedback, rerouting users safely.",
+    mission: "Building navigation systems that prioritize human safety over travel speed.",
+    problem: "Conventional navigation engines optimize for distance and time, often routing users through poorly lit streets, isolated zones, and locations with elevated crime risk.",
+    solution: "An AI-assisted safety routing framework that evaluates road segments using crime statistics, environmental conditions, crowd density, community reports, and infrastructure coverage before generating navigation paths.",
     features: [
-      "Safe Route Recommendation",
-      "Crime Awareness Mapping",
-      "Low-Latency SOS Notification System",
-      "Geospatial Risk Analysis Module",
-      "Nearest Hospital Finder",
-      "Nearest Police Station Finder"
+      "Safety-First Route Recommendation",
+      "Real-Time Risk Zone Detection",
+      "SOS Emergency Response Network",
+      "Dynamic Risk Score Engine"
     ],
-    techStack: ["React Native", "Python (Flask)", "TensorFlow", "Google Maps API", "MongoDB"],
+    techStack: ["REACT NATIVE", "FLASK", "TENSORFLOW", "MONGODB", "GOOGLE MAPS API", "GEMINI AI", "FIREBASE", "GEOSPATIAL ANALYTICS"],
+    impact: "Transforms navigation from speed optimization into risk-aware decision making, enabling safer movement across urban environments.",
     github: "https://github.com/Aryaaa-21/RakshaMarg_app",
-    demo: "#"
-  },
-  {
-    id: "chainrent",
-    title: "ChainRent",
-    image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1200&auto=format&fit=crop&q=80",
-    category: "Web3 Rental Platform",
-    status: "COMPLETED",
-    icon: Compass,
-    accent: "cyan",
-    telemetry: { ping: "38ms", integrity: "100.0%", build: "v1.0.0-final" },
-    story: "Industrial and luxury equipment leasing is historically plagued by contract disputes, deposit withholding, and high transaction broker fees. ChainRent was built to disrupt this space.",
-    problem: "Renters suffer from unfair deposit deductions and lack of contract transparency, while owners face high defaults and middleman fees up to 15%.",
-    solution: "A decentralized P2P equipment leasing protocol where security deposits are locked in auditable smart contract escrows and agreements are cryptographically signed.",
-    features: [
-      "Escrow Smart Contracts",
-      "Transparent Leasing Agreements",
-      "Decentralized User Verification",
-      "Automated Penalty and Refund Triggers",
-      "Multi-Signature Dispute Settlement"
-    ],
-    techStack: ["Solidity", "Next.js", "Hardhat", "Ethers.js", "IPFS"],
-    github: "https://github.com/Aryaaa-21",
-    demo: "#"
-  },
-  {
-    id: "stellarpay",
-    title: "StellarPay",
-    image: "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?w=1200&auto=format&fit=crop&q=80",
-    category: "Payment Infrastructure",
-    status: "MAINNET ALPHA",
-    icon: Key,
-    accent: "violet",
-    telemetry: { ping: "8ms", integrity: "99.9%", build: "v0.8.2-alpha" },
-    story: "Micro-transactions and cross-border remittances are expensive and slow on legacy payment networks. StellarPay serves as a developer-friendly API infrastructure for low-fee rails.",
-    problem: "Traditional cross-border business invoices face settlement delays of up to 5 days, accompanied by high currency conversion markup fees.",
-    solution: "A Soroban smart contract-driven payment layer that settles tokenized transactions in seconds for sub-penny fees using trustlines.",
-    features: [
-      "Soroban Escrow Smart Contracts",
-      "Multi-Asset Trustline support",
-      "Developer SDK for API Payments",
-      "Real-Time Transaction Activity Feed",
-      "Automated Foreign Exchange (FX) Settlement"
-    ],
-    techStack: ["Rust (Soroban)", "React", "Stellar SDK", "Tailwind CSS", "NodeJS"],
-    github: "https://github.com/Aryaaa-21",
     demo: "#"
   },
   {
     id: "vedax",
     title: "VEDAX",
     image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1200&auto=format&fit=crop&q=80",
-    category: "Educational Technology",
-    status: "COMPLETED",
+    category: "EDTECH + COGNITIVE LEARNING PLATFORM",
+    status: "PRODUCTION READY",
     icon: BookOpen,
     accent: "orange",
     telemetry: { ping: "22ms", integrity: "100.0%", build: "v1.2.0-stable" },
-    story: "Mental arithmetic skills are declining, yet standard learning platforms present math in dull formats. VEDAX gamifies Vedic Mathematics principles to spark computational speed.",
-    problem: "Students struggle with fast mental calculation techniques due to passive learning materials and a lack of step-by-step guidance.",
-    solution: "A gamified learning app featuring an interactive solver engine that teaches 16 core Vedic Math sutras through customized challenges.",
+    mission: "Preserving and modernizing Vedic Mathematics through interactive digital learning.",
+    problem: "Traditional mathematics education often emphasizes memorization over mental computation and pattern recognition.",
+    solution: "A gamified learning ecosystem that teaches Vedic Mathematics techniques through guided practice, adaptive challenges, and performance tracking.",
     features: [
-      "Vedic Mathematics Sutras Library",
-      "Gamified Level Progression",
-      "Interactive Practice Math Board",
-      "Speed Metrics Dashboard",
-      "Live AI Hints Generator"
+      "Interactive Learning Modules",
+      "Mental Arithmetic Training",
+      "Gamified Challenges",
+      "Adaptive Difficulty Engine"
     ],
-    techStack: ["React", "Tailwind CSS", "Framer Motion", "JavaScript", "HTML5 Canvas"],
+    techStack: ["REACT", "TYPESCRIPT", "FIREBASE", "MONGODB", "NODE.JS", "VERCEL", "TAILWIND CSS"],
+    impact: "Improves calculation speed, pattern recognition, and numerical confidence through structured cognitive training.",
     github: "https://github.com/Aryaaa-21",
+    demo: "#"
+  },
+  {
+    id: "swasthi",
+    title: "Swasthi",
+    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&auto=format&fit=crop&q=80",
+    category: "HEALTHCARE + AI ASSISTANCE PLATFORM",
+    status: "RESEARCH PROTOTYPE",
+    icon: Heart,
+    accent: "violet",
+    telemetry: { ping: "31ms", integrity: "99.2%", build: "v0.9.1-alpha" },
+    mission: "Making preventive healthcare more accessible through intelligent digital assistance.",
+    problem: "Individuals often ignore early symptoms and struggle to access reliable health guidance before conditions become severe.",
+    solution: "A healthcare intelligence platform that combines symptom assessment, wellness monitoring, and personalized recommendations to support informed health decisions.",
+    features: [
+      "Symptom Assessment Engine",
+      "Health Risk Evaluation",
+      "Personalized Wellness Guidance",
+      "Medical Resource Discovery"
+    ],
+    techStack: ["REACT", "PYTHON", "FLASK", "MONGODB", "GEMINI AI", "FIREBASE", "NLTK"],
+    impact: "Encourages proactive health management and earlier intervention through accessible digital screening tools.",
+    github: "https://github.com/Aryaaa-21/Swasthi",
     demo: "#"
   }
 ];
@@ -113,17 +89,14 @@ export default function Projects({ currentPage: propPage, setCurrentPage: propSe
     const totalHeight = rect.height;
     const viewportHeight = window.innerHeight;
     
-    // scrolled is the distance from the top of the container to the top of the viewport
     const scrolled = -rect.top;
     const scrollableDistance = totalHeight - viewportHeight;
     
     if (scrollableDistance <= 0) return;
     
-    // progress goes from 0 to 1
     const progress = Math.max(0, Math.min(1, scrolled / scrollableDistance));
     setScrollProgress(progress);
     
-    // Map progress to active slide (1 to 4)
     const slide = Math.min(
       totalSlides,
       Math.max(1, Math.ceil(progress * totalSlides - 0.001))
@@ -136,7 +109,6 @@ export default function Projects({ currentPage: propPage, setCurrentPage: propSe
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-    // Trigger once to initialize
     handleScroll();
     
     return () => {
@@ -149,17 +121,11 @@ export default function Projects({ currentPage: propPage, setCurrentPage: propSe
     const rect = containerRef.current.getBoundingClientRect();
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
-    // The top of the container in the document scroll coordinates
     const containerTop = rect.top + scrollTop;
     const scrollableDistance = rect.height - window.innerHeight;
     
-    // Calculate the target scroll position based on slide index fraction
-    // Slide 1: progress = 0
-    // Slide 2: progress = 0.25 (or slightly more)
-    // Slide 3: progress = 0.50
-    // Slide 4: progress = 0.75
     const targetProgress = (idx - 1) / totalSlides;
-    const targetScroll = containerTop + (targetProgress * scrollableDistance) + 5; // adding small padding to register slide boundaries
+    const targetScroll = containerTop + (targetProgress * scrollableDistance) + 5;
     
     window.scrollTo({
       top: targetScroll,
@@ -183,7 +149,7 @@ export default function Projects({ currentPage: propPage, setCurrentPage: propSe
     <section 
       ref={containerRef}
       id="featured" 
-      className="relative w-full lg:h-[400vh] bg-black text-white border-b border-white/10"
+      className="relative w-full lg:h-[300vh] bg-black text-white border-b border-white/10"
     >
       {/* Desktop Layout (Sticky Split-Screen Adventure Slider) */}
       <div className="sticky top-0 h-screen w-full overflow-hidden hidden lg:block">
@@ -204,7 +170,7 @@ export default function Projects({ currentPage: propPage, setCurrentPage: propSe
           </div>
         </div>
 
-        {/* Grid Overlay lines (Premium background style) */}
+        {/* Grid Overlay lines */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:30px_30px] pointer-events-none z-10" />
 
         {/* Slides rendering */}
@@ -213,17 +179,14 @@ export default function Projects({ currentPage: propPage, setCurrentPage: propSe
           const isActive = currentSlide === idx;
           const isEven = idx % 2 === 0;
 
-          // Split directions: left slides down, right slides up (or opposite depending on screen action)
           const upOff = 'translateY(-100%)';
           const downOff = 'translateY(100%)';
           
-          // Even/odd alternates sliding directions for premium dynamics
           const leftTrans = isActive ? 'translateY(0)' : (isEven ? upOff : downOff);
           const rightTrans = isActive ? 'translateY(0)' : (isEven ? downOff : upOff);
 
           const ProjectIcon = project.icon;
 
-          // Accent color mapping for subtle UI glow
           const glowStyles = {
             emerald: "shadow-[0_0_15px_rgba(16,185,129,0.15)] border-emerald-500/30 text-emerald-400",
             cyan: "shadow-[0_0_15px_rgba(6,182,212,0.15)] border-cyan-500/30 text-cyan-400",
@@ -271,10 +234,13 @@ export default function Projects({ currentPage: propPage, setCurrentPage: propSe
                         </h2>
                       </div>
 
-                      {/* Description Story */}
-                      <p className="text-xs xl:text-sm font-body text-white/70 leading-relaxed">
-                        {project.story}
-                      </p>
+                      {/* Mission Statement */}
+                      <div className="space-y-1">
+                        <span className="text-[9px] font-mono uppercase tracking-wider text-white/40 block">MISSION</span>
+                        <p className="text-xs xl:text-sm font-body text-white/80 leading-relaxed font-semibold">
+                          {project.mission}
+                        </p>
+                      </div>
 
                       {/* Technical specifications breakdown */}
                       <div className="grid grid-cols-2 gap-6 pt-6 border-t border-white/10">
@@ -288,17 +254,25 @@ export default function Projects({ currentPage: propPage, setCurrentPage: propSe
                         </div>
                       </div>
 
-                      {/* Features */}
-                      <div className="pt-4 space-y-2">
-                        <span className="text-[9px] font-mono uppercase tracking-wider text-white/40 block">CAPABILITIES DEPLOYED</span>
-                        <ul className="grid grid-cols-2 gap-2 text-[10px] xl:text-[11px] font-mono text-white/80">
-                          {project.features.slice(0, 4).map((feat, fidx) => (
-                            <li key={fidx} className="flex items-center gap-2">
-                              <span className={`w-1 h-1 rounded-full ${accentBg}`} />
-                              <span>{feat}</span>
-                            </li>
-                          ))}
-                        </ul>
+                      {/* Capabilities and Impact */}
+                      <div className="grid grid-cols-2 gap-6 pt-4 border-t border-white/10">
+                        <div className="space-y-2">
+                          <span className="text-[9px] font-mono uppercase tracking-wider text-white/40 block">CAPABILITIES DEPLOYED</span>
+                          <ul className="space-y-1.5 text-[10px] xl:text-[11px] font-mono text-white/80">
+                            {project.features.slice(0, 4).map((feat, fidx) => (
+                              <li key={fidx} className="flex items-center gap-2">
+                                <span className={`w-1.5 h-1.5 rounded-full ${accentBg}`} />
+                                <span>{feat}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div className="space-y-2">
+                          <span className="text-[9px] font-mono uppercase tracking-wider text-white/40 block">IMPACT STATEMENT</span>
+                          <p className="text-[11px] xl:text-xs text-white/70 font-body leading-relaxed font-semibold italic border-l-2 border-white/20 pl-3">
+                            {project.impact}
+                          </p>
+                        </div>
                       </div>
 
                       {/* Tech stack */}
@@ -385,10 +359,13 @@ export default function Projects({ currentPage: propPage, setCurrentPage: propSe
                         </h2>
                       </div>
 
-                      {/* Description Story */}
-                      <p className="text-xs xl:text-sm font-body text-white/70 leading-relaxed">
-                        {project.story}
-                      </p>
+                      {/* Mission Statement */}
+                      <div className="space-y-1">
+                        <span className="text-[9px] font-mono uppercase tracking-wider text-white/40 block">MISSION</span>
+                        <p className="text-xs xl:text-sm font-body text-white/80 leading-relaxed font-semibold">
+                          {project.mission}
+                        </p>
+                      </div>
 
                       {/* Technical specifications breakdown */}
                       <div className="grid grid-cols-2 gap-6 pt-6 border-t border-white/10">
@@ -402,17 +379,25 @@ export default function Projects({ currentPage: propPage, setCurrentPage: propSe
                         </div>
                       </div>
 
-                      {/* Features */}
-                      <div className="pt-4 space-y-2">
-                        <span className="text-[9px] font-mono uppercase tracking-wider text-white/40 block">CAPABILITIES DEPLOYED</span>
-                        <ul className="grid grid-cols-2 gap-2 text-[10px] xl:text-[11px] font-mono text-white/80">
-                          {project.features.slice(0, 4).map((feat, fidx) => (
-                            <li key={fidx} className="flex items-center gap-2">
-                              <span className={`w-1 h-1 rounded-full ${accentBg}`} />
-                              <span>{feat}</span>
-                            </li>
-                          ))}
-                        </ul>
+                      {/* Capabilities and Impact */}
+                      <div className="grid grid-cols-2 gap-6 pt-4 border-t border-white/10">
+                        <div className="space-y-2">
+                          <span className="text-[9px] font-mono uppercase tracking-wider text-white/40 block">CAPABILITIES DEPLOYED</span>
+                          <ul className="space-y-1.5 text-[10px] xl:text-[11px] font-mono text-white/80">
+                            {project.features.slice(0, 4).map((feat, fidx) => (
+                              <li key={fidx} className="flex items-center gap-2">
+                                <span className={`w-1.5 h-1.5 rounded-full ${accentBg}`} />
+                                <span>{feat}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div className="space-y-2">
+                          <span className="text-[9px] font-mono uppercase tracking-wider text-white/40 block">IMPACT STATEMENT</span>
+                          <p className="text-[11px] xl:text-xs text-white/70 font-body leading-relaxed font-semibold italic border-l-2 border-white/20 pl-3">
+                            {project.impact}
+                          </p>
+                        </div>
                       </div>
 
                       {/* Tech stack */}
@@ -556,6 +541,13 @@ export default function Projects({ currentPage: propPage, setCurrentPage: propSe
         
         {featured.map((project, idx) => {
           const ProjectIcon = project.icon;
+          const accentBg = {
+            emerald: "bg-emerald-500",
+            cyan: "bg-cyan-500",
+            violet: "bg-violet-500",
+            orange: "bg-orange-500"
+          }[project.accent] || "bg-white";
+
           return (
             <div 
               key={project.id} 
@@ -584,9 +576,11 @@ export default function Projects({ currentPage: propPage, setCurrentPage: propSe
                   </span>
                 </div>
 
-                <p className="text-xs font-body text-text/70 dark:text-text-dark/70 leading-relaxed">
-                  {project.story}
-                </p>
+                {/* Mission */}
+                <div>
+                  <h4 className="text-[10px] font-mono uppercase tracking-wider text-text/40 dark:text-text-dark/40 mb-1">Mission</h4>
+                  <p className="text-xs font-body text-text/80 dark:text-text-dark/80 font-semibold">{project.mission}</p>
+                </div>
 
                 <div className="space-y-4 pt-4 border-t border-border/10 dark:border-border-dark/10">
                   <div>
@@ -599,16 +593,22 @@ export default function Projects({ currentPage: propPage, setCurrentPage: propSe
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-border/10 dark:border-border-dark/10">
-                  <h4 className="text-[10px] font-mono uppercase tracking-wider text-text/40 dark:text-text-dark/40 mb-2">Capabilities</h4>
-                  <ul className="grid grid-cols-1 gap-1 text-[11px] font-mono text-text/70 dark:text-text-dark/70">
-                    {project.features.slice(0, 4).map((feat, fidx) => (
-                      <li key={fidx} className="flex items-center gap-1.5">
-                        <span className="w-1 h-1 bg-emerald-500 rounded-full" />
-                        <span>{feat}</span>
-                      </li>
-                    ))}
-                  </ul>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-border/10 dark:border-border-dark/10">
+                  <div>
+                    <h4 className="text-[10px] font-mono uppercase tracking-wider text-text/40 dark:text-text-dark/40 mb-2">Capabilities</h4>
+                    <ul className="space-y-1 text-[11px] font-mono text-text/70 dark:text-text-dark/70">
+                      {project.features.slice(0, 4).map((feat, fidx) => (
+                        <li key={fidx} className="flex items-center gap-1.5">
+                          <span className={`w-1.5 h-1.5 rounded-full ${accentBg}`} />
+                          <span>{feat}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="text-[10px] font-mono uppercase tracking-wider text-text/40 dark:text-text-dark/40 mb-2">Impact</h4>
+                    <p className="text-xs font-body text-text/70 dark:text-text-dark/70 italic border-l border-border dark:border-border-dark pl-2">{project.impact}</p>
+                  </div>
                 </div>
 
                 <div className="pt-4 border-t border-border/10 dark:border-border-dark/10">

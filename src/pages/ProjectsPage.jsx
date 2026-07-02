@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Shield, Compass, Key, BookOpen, ArrowDown } from 'lucide-react';
+import { Shield, Compass, Key, BookOpen, ArrowDown, Heart } from 'lucide-react';
 import Projects from '../sections/Projects';
 import Archive from '../sections/Archive';
 import BuildLog from '../sections/BuildLog';
@@ -13,37 +13,28 @@ export default function ProjectsPage() {
       idx: 1,
       id: "rakshamarg",
       title: "RakshaMarg",
-      category: "AI + Safety Platform",
+      category: "AI + PUBLIC SAFETY PLATFORM",
       status: "BETA RELEASE",
       icon: Shield,
-      desc: "Low-latency emergency navigation and geospatial crime analysis routing system."
+      desc: "Building navigation systems that prioritize human safety over travel speed."
     },
     {
       idx: 2,
-      id: "chainrent",
-      title: "ChainRent",
-      category: "Web3 Rental Platform",
-      status: "COMPLETED",
-      icon: Compass,
-      desc: "Decentralized P2P equipment leasing protocol with smart contract-based escrows."
+      id: "vedax",
+      title: "VEDAX",
+      category: "EDTECH + COGNITIVE LEARNING",
+      status: "PRODUCTION READY",
+      icon: BookOpen,
+      desc: "Preserving and modernizing Vedic Mathematics through interactive digital learning."
     },
     {
       idx: 3,
-      id: "stellarpay",
-      title: "StellarPay",
-      category: "Payment Infrastructure",
-      status: "MAINNET ALPHA",
-      icon: Key,
-      desc: "Soroban smart contract-driven payment layer for cross-border invoice settlements."
-    },
-    {
-      idx: 4,
-      id: "vedax",
-      title: "VEDAX",
-      category: "Educational Technology",
-      status: "COMPLETED",
-      icon: BookOpen,
-      desc: "Gamified Vedic Mathematics computational engine featuring interactive boards."
+      id: "swasthi",
+      title: "Swasthi",
+      category: "DIGITAL HEALTHCARE PLATFORM",
+      status: "RESEARCH PROTOTYPE",
+      icon: Heart,
+      desc: "Making preventive healthcare more accessible through intelligent digital assistance."
     }
   ];
 
@@ -57,7 +48,7 @@ export default function ProjectsPage() {
       const scrollableDistance = rect.height - window.innerHeight;
       
       if (window.innerWidth >= 1024) {
-        const targetProgress = (idx - 1) / 4; // 4 is totalSlides
+        const targetProgress = (idx - 1) / mainProjects.length;
         const targetScroll = containerTop + (targetProgress * scrollableDistance) + 5;
         window.scrollTo({
           top: targetScroll,
@@ -84,7 +75,6 @@ export default function ProjectsPage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-
             <h1 className="font-display text-4xl sm:text-6xl font-bold tracking-tight text-text dark:text-text-dark uppercase mb-6">
               Core Engineering Deployments
             </h1>
@@ -93,8 +83,8 @@ export default function ProjectsPage() {
             </p>
           </motion.div>
 
-          {/* Grid Layout of the 4 Main Projects */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full mb-16">
+          {/* Grid Layout of the Main Projects */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl mb-16">
             {mainProjects.map((project, index) => {
               const IconComp = project.icon;
               return (
