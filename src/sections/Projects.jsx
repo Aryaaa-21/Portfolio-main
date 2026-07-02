@@ -5,7 +5,7 @@ const featured = [
   {
     id: "rakshamarg",
     title: "RakshaMarg",
-    image: "https://images.unsplash.com/photo-1508962914676-134849a727f0?w=1200&auto=format&fit=crop&q=80",
+    image: "/img/project/rakshamarg.png",
     category: "AI + PUBLIC SAFETY PLATFORM",
     status: "BETA RELEASE",
     icon: Shield,
@@ -28,7 +28,7 @@ const featured = [
   {
     id: "vedax",
     title: "VEDAX",
-    image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1200&auto=format&fit=crop&q=80",
+    image: "/img/project/vedax.png",
     category: "EDTECH + COGNITIVE LEARNING PLATFORM",
     status: "PRODUCTION READY",
     icon: BookOpen,
@@ -51,7 +51,7 @@ const featured = [
   {
     id: "swasthi",
     title: "Swasthi",
-    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&auto=format&fit=crop&q=80",
+    image: "/img/project/swasthi.png",
     category: "HEALTHCARE + AI ASSISTANCE PLATFORM",
     status: "RESEARCH PROTOTYPE",
     icon: Heart,
