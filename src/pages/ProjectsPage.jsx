@@ -33,13 +33,28 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      {/* 2. System Registry Header & Filter controls (In between banner and slideshow) */}
+      {/* 2. System Registry Header & Filter controls */}
       <ArchiveHeader 
         search={search} 
         setSearch={setSearch} 
         filterStatus={filterStatus} 
         setFilterStatus={setFilterStatus} 
       />
+
+      {/* Flagship deployments category header */}
+      <div className="w-full bg-background dark:bg-background-dark px-6 lg:px-16 pt-2 pb-6 relative z-10 theme-transition">
+        <div className="max-w-7xl mx-auto">
+          <div className="border-b border-border/30 dark:border-border-dark/30 pb-3 flex items-center justify-between">
+            <span className="font-mono text-xs tracking-[0.25em] text-text/40 dark:text-text-dark/40 flex items-center gap-2">
+              <span className="text-emerald-500 font-bold">&gt;_</span>
+              01 // FLAGSHIP DEPLOYMENTS
+            </span>
+            <span className="font-mono text-[9px] text-text/30 dark:text-text-dark/30">
+              SYS_WEIGHT: 70%
+            </span>
+          </div>
+        </div>
+      </div>
 
       {/* 3. Interactive Pinned Detail Showcase Section (Slideshow Component) */}
       <Projects currentPage={currentPage} setCurrentPage={setCurrentPage} />
