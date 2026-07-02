@@ -5,6 +5,7 @@ import { Github, Linkedin, Instagram, Mail } from 'lucide-react';
 
 export default function Hero() {
   const [windowWidth, setWindowWidth] = useState(0);
+  const [hoveredLabel, setHoveredLabel] = useState('');
 
   useEffect(() => {
     setWindowWidth(window.innerWidth);
@@ -36,6 +37,55 @@ export default function Hero() {
     mouseX.set(0);
     mouseY.set(0);
   };
+
+  const socials = [
+    {
+      id: 'github',
+      url: 'https://github.com/Aryaaa-21',
+      hoverText: 'visit my github account',
+      ariaLabel: 'GitHub',
+      icon: <Github className="w-4 h-4" />
+    },
+    {
+      id: 'linkedin',
+      url: 'https://www.linkedin.com/in/arya-bhagat-2102np',
+      hoverText: 'visit my linkedin profile',
+      ariaLabel: 'LinkedIn',
+      icon: <Linkedin className="w-4 h-4" />
+    },
+    {
+      id: 'instagram-private',
+      url: 'https://instagram.com/aryaaa._.21',
+      hoverText: 'visit my private instagram account',
+      ariaLabel: 'Instagram (Private)',
+      icon: <Instagram className="w-4 h-4" />
+    },
+    {
+      id: 'instagram-public',
+      url: 'https://www.instagram.com/arya._.21_02?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',
+      hoverText: 'visit my public instagram account',
+      ariaLabel: 'Instagram (Public)',
+      icon: <Instagram className="w-4 h-4" />
+    },
+    {
+      id: 'x',
+      url: 'https://x.com/@aryaNP2102',
+      hoverText: 'visit my x profile',
+      ariaLabel: 'X',
+      icon: (
+        <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+        </svg>
+      )
+    },
+    {
+      id: 'email',
+      url: 'mailto:aryabhagat249@gamil.com',
+      hoverText: 'send an email to my account',
+      ariaLabel: 'Email',
+      icon: <Mail className="w-4 h-4" />
+    }
+  ];
 
   return (
     <section
@@ -107,59 +157,44 @@ export default function Hero() {
             </Link>
           </motion.div>
 
-          {/* Social Icons */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }}
-            className="flex flex-wrap gap-3 items-center"
-          >
-            <a
-              href="https://github.com/Aryaaa-21"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 border border-border dark:border-border-dark text-text/60 dark:text-text-dark/60 hover:text-text dark:hover:text-text-dark hover:border-text dark:hover:border-text-dark transition-colors"
-              aria-label="GitHub"
+          {/* Social Icons Container with Dynamic Status Indicator */}
+          <div className="flex flex-col gap-2">
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }}
+              className="flex flex-wrap gap-3 items-center"
             >
-              <Github className="w-4 h-4" />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/arya-bhagat-2102np"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 border border-border dark:border-border-dark text-text/60 dark:text-text-dark/60 hover:text-text dark:hover:text-text-dark hover:border-text dark:hover:border-text-dark transition-colors"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="w-4 h-4" />
-            </a>
-            <a
-              href="https://instagram.com/aryaaa._.21"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 border border-border dark:border-border-dark text-text/60 dark:text-text-dark/60 hover:text-text dark:hover:text-text-dark hover:border-text dark:hover:border-text-dark transition-colors"
-              aria-label="Instagram"
-            >
-              <Instagram className="w-4 h-4" />
-            </a>
-            <a
-              href="https://x.com/@aryaNP2102"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 border border-border dark:border-border-dark text-text/60 dark:text-text-dark/60 hover:text-text dark:hover:text-text-dark hover:border-text dark:hover:border-text-dark transition-colors"
-              aria-label="X"
-            >
-              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-              </svg>
-            </a>
-            <a
-              href="mailto:aryabhagat249@gamil.com"
-              className="p-3 border border-border dark:border-border-dark text-text/60 dark:text-text-dark/60 hover:text-text dark:hover:text-text-dark hover:border-text dark:hover:border-text-dark transition-colors"
-              aria-label="Email"
-            >
-              <Mail className="w-4 h-4" />
-            </a>
-          </motion.div>
+              {socials.map((social) => (
+                <a
+                  key={social.id}
+                  href={social.url}
+                  target={social.id !== 'email' ? "_blank" : undefined}
+                  rel={social.id !== 'email' ? "noopener noreferrer" : undefined}
+                  onMouseEnter={() => setHoveredLabel(social.hoverText)}
+                  onMouseLeave={() => setHoveredLabel('')}
+                  className="p-3 border border-border dark:border-border-dark text-text/60 dark:text-text-dark/60 hover:text-text dark:hover:text-text-dark hover:border-text dark:hover:border-text-dark transition-colors relative group"
+                  aria-label={social.ariaLabel}
+                  title={social.ariaLabel}
+                >
+                  {social.icon}
+                </a>
+              ))}
+            </motion.div>
+
+            {/* Hover descriptive text */}
+            <div className="h-4 flex items-center mt-1">
+              {hoveredLabel && (
+                <motion.span
+                  initial={{ opacity: 0, x: -5 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  className="font-mono text-[9px] tracking-[0.2em] text-text/50 dark:text-text-dark/50 uppercase"
+                >
+                  &gt; {hoveredLabel}
+                </motion.span>
+              )}
+            </div>
+          </div>
         </div>
 
         {/* Right Column - Image */}
