@@ -568,10 +568,14 @@ export default function JourneyPage() {
                           <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/60 dark:text-text-dark/60">Formed Team</span>
                           {sprintersExpanded && (
                             <div className="mt-3 pt-3 border-t border-border/10 text-left font-mono text-[9px] leading-relaxed text-text/70 dark:text-text-dark/70 space-y-1">
-                              <div className="text-[8px] uppercase tracking-wider text-text/40 dark:text-text-dark/40 mb-1">JIS University</div>
-                              <div>• Dipak Kumar Agrahari</div>
-                              <div>• Deep Saha</div>
-                              <div>• Adiba Ali</div>
+                              <div>Team: <span className="text-text dark:text-text-dark font-bold">Sprinters</span></div>
+                              <div>Formed At: <span className="text-text dark:text-text-dark font-bold">JIS University</span></div>
+                              <div className="mt-2 text-[8px] uppercase tracking-wider text-text/40 dark:text-text-dark/40">Teammates:</div>
+                              <div className="pl-2 space-y-0.5">
+                                <div>• Dipak Kumar Agrahari</div>
+                                <div>• Deep Saha</div>
+                                <div>• Adiba Ali</div>
+                              </div>
                             </div>
                           )}
                         </div>
@@ -606,11 +610,15 @@ export default function JourneyPage() {
                           <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/60 dark:text-text-dark/60">Formed Team</span>
                           {dnaExpanded && (
                             <div className="mt-3 pt-3 border-t border-border/10 text-left font-mono text-[9px] leading-relaxed text-text/70 dark:text-text-dark/70 space-y-1">
-                              <div className="text-[8px] uppercase tracking-wider text-text/40 dark:text-text-dark/40 mb-1">Narula Institute of Tech</div>
-                              <div>• Deep Saha</div>
-                              <div>• Nivriti Pandey</div>
-                              <div>• Aman Raj Bharti</div>
-                              <div>• Pranjal Gupta</div>
+                              <div>Team: <span className="text-text dark:text-text-dark font-bold">DNA Coded</span></div>
+                              <div>Formed At: <span className="text-text dark:text-text-dark font-bold">Narula Institute of Technology</span></div>
+                              <div className="mt-2 text-[8px] uppercase tracking-wider text-text/40 dark:text-text-dark/40">Teammates:</div>
+                              <div className="pl-2 space-y-0.5">
+                                <div>• Deep Saha</div>
+                                <div>• Nivriti Pandey</div>
+                                <div>• Aman Raj Bharti</div>
+                                <div>• Pranjal Gupta</div>
+                              </div>
                             </div>
                           )}
                         </div>
