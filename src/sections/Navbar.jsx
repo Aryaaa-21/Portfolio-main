@@ -12,7 +12,7 @@ export default function Navbar({ theme, toggleTheme }) {
     { label: 'Home', path: '/' },
     { label: 'Journey', path: '/journey' },
     { label: 'Projects', path: '/projects' },
-    { label: 'Vault', path: '/certificates' },
+    { label: 'Credentials', path: '/certificates' },
   ];
 
   return (

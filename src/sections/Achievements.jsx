@@ -19,7 +19,7 @@ export default function Achievements() {
   });
 
   return (
-    <section id="vault" className="py-32 bg-surface dark:bg-surface-dark border-b border-border/20 dark:border-border-dark/20 theme-transition">
+    <section id="credentials" className="py-32 bg-surface dark:bg-surface-dark border-b border-border/20 dark:border-border-dark/20 theme-transition">
       <div className="max-w-7xl mx-auto px-6 lg:px-16">
         {/* Header and Filters */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16">
@@ -28,7 +28,7 @@ export default function Achievements() {
               RECOGNITIONS & CERTIFICATIONS
             </span>
             <h2 className="font-display text-4xl sm:text-5xl font-bold tracking-tight text-text dark:text-text-dark">
-              THE VAULT
+              CREDENTIAL LEDGER
             </h2>
           </div>
 

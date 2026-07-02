@@ -46,7 +46,7 @@ export default function CertificatesPage() {
         <div className="mb-16">
 
           <h1 className="font-display text-4xl sm:text-6xl font-bold tracking-tight text-text dark:text-text-dark mb-4">
-            CERTIFICATE VAULT
+            CREDENTIAL LEDGER
           </h1>
           <p className="font-body text-xs sm:text-sm uppercase tracking-widest text-text/60 dark:text-text-dark/60">
             Every milestone tells a story.
