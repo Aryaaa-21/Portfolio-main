@@ -108,8 +108,6 @@ export default function ProjectsPage() {
                       </span>
                     </div>
 
-                    <IconComp className="w-6 h-6 text-text/70 dark:text-text-dark/70 group-hover:text-text dark:group-hover:text-text-dark mb-4 transition-colors" />
-
                     <h3 className="font-display text-xl font-bold tracking-tight text-text dark:text-text-dark group-hover:underline mb-2">
                       {project.title}
                     </h3>
