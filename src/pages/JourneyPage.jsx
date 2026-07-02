@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Calendar, Compass, Award, Frown, BookOpen, Rocket, CheckCircle, Flame } from 'lucide-react';
@@ -8,6 +8,7 @@ export default function JourneyPage() {
   const activeSection = searchParams.get('section') || 'academic'; // 'academic' or 'engineering'
   const activeYear = parseInt(searchParams.get('year') || '1', 10);
   
+  const [collegesExpanded, setCollegesExpanded] = useState(false);
   const milestonesContainerRef = useRef(null);
   const academicContainerRef = useRef(null);
 
@@ -536,7 +537,7 @@ export default function JourneyPage() {
 
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
                         <div className="p-4 border border-border dark:border-border-dark cursor-target">
-                          <span className="font-display text-3xl font-bold block mb-1">25+</span>
+                          <span className="font-display text-3xl font-bold block mb-1">20+</span>
                           <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/60 dark:text-text-dark/60">Certificates</span>
                         </div>
                         <div className="p-4 border border-border dark:border-border-dark cursor-target">
@@ -555,12 +556,28 @@ export default function JourneyPage() {
 
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-6 text-center">
                         <div className="p-4 border border-border dark:border-border-dark cursor-target">
-                          <span className="font-display text-sm font-bold block mb-1">RakshaMarg</span>
-                          <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/60 dark:text-text-dark/60">Built MVP</span>
+                          <span className="font-display text-sm font-bold block mb-1">Sprinters</span>
+                          <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/60 dark:text-text-dark/60">Formed Team</span>
                         </div>
-                        <div className="p-4 border border-border dark:border-border-dark cursor-target">
-                          <span className="font-display text-sm font-bold block mb-1">5 Colleges</span>
+                        <div 
+                          onClick={() => setCollegesExpanded(!collegesExpanded)}
+                          className="p-4 border border-border dark:border-border-dark cursor-pointer select-none transition-colors hover:bg-white/5 relative"
+                        >
+                          <div className="flex items-center justify-center gap-1.5">
+                            <span className="font-display text-sm font-bold block mb-1">6 Colleges</span>
+                            <span className="text-[8px] opacity-60">{collegesExpanded ? '▲' : '▼'}</span>
+                          </div>
                           <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/60 dark:text-text-dark/60">Explored Network</span>
+                          {collegesExpanded && (
+                            <div className="mt-3 pt-3 border-t border-border/10 text-left font-mono text-[9px] leading-relaxed text-text/70 dark:text-text-dark/70 space-y-1">
+                              <div>• JIS University</div>
+                              <div>• Narula Institute of Technology</div>
+                              <div>• Techno Main Saltlake</div>
+                              <div>• Surtech</div>
+                              <div>• Heritage Institute of Technology</div>
+                              <div>• Jadavpur University</div>
+                            </div>
+                          )}
                         </div>
                         <div className="p-4 border border-border dark:border-border-dark cursor-target">
                           <span className="font-display text-sm font-bold block mb-1">DNA Coded</span>

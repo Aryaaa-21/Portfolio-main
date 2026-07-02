@@ -311,13 +311,6 @@ export default function Projects({ currentPage: propPage, setCurrentPage: propSe
                     />
                     {/* Visual filter overlay */}
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent to-neutral-950/90 pointer-events-none z-10" />
-                    
-                    {/* Centered Large Icon */}
-                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
-                      <div className={`p-6 bg-black/40 border rounded-full backdrop-blur-md opacity-25 hover:opacity-100 transition-opacity ${glowStyles}`}>
-                        <ProjectIcon className="w-16 h-16 stroke-[1.2]" />
-                      </div>
-                    </div>
                   </div>
                 )}
               </div>
@@ -424,13 +417,6 @@ export default function Projects({ currentPage: propPage, setCurrentPage: propSe
                     />
                     {/* Visual filter overlay */}
                     <div className="absolute inset-0 bg-gradient-to-l from-transparent to-neutral-950/90 pointer-events-none z-10" />
-                    
-                    {/* Centered Large Icon */}
-                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
-                      <div className={`p-6 bg-black/40 border rounded-full backdrop-blur-md opacity-25 hover:opacity-100 transition-opacity ${glowStyles}`}>
-                        <ProjectIcon className="w-16 h-16 stroke-[1.2]" />
-                      </div>
-                    </div>
                   </div>
                 )}
               </div>
