@@ -130,32 +130,6 @@ export default function Hero() {
             Building impactful products across AI, Blockchain and Full Stack Development.
           </motion.p>
 
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.45, ease: 'easeOut' }}
-            className="flex flex-wrap gap-4 items-center mb-8"
-          >
-            <Link
-              to="/projects"
-              className="px-6 py-3 bg-text dark:bg-text-dark text-background dark:text-background-dark font-body text-xs font-semibold tracking-wider uppercase flex items-center gap-2 hover:opacity-90 transition-all duration-300"
-            >
-              View Projects
-            </Link>
-            <Link
-              to="/journey"
-              className="px-6 py-3 border border-border dark:border-border-dark text-text dark:text-text-dark font-body text-xs font-semibold tracking-wider uppercase flex items-center gap-2 hover:bg-text hover:text-background dark:hover:bg-text-dark dark:hover:text-background-dark transition-all duration-300"
-            >
-              View Journey
-            </Link>
-            <Link
-              to="/certificates"
-              className="px-6 py-3 border border-border dark:border-border-dark text-text dark:text-text-dark font-body text-xs font-semibold tracking-wider uppercase flex items-center gap-2 hover:bg-text hover:text-background dark:hover:bg-text-dark dark:hover:text-background-dark transition-all duration-300"
-            >
-              Credentials
-            </Link>
-          </motion.div>
 
           {/* Social Icons Container with Dynamic Status Indicator */}
           <div className="flex flex-col gap-2">
