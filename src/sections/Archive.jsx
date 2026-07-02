@@ -205,7 +205,7 @@ export default function Archive() {
   const filteredWeb3 = filterList(web3Projects);
   const filteredFoundational = filterList(foundationalProjects);
 
-  const hasAnyMatches = filteredFeatured.length > 0 || filteredWeb3.length > 0 || filteredFoundational.length > 0;
+  const hasAnyMatches = filteredWeb3.length > 0 || filteredFoundational.length > 0;
 
   return (
     <section id="archive" className="py-32 bg-background dark:bg-background-dark border-b border-border/20 dark:border-border-dark/20 theme-transition relative">
@@ -273,189 +273,14 @@ export default function Archive() {
           <div className="space-y-24">
             
             {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-                01. FEATURED PROJECTS (Flagships - 60-70% attention)
-                ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-            {filteredFeatured.length > 0 && (
-              <div className="space-y-8">
-                <div className="border-b border-border/30 dark:border-border-dark/30 pb-3 flex items-center justify-between">
-                  <span className="font-mono text-xs tracking-[0.25em] text-text/40 dark:text-text-dark/40 flex items-center gap-2">
-                    <Terminal className="w-4 h-4 text-emerald-500" />
-                    01 // FLAGSHIP DEPLOYMENTS
-                  </span>
-                  <span className="font-mono text-[9px] text-text/30 dark:text-text-dark/30">
-                    SYS_WEIGHT: 70%
-                  </span>
-                </div>
-
-                <div className="grid grid-cols-1 gap-8">
-                  {filteredFeatured.map((project) => {
-                    const ProjectIcon = project.icon;
-                    
-                    const borderGlow = {
-                      emerald: 'border-emerald-500/25 shadow-[0_0_20px_rgba(16,185,129,0.06)] hover:border-emerald-500/50',
-                      orange: 'border-orange-500/25 shadow-[0_0_20px_rgba(249,115,22,0.06)] hover:border-orange-500/50',
-                      violet: 'border-violet-500/25 shadow-[0_0_20px_rgba(139,92,246,0.06)] hover:border-violet-500/50'
-                    }[project.accent] || 'border-border/30';
-
-                    const accentText = {
-                      emerald: 'text-emerald-400',
-                      orange: 'text-orange-400',
-                      violet: 'text-violet-400'
-                    }[project.accent] || 'text-text';
-
-                    const accentBg = {
-                      emerald: 'bg-emerald-500',
-                      orange: 'bg-orange-500',
-                      violet: 'bg-violet-500'
-                    }[project.accent] || 'bg-text';
-
-                    return (
-                      <div 
-                        key={project.id}
-                        className={`border bg-surface/20 dark:bg-surface-dark/10 p-6 sm:p-8 relative flex flex-col justify-between transition-all duration-500 hover:-translate-y-1 ${borderGlow}`}
-                      >
-                        {/* Dossier Corner Coordinates */}
-                        <span className="absolute top-2 right-3 font-mono text-[8px] text-text/20 dark:text-text-dark/20 pointer-events-none">
-                          LOC_INDEX: {project.id} // {project.complexity}
-                        </span>
-
-                        <div className="space-y-6">
-                          {/* Heading parameters */}
-                          <div className="flex flex-wrap items-center justify-between gap-4">
-                            <div className="flex items-center gap-3">
-                              <span className="font-mono text-xs text-text/40 dark:text-text-dark/40 font-bold">
-                                {project.id}
-                              </span>
-                              <h3 className="font-display text-2xl font-bold tracking-tight text-text dark:text-text-dark uppercase">
-                                {project.title}
-                              </h3>
-                              <span className="w-1.5 h-1.5 rounded-full bg-white/20" />
-                              <span className={`font-mono text-[9px] tracking-wider uppercase font-bold ${accentText}`}>
-                                {project.classification}
-                              </span>
-                            </div>
-
-                            <div className="flex items-center gap-2">
-                              {project.status.map(tag => (
-                                <span key={tag} className="px-2 py-0.5 border border-border dark:border-border-dark bg-surface/50 dark:bg-surface-dark/50 text-[9px] font-mono text-text/50 dark:text-text-dark/50">
-                                  {tag}
-                                </span>
-                              ))}
-                              <span className="px-2 py-0.5 border border-border dark:border-border-dark bg-text dark:bg-text-dark text-background dark:text-background-dark text-[9px] font-mono font-bold">
-                                {project.complexity}
-                              </span>
-                            </div>
-                          </div>
-
-                          {/* Mission Block */}
-                          <div className="p-3 border-l-2 border-border dark:border-border-dark bg-surface/40 dark:bg-surface-dark/40 font-body text-xs text-text/80 dark:text-text-dark/80 font-semibold italic">
-                            MISSION // {project.mission}
-                          </div>
-
-                          {/* Overview Description */}
-                          <p className="font-body text-xs sm:text-sm text-text/70 dark:text-text-dark/70 leading-relaxed max-w-5xl">
-                            {project.overview}
-                          </p>
-
-                          {/* Technical Spec Matrix */}
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-border/10 dark:border-border-dark/10">
-                            <div className="space-y-2">
-                              <span className="font-mono text-[9px] tracking-wider text-text/40 dark:text-text-dark/40 uppercase block">
-                                THE PROBLEM
-                              </span>
-                              <p className="font-body text-xs text-text/60 dark:text-text-dark/60 leading-relaxed">
-                                {project.problem}
-                              </p>
-                            </div>
-                            <div className="space-y-2">
-                              <span className="font-mono text-[9px] tracking-wider text-text/40 dark:text-text-dark/40 uppercase block">
-                                ARCHITECTURAL SOLUTION
-                              </span>
-                              <p className="font-body text-xs text-text/60 dark:text-text-dark/60 leading-relaxed">
-                                {project.solution}
-                              </p>
-                            </div>
-                          </div>
-
-                          {/* Capabilities and Impact */}
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-border/10 dark:border-border-dark/10">
-                            <div className="space-y-3">
-                              <span className="font-mono text-[9px] tracking-wider text-text/40 dark:text-text-dark/40 uppercase block">
-                                KEY CAPABILITIES
-                              </span>
-                              <ul className="space-y-2 text-xs font-mono text-text/70 dark:text-text-dark/70">
-                                {project.capabilities.map((cap, cidx) => (
-                                  <li key={cidx} className="flex items-center gap-2.5">
-                                    <Check className={`w-3.5 h-3.5 ${accentText}`} />
-                                    <span>{cap}</span>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                            <div className="space-y-2">
-                              <span className="font-mono text-[9px] tracking-wider text-text/40 dark:text-text-dark/40 uppercase block">
-                                IMPACT TELEMETRY
-                              </span>
-                              <div className="p-4 border border-dashed border-border/30 dark:border-border-dark/30 bg-surface/20 dark:bg-surface-dark/10">
-                                <p className="font-body text-xs text-text/80 dark:text-text-dark/80 font-medium leading-relaxed italic">
-                                  "{project.impact}"
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Tech Tag stack */}
-                          <div className="pt-4 space-y-2">
-                            <span className="font-mono text-[9px] tracking-wider text-text/40 dark:text-text-dark/40 uppercase block">
-                              ENGINEERING STACK
-                            </span>
-                            <div className="flex flex-wrap gap-1.5">
-                              {project.tech.map(tech => (
-                                <span key={tech} className="px-2.5 py-0.5 bg-surface dark:bg-surface-dark/80 border border-border dark:border-border-dark text-[9px] font-mono text-text/80 dark:text-text-dark/80">
-                                  {tech}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Action Triggers */}
-                        <div className="flex gap-4 pt-8 mt-6 border-t border-border/10 dark:border-border-dark/10">
-                          <a 
-                            href={project.github}
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            className="px-5 py-2.5 border border-border dark:border-border-dark text-text dark:text-text-dark font-mono text-[10px] uppercase tracking-widest hover:bg-text hover:text-background dark:hover:bg-text-dark dark:hover:text-background-dark transition-all flex items-center gap-2"
-                          >
-                            <Github className="w-3.5 h-3.5" /> REPOSITORY
-                          </a>
-                          {project.demo && (
-                            <a 
-                              href={project.demo}
-                              target="_blank" 
-                              rel="noopener noreferrer" 
-                              className="px-5 py-2.5 bg-text dark:bg-text-dark text-background dark:text-background-dark font-mono text-[10px] uppercase tracking-widest hover:opacity-90 transition-all flex items-center gap-2"
-                            >
-                              <ExternalLink className="w-3.5 h-3.5" /> LIVE DEPLOYMENT
-                            </a>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-
-            {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-                02. WEB3 & SOROBAN ARCHIVE (Blockchain nodes - 20-25% attention)
+                01. WEB3 & SOROBAN ARCHIVE (Blockchain nodes - 20-25% attention)
                 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
             {filteredWeb3.length > 0 && (
               <div className="space-y-8">
                 <div className="border-b border-border/30 dark:border-border-dark/30 pb-3 flex items-center justify-between">
                   <span className="font-mono text-xs tracking-[0.25em] text-text/40 dark:text-text-dark/40 flex items-center gap-2">
                     <Layers className="w-4 h-4 text-cyan-500" />
-                    02 // WEB3 & SOROBAN BLOCKCHAIN ARCHIVE
+                    01 // WEB3 & SOROBAN BLOCKCHAIN ARCHIVE
                   </span>
                   <span className="font-mono text-[9px] text-text/30 dark:text-text-dark/30">
                     SYS_WEIGHT: 20%
@@ -569,14 +394,14 @@ export default function Archive() {
             )}
 
             {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-                03. FOUNDATIONAL WEB PROJECTS (Micro cards - 10-15% attention)
+                02. FOUNDATIONAL WEB PROJECTS (Micro cards - 10-15% attention)
                 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
             {filteredFoundational.length > 0 && (
               <div className="space-y-8">
                 <div className="border-b border-border/30 dark:border-border-dark/30 pb-3 flex items-center justify-between">
                   <span className="font-mono text-xs tracking-[0.25em] text-text/40 dark:text-text-dark/40 flex items-center gap-2">
                     <Activity className="w-4 h-4 text-violet-500" />
-                    03 // FOUNDATIONAL ENGINEERING SYSTEMS
+                    02 // FOUNDATIONAL ENGINEERING SYSTEMS
                   </span>
                   <span className="font-mono text-[9px] text-text/30 dark:text-text-dark/30">
                     SYS_WEIGHT: 10%
