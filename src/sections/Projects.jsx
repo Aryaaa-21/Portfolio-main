@@ -307,7 +307,7 @@ export default function Projects({ currentPage: propPage, setCurrentPage: propSe
                     <img 
                       src={project.image} 
                       alt={project.title} 
-                      className={`w-full h-full object-cover ${project.imagePosition || 'object-center'} filter grayscale brightness-[0.45] transition-transform duration-[1200ms] hover:scale-105`} 
+                      className={`w-full h-full object-cover ${project.imagePosition || 'object-center'} filter grayscale hover:grayscale-0 brightness-[0.85] hover:brightness-100 transition-all duration-[1000ms] hover:scale-105`} 
                     />
                     {/* Visual filter overlay */}
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent to-neutral-950/90 pointer-events-none z-10" />
@@ -413,7 +413,7 @@ export default function Projects({ currentPage: propPage, setCurrentPage: propSe
                     <img 
                       src={project.image} 
                       alt={project.title} 
-                      className={`w-full h-full object-cover ${project.imagePosition || 'object-center'} filter grayscale brightness-[0.45] transition-transform duration-[1200ms] hover:scale-105`} 
+                      className={`w-full h-full object-cover ${project.imagePosition || 'object-center'} filter grayscale hover:grayscale-0 brightness-[0.85] hover:brightness-100 transition-all duration-[1000ms] hover:scale-105`} 
                     />
                     {/* Visual filter overlay */}
                     <div className="absolute inset-0 bg-gradient-to-l from-transparent to-neutral-950/90 pointer-events-none z-10" />
