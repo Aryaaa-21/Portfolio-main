@@ -8,11 +8,8 @@ export default function ProjectsPage() {
 
   return (
     <div className="w-full flex flex-col">
-      {/* 1. Interactive Pinned Detail Showcase Section */}
-      <Projects currentPage={currentPage} setCurrentPage={setCurrentPage} />
-
-      {/* 2. Intro Banner Section (Moved after Projects and before Archive) */}
-      <section className="w-full bg-background dark:bg-background-dark pt-24 pb-8 px-6 lg:px-16 flex flex-col justify-center items-center relative overflow-hidden theme-transition">
+      {/* 1. Page Header Banner */}
+      <section className="w-full bg-background dark:bg-background-dark pt-32 pb-8 px-6 lg:px-16 flex flex-col justify-center items-center relative overflow-hidden theme-transition">
         
         {/* Floating grid backgrounds */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px] pointer-events-none" />
@@ -34,8 +31,11 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      {/* 3. Project Archive Listing Section */}
+      {/* 2. System Registry (Archive Component) */}
       <Archive />
+
+      {/* 3. Interactive Pinned Detail Showcase Section (Slideshow Component) */}
+      <Projects currentPage={currentPage} setCurrentPage={setCurrentPage} />
     </div>
   );
 }
