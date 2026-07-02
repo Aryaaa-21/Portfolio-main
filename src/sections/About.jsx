@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { GraduationCap, Code2, BookOpen, Users2 } from 'lucide-react';
 
@@ -80,6 +81,34 @@ export default function About() {
             passionate about building software that solves real-world problems.
             <br />I am currently focusing on Web Development and strengthening my fundamentals in Data Structures.
           </motion.p>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex flex-wrap gap-4 items-center mt-8"
+          >
+            <Link
+              to="/projects"
+              className="px-6 py-3 bg-text dark:bg-text-dark text-background dark:text-background-dark font-body text-xs font-semibold tracking-wider uppercase flex items-center gap-2 hover:opacity-90 transition-all duration-300"
+            >
+              View Projects
+            </Link>
+            <Link
+              to="/journey"
+              className="px-6 py-3 border border-border dark:border-border-dark text-text dark:text-text-dark font-body text-xs font-semibold tracking-wider uppercase flex items-center gap-2 hover:bg-text hover:text-background dark:hover:bg-text-dark dark:hover:text-background-dark transition-all duration-300"
+            >
+              View Journey
+            </Link>
+            <Link
+              to="/certificates"
+              className="px-6 py-3 border border-border dark:border-border-dark text-text dark:text-text-dark font-body text-xs font-semibold tracking-wider uppercase flex items-center gap-2 hover:bg-text hover:text-background dark:hover:bg-text-dark dark:hover:text-background-dark transition-all duration-300"
+            >
+              Credentials
+            </Link>
+          </motion.div>
         </div>
 
         {/* Right Column - Highlight Details Grid */}
