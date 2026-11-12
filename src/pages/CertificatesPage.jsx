@@ -1,233 +1,213 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Filter, ExternalLink, Download, Share2, X, Trophy, Award, Landmark, Eye } from 'lucide-react';
-import { certificates } from '../data/certificates';
+import React, { useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
+import { Award, CalendarCheck, Landmark, Search, Trophy, X } from 'lucide-react';
+import { certificates, certificateCategories } from '../data/certificates';
+import CertificateCard from '../components/CertificateCard';
+import CertificateModal from '../components/CertificateModal';
+import CountUp from '../components/motion/CountUp';
+import Reveal, { RevealText } from '../components/motion/Reveal';
+import SpotlightCard from '../components/motion/SpotlightCard';
+import { trackEvent } from '../lib/analytics';
+
+const EASE = [0.22, 1, 0.36, 1];
+
+const inCategory = (cert, category) =>
+  category === 'All' || (category === 'Awards' ? cert.award : cert.category === category);
 
 export default function CertificatesPage() {
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('All');
-  const [selectedCert, setSelectedCert] = useState(null);
-  const [shareSuccess, setShareSuccess] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const categories = ['All', 'Hackathons', 'Web3', 'Development', 'Academic', 'Volunteering', 'Extra-Curricular'];
+  // The open certificate lives in the URL (?id=cert-7) so shared links open it directly.
+  const selectedCert = certificates.find((cert) => cert.id === searchParams.get('id')) || null;
+  const openCert = (cert) => {
+    trackEvent('view_certificate', { certificate_id: cert.id, certificate_title: cert.title });
+    setSearchParams({ id: cert.id }, { replace: true });
+  };
+  const closeCert = () => setSearchParams({}, { replace: true });
 
   const stats = [
-    { label: "Certificates Earned", value: "20+", icon: Award },
-    { label: "Hackathons Won", value: "6+", icon: Trophy },
-    { label: "Prize Money", value: "₹16K+", icon: Landmark },
-    { label: "Events Attended", value: "15+", icon: Filter }
+    { label: 'Certificates Earned', value: String(certificates.length), icon: Award },
+    { label: 'Hackathons Won', value: '6+', icon: Trophy },
+    { label: 'Prize Money', value: '₹16K+', icon: Landmark },
+    { label: 'Events Attended', value: '15+', icon: CalendarCheck },
   ];
 
-  const filtered = certificates.filter((cert) => {
-    const query = search.toLowerCase();
-    const matchesSearch =
-      cert.title.toLowerCase().includes(query) ||
-      cert.issuer.toLowerCase().includes(query) ||
-      cert.year.includes(query) ||
-      cert.category.toLowerCase().includes(query);
-    
-    const matchesCategory = category === 'All' || cert.category === category;
-    return matchesSearch && matchesCategory;
-  });
+  const counts = useMemo(
+    () =>
+      Object.fromEntries(
+        certificateCategories.map((name) => [name, certificates.filter((cert) => inCategory(cert, name)).length])
+      ),
+    []
+  );
 
-  const handleShare = (cert) => {
-    const url = `${window.location.origin}/#/certificates?id=${cert.id}`;
-    navigator.clipboard.writeText(url).then(() => {
-      setShareSuccess(true);
-      setTimeout(() => setShareSuccess(false), 2000);
-    });
-  };
+  const query = search.trim().toLowerCase();
+  const filtered = certificates.filter((cert) => {
+    const matchesSearch =
+      !query ||
+      [cert.title, cert.issuer, cert.year, cert.category, cert.date].some((field) =>
+        field.toLowerCase().includes(query)
+      );
+    return matchesSearch && inCategory(cert, category);
+  });
 
   return (
     <div className="w-full min-h-screen bg-background dark:bg-background-dark pt-32 pb-24 theme-transition">
       <div className="max-w-7xl mx-auto px-6 lg:px-16">
-        
         {/* Page Hero */}
         <div className="mb-16">
-
-          <h1 className="font-display text-4xl sm:text-6xl font-bold tracking-tight text-text dark:text-text-dark mb-4">
-            CREDENTIAL LEDGER
-          </h1>
-          <p className="font-body text-xs sm:text-sm uppercase tracking-widest text-text/60 dark:text-text-dark/60">
-            Every milestone tells a story.
-          </p>
+          <Reveal y={12}>
+            <span className="font-body text-xs font-semibold tracking-[0.2em] text-text/50 dark:text-text-dark/50 block mb-4 uppercase">
+              Recognitions &amp; Certifications
+            </span>
+          </Reveal>
+          <RevealText
+            as="h1"
+            text="CREDENTIAL LEDGER"
+            className="font-display text-4xl sm:text-6xl font-bold tracking-tight text-text dark:text-text-dark mb-4"
+          />
+          <Reveal delay={0.25} y={12}>
+            <p className="font-body text-xs sm:text-sm uppercase tracking-widest text-text/60 dark:text-text-dark/60">
+              Every milestone tells a story.
+            </p>
+          </Reveal>
         </div>
 
         {/* Achievement Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-16">
           {stats.map((stat, idx) => {
             const Icon = stat.icon;
             return (
-              <div key={idx} className="border border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-6 flex items-center justify-between cursor-target">
-                <div>
-                  <span className="font-body text-[10px] font-bold tracking-widest text-text/40 dark:text-text-dark/40 uppercase block mb-1">
-                    {stat.label}
-                  </span>
-                  <span className="font-display text-2xl sm:text-3xl font-bold text-text dark:text-text-dark">
-                    {stat.value}
-                  </span>
-                </div>
-                <Icon className="w-8 h-8 text-text/25 dark:text-text-dark/25" />
-              </div>
+              <Reveal key={stat.label} delay={idx * 0.08}>
+                <SpotlightCard className="cursor-target h-full border border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-5 sm:p-6 flex items-center justify-between gap-4">
+                  <div>
+                    <span className="font-body text-[10px] font-bold tracking-widest text-text/40 dark:text-text-dark/40 uppercase block mb-1">
+                      {stat.label}
+                    </span>
+                    <CountUp
+                      value={stat.value}
+                      className="font-display text-2xl sm:text-4xl font-bold text-text dark:text-text-dark"
+                    />
+                  </div>
+                  <Icon className="w-7 h-7 sm:w-8 sm:h-8 shrink-0 text-text/25 dark:text-text-dark/25" />
+                </SpotlightCard>
+              </Reveal>
             );
           })}
         </div>
 
         {/* Filters and Controls */}
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-12">
-          {/* Search bar */}
-          <div className="relative w-full lg:max-w-md">
+        <Reveal className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-6">
+          <div className="relative w-full lg:max-w-sm">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text/40 dark:text-text-dark/40" />
             <input
               type="text"
-              placeholder="Search by Title, Issuer, Year, Category..."
+              placeholder="Search title, issuer, year..."
+              aria-label="Search certificates"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark/50 font-body text-xs font-semibold text-text dark:text-text-dark focus:outline-none focus:border-text dark:focus:border-text-dark tracking-wide uppercase rounded-none transition-colors"
+              className="w-full pl-10 pr-10 py-2.5 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark/50 font-body text-xs font-semibold text-text dark:text-text-dark placeholder:text-text/35 dark:placeholder:text-text-dark/35 focus:outline-none focus:border-text dark:focus:border-text-dark tracking-wide rounded-none transition-colors"
             />
+            {search && (
+              <button
+                type="button"
+                onClick={() => setSearch('')}
+                aria-label="Clear search"
+                className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-text/40 dark:text-text-dark/40 hover:text-text dark:hover:text-text-dark"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
           </div>
 
-          {/* Category tabs */}
-          <div className="flex flex-wrap gap-2">
-            {categories.map((cat) => {
-              const isActive = category === cat;
-              return (
-                <button
-                  key={cat}
-                  onClick={() => setCategory(cat)}
-                  className={`px-3 py-1.5 border text-[9px] font-bold uppercase tracking-widest transition-all duration-300 ${
-                    isActive
-                      ? 'bg-text border-text text-background dark:bg-text-dark dark:border-text-dark dark:text-background-dark'
-                      : 'border-border dark:border-border-dark text-text/60 dark:text-text-dark/60 hover:text-text dark:hover:text-text-dark'
-                  }`}
-                >
-                  {cat}
-                </button>
-              );
-            })}
-          </div>
-        </div>
+          <LayoutGroup id="certificate-filters">
+            <div className="flex flex-wrap gap-2">
+              {certificateCategories.map((name) => {
+                const isActive = category === name;
+                return (
+                  <button
+                    key={name}
+                    type="button"
+                    onClick={() => setCategory(name)}
+                    aria-pressed={isActive}
+                    className={`relative px-3 py-1.5 border text-[9px] font-bold uppercase tracking-widest transition-colors duration-300 ${
+                      isActive
+                        ? 'border-text dark:border-text-dark text-background dark:text-background-dark'
+                        : 'border-border dark:border-border-dark text-text/60 dark:text-text-dark/60 hover:text-text dark:hover:text-text-dark hover:border-text/50 dark:hover:border-text-dark/50'
+                    }`}
+                  >
+                    {isActive && (
+                      <motion.span
+                        layoutId="certificate-filter-active"
+                        className="absolute inset-0 bg-text dark:bg-text-dark"
+                        transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                      />
+                    )}
+                    <span className="relative">
+                      {name}
+                      <span className="ml-1.5 opacity-60 tabular-nums">{counts[name]}</span>
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </LayoutGroup>
+        </Reveal>
+
+        <p className="font-body text-[10px] font-bold uppercase tracking-[0.2em] text-text/40 dark:text-text-dark/40 mb-8" aria-live="polite">
+          Showing {filtered.length} of {certificates.length}
+        </p>
 
         {/* Certificates Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filtered.map((cert) => (
-            <motion.div
-              layout
-              key={cert.id}
-              className="glass-card group border border-border dark:border-border-dark flex flex-col justify-between overflow-hidden"
-            >
-              {/* Thumbnail Container */}
-              <div className="aspect-video relative bg-[#111] overflow-hidden border-b border-border dark:border-border-dark">
-                <img
-                  src={cert.thumbnail}
-                  alt={cert.title}
-                  className="w-full h-full object-cover group-hover:scale-[1.02] transition-all duration-700"
-                />
-              </div>
-
-              {/* Card Meta details */}
-              <div className="p-6 flex-1 flex flex-col justify-between">
-                <div>
-                  <span className="font-body text-[8px] font-bold tracking-widest text-text/40 dark:text-text-dark/40 uppercase block mb-1">
-                    {cert.category}
-                  </span>
-                  <h3 className="font-display text-lg font-bold text-text dark:text-text-dark mb-4 group-hover:underline">
-                    {cert.title}
-                  </h3>
-                  <div className="font-body text-xs text-text/50 dark:text-text-dark/50 flex justify-between mb-6">
-                    <span>{cert.issuer}</span>
-                    <span>{cert.date}</span>
-                  </div>
-                </div>
-
-                <button
-                  onClick={() => setSelectedCert(cert)}
-                  className="w-full py-2.5 border border-text/40 dark:border-text-dark/40 text-text/80 dark:text-text-dark/80 group-hover:bg-text group-hover:border-text group-hover:text-background dark:group-hover:bg-text-dark dark:group-hover:border-text-dark dark:group-hover:text-background-dark font-body text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all duration-300"
-                >
-                  <Eye className="w-3.5 h-3.5" />
-                  View Certificate
-                </button>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          <AnimatePresence mode="popLayout">
+            {filtered.map((cert, idx) => (
+              <motion.div
+                layout
+                key={cert.id}
+                initial={{ opacity: 0, y: 30, scale: 0.97 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: '0px 0px -40px 0px' }}
+                exit={{ opacity: 0, scale: 0.94, transition: { duration: 0.2 } }}
+                transition={{ duration: 0.6, ease: EASE, delay: (idx % 3) * 0.07 }}
+              >
+                <CertificateCard cert={cert} onOpen={openCert} />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
 
         {filtered.length === 0 && (
-          <div className="text-center py-20 text-text/40 dark:text-text-dark/40 font-body text-xs uppercase tracking-wider">
-            No matching credentials located.
-          </div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-20 border border-dashed border-border dark:border-border-dark"
+          >
+            <p className="font-body text-xs uppercase tracking-wider text-text/50 dark:text-text-dark/50 mb-4">
+              No certificates match that search.
+            </p>
+            <button
+              type="button"
+              onClick={() => {
+                setSearch('');
+                setCategory('All');
+              }}
+              className="px-4 py-2 border border-text dark:border-text-dark font-body text-[10px] font-bold uppercase tracking-widest hover:bg-text hover:text-background dark:hover:bg-text-dark dark:hover:text-background-dark transition-colors duration-300"
+            >
+              Show all certificates
+            </button>
+          </motion.div>
         )}
       </div>
 
-      {/* Modal View details */}
-      {selectedCert && (
-        <div className="fixed inset-0 z-[9999] bg-[#050505]/90 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="relative w-full max-w-3xl border border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-6 sm:p-8 flex flex-col gap-6">
-            
-            {/* Close Button */}
-            <button
-              onClick={() => setSelectedCert(null)}
-              className="absolute top-4 right-4 p-2 border border-border dark:border-border-dark text-text/60 dark:text-text-dark/60 hover:text-text dark:hover:text-text-dark transition-colors"
-              aria-label="Close Preview"
-            >
-              <X className="w-4 h-4" />
-            </button>
-
-            {/* Modal Certificate Details */}
-            <div>
-              <span className="font-body text-[9px] font-bold tracking-widest text-text/40 dark:text-text-dark/40 uppercase">
-                {selectedCert.category}
-              </span>
-              <h3 className="font-display text-2xl font-bold text-text dark:text-text-dark mt-1">
-                {selectedCert.title}
-              </h3>
-              <p className="font-body text-xs text-text/50 dark:text-text-dark/50 mt-1">
-                Issued by {selectedCert.issuer} &bull; {selectedCert.date}
-              </p>
-            </div>
-
-            {/* Main Preview Image */}
-            <div className="w-full aspect-video border border-border dark:border-border-dark overflow-hidden bg-[#111] flex items-center justify-center">
-              <img
-                src={selectedCert.thumbnail}
-                alt={selectedCert.title}
-                className="max-h-full object-contain"
-              />
-            </div>
-
-            {/* Action buttons */}
-            <div className="flex flex-wrap gap-4 items-center justify-between">
-              <div className="flex gap-4">
-                <a
-                  href={selectedCert.verificationLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 bg-text dark:bg-text-dark text-background dark:text-background-dark font-body text-[10px] font-bold tracking-widest uppercase flex items-center gap-2 hover:bg-mono-42 dark:hover:bg-mono-161 transition-colors"
-                >
-                  <ExternalLink className="w-3.5 h-3.5" />
-                  Verification Link
-                </a>
-                <a
-                  href={selectedCert.downloadLink}
-                  download
-                  className="px-4 py-2 border border-border dark:border-border-dark text-text dark:text-text-dark font-body text-[10px] font-bold tracking-widest uppercase flex items-center gap-2 hover:bg-text hover:text-background dark:hover:bg-text-dark dark:hover:text-background-dark transition-all duration-300"
-                >
-                  <Download className="w-3.5 h-3.5" />
-                  Download
-                </a>
-              </div>
-
-              <button
-                onClick={() => handleShare(selectedCert)}
-                className="px-4 py-2 border border-border dark:border-border-dark text-text/60 dark:text-text-dark/60 hover:text-text dark:hover:text-text-dark font-body text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 transition-all"
-              >
-                <Share2 className="w-3.5 h-3.5" />
-                {shareSuccess ? 'Link Copied!' : 'Share Link'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <CertificateModal
+        cert={selectedCert}
+        list={filtered.some((cert) => cert.id === selectedCert?.id) ? filtered : certificates}
+        onChange={openCert}
+        onClose={closeCert}
+      />
     </div>
   );
 }

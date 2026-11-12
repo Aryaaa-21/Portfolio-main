@@ -1,5 +1,5 @@
 // Real certificates list for Arya Bhagat
-export const certificates = [
+const entries = [
   {
     id: "cert-1",
     title: "Introduction to Front End Development",
@@ -230,5 +230,59 @@ export const certificates = [
     thumbnail: "/img/certs/21.jpeg",
     verificationLink: "https://github.com/Aryaaa-21",
     downloadLink: "/img/certs/21.jpeg"
+  },
+  {
+    id: "cert-22",
+    title: "AKI HACKS x Hacktoberfest '26 Participation",
+    issuer: "AKI HACKS & CalTech Circle (MLH)",
+    date: "31st October 2026",
+    year: "2026",
+    category: "Hackathons",
+    thumbnail: "/img/certs/22.png",
+    verificationLink: "https://github.com/Aryaaa-21",
+    downloadLink: "/img/certs/22.png"
+  },
+  {
+    id: "cert-23",
+    title: "AWS Cloud Practitioner Essentials",
+    issuer: "AWS Training & Certification",
+    date: "20 December 2025",
+    year: "2025",
+    category: "Cloud",
+    thumbnail: "/img/certs/23.png",
+    verificationLink: "https://github.com/Aryaaa-21",
+    downloadLink: "/img/certs/23.png"
+  },
+  {
+    id: "cert-24",
+    title: "HackSamarth 2026 Participation",
+    issuer: "Unstop & IIT Kanpur",
+    date: "2026",
+    year: "2026",
+    category: "Hackathons",
+    thumbnail: "/img/certs/24.png",
+    verificationLink: "https://github.com/Aryaaa-21",
+    downloadLink: "/img/certs/24.pdf"
   }
+];
+
+// Certificates that represent a podium finish / win
+const AWARD_IDS = new Set(["cert-6", "cert-13", "cert-16", "cert-18", "cert-19"]);
+
+export const certificates = entries.map((cert, idx) => ({
+  ...cert,
+  number: idx + 1,
+  award: AWARD_IDS.has(cert.id),
+}));
+
+// Shown on the home page, in this order
+const FEATURED_IDS = ["cert-19", "cert-13", "cert-16", "cert-18"];
+export const featuredCertificates = FEATURED_IDS
+  .map((id) => certificates.find((cert) => cert.id === id))
+  .filter(Boolean);
+
+export const certificateCategories = [
+  "All",
+  "Awards",
+  ...Array.from(new Set(entries.map((cert) => cert.category))),
 ];

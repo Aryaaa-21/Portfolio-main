@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, MotionConfig, motion } from 'framer-motion';
 import Navbar from './sections/Navbar';
 import Contact from './sections/Contact';
 
@@ -14,6 +14,8 @@ import CertificatesPage from './pages/CertificatesPage';
 import ShaderBackground from './components/ShaderBackground';
 import TargetCursor from './components/ui/TargetCursor';
 import Preloader from './components/Preloader';
+import ScrollProgress from './components/motion/ScrollProgress';
+import { initAnalytics, trackPageView } from './lib/analytics';
 
 // Helper component to scroll to top on route change
 function ScrollToTop() {
@@ -22,6 +24,38 @@ function ScrollToTop() {
     window.scrollTo(0, 0);
   }, [pathname]);
   return null;
+}
+
+// Reports a page view to Google Analytics on every route change.
+function AnalyticsTracker() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    initAnalytics();
+    trackPageView(pathname);
+  }, [pathname]);
+  return null;
+}
+
+// Fades each page in when the route changes. Opacity only: a transform here
+// would re-anchor the fixed and sticky elements inside the pages.
+function AnimatedRoutes() {
+  const location = useLocation();
+  return (
+    <motion.div
+      key={location.pathname}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+      className="w-full flex flex-col"
+    >
+      <Routes location={location}>
+        <Route path="/" element={<Home />} />
+        <Route path="/journey" element={<JourneyPage />} />
+        <Route path="/projects" element={<ProjectsPage />} />
+        <Route path="/certificates" element={<CertificatesPage />} />
+      </Routes>
+    </motion.div>
+  );
 }
 
 export default function App() {
@@ -54,8 +88,11 @@ export default function App() {
   };
 
   return (
+    <MotionConfig reducedMotion="user">
     <Router>
       <ScrollToTop />
+      <AnalyticsTracker />
+      <ScrollProgress />
       <div className="relative min-h-screen w-full bg-background dark:bg-background-dark text-text dark:text-text-dark font-body select-text overflow-x-clip transition-colors duration-500">
         
         {/* Premium Preloader Experience */}
@@ -83,17 +120,13 @@ export default function App() {
 
         {/* Active Route Wrapper */}
         <main className="relative z-10 w-full flex flex-col">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/journey" element={<JourneyPage />} />
-            <Route path="/projects" element={<ProjectsPage />} />
-            <Route path="/certificates" element={<CertificatesPage />} />
-          </Routes>
+          <AnimatedRoutes />
         </main>
 
         {/* Standard Footer across all pages */}
         <Contact />
       </div>
     </Router>
+    </MotionConfig>
   );
 }

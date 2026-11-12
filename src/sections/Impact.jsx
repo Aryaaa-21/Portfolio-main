@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { metrics } from '../data/metrics';
+import CountUp from '../components/motion/CountUp';
 
 export default function Impact() {
   return (
@@ -16,9 +17,10 @@ export default function Impact() {
               transition={{ duration: 0.6, delay: idx * 0.15 }}
               className="bg-surface dark:bg-surface-dark p-12 text-center flex flex-col justify-center items-center theme-transition"
             >
-              <span className="font-display text-5xl sm:text-6xl font-bold tracking-tight text-text dark:text-text-dark mb-4">
-                {metric.value}
-              </span>
+              <CountUp
+                value={metric.value}
+                className="font-display text-5xl sm:text-6xl font-bold tracking-tight text-text dark:text-text-dark mb-4"
+              />
               <span className="font-body text-xs font-bold tracking-[0.2em] text-text dark:text-text-dark uppercase mb-3">
                 {metric.label}
               </span>
