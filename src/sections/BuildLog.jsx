@@ -90,16 +90,16 @@ export default function BuildLog() {
               <div className="p-6 sm:p-8 border border-border dark:border-border-dark bg-background dark:bg-background-dark/50 hover:border-text/30 dark:hover:border-text-dark/30 transition-all duration-300">
                 <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
                   <div className="flex items-center gap-3">
-                    <span className="font-body text-[10px] font-bold px-2 py-0.5 border border-border dark:border-border-dark text-text/60 dark:text-text-dark/60 uppercase">
+                    <span className="font-body text-xs font-bold px-2 py-0.5 border border-border dark:border-border-dark text-text/60 dark:text-text-dark/60 uppercase">
                       {log.version}
                     </span>
-                    <span className="flex items-center gap-1 font-body text-[10px] font-semibold text-text/40 dark:text-text-dark/40 uppercase">
+                    <span className="flex items-center gap-1 font-body text-xs font-semibold text-text/40 dark:text-text-dark/40 uppercase">
                       <Calendar className="w-3 h-3" />
                       {log.date}
                     </span>
                   </div>
                   
-                  <span className="font-body text-[9px] font-bold px-2 py-0.5 bg-text dark:bg-text-dark text-background dark:text-background-dark uppercase tracking-wider">
+                  <span className="font-body text-xs font-bold px-2 py-0.5 bg-text dark:bg-text-dark text-background dark:text-background-dark uppercase tracking-wider">
                     {log.badge}
                   </span>
                 </div>

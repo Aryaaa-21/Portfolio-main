@@ -1,4 +1,6 @@
-// Real certificates list for Arya Bhagat
+// Real certificates list for Arya Bhagat.
+// verificationLink is only set where the issuer's own verification page is known
+// (read from the QR code printed on the certificate). Leave it out otherwise.
 const entries = [
   {
     id: "cert-1",
@@ -7,9 +9,8 @@ const entries = [
     date: "14th August 2025",
     year: "2025",
     category: "Development",
-    thumbnail: "/img/certs/1.png",
-    verificationLink: "https://github.com/Aryaaa-21",
-    downloadLink: "/img/certs/1.png"
+    thumbnail: "/img/certs/1.webp",
+    downloadLink: "/img/certs/1.webp"
   },
   {
     id: "cert-2",
@@ -18,9 +19,8 @@ const entries = [
     date: "September 2025",
     year: "2025",
     category: "Hackathons",
-    thumbnail: "/img/certs/2.jpg",
-    verificationLink: "https://github.com/Aryaaa-21",
-    downloadLink: "/img/certs/2.jpg"
+    thumbnail: "/img/certs/2.webp",
+    downloadLink: "/img/certs/2.webp"
   },
   {
     id: "cert-3",
@@ -29,9 +29,8 @@ const entries = [
     date: "29 October 2025",
     year: "2025",
     category: "Web3",
-    thumbnail: "/img/certs/3.jpg",
-    verificationLink: "https://github.com/Aryaaa-21",
-    downloadLink: "/img/certs/3.jpg"
+    thumbnail: "/img/certs/3.webp",
+    downloadLink: "/img/certs/3.webp"
   },
   {
     id: "cert-4",
@@ -40,9 +39,8 @@ const entries = [
     date: "February 2026",
     year: "2026",
     category: "Hackathons",
-    thumbnail: "/img/certs/4.png",
-    verificationLink: "https://github.com/Aryaaa-21",
-    downloadLink: "/img/certs/4.png"
+    thumbnail: "/img/certs/4.webp",
+    downloadLink: "/img/certs/4.webp"
   },
   {
     id: "cert-5",
@@ -51,9 +49,8 @@ const entries = [
     date: "19 December 2025",
     year: "2025",
     category: "Academic",
-    thumbnail: "/img/certs/5.png",
-    verificationLink: "https://github.com/Aryaaa-21",
-    downloadLink: "/img/certs/5.png"
+    thumbnail: "/img/certs/5.webp",
+    downloadLink: "/img/certs/5.webp"
   },
   {
     id: "cert-6",
@@ -62,9 +59,8 @@ const entries = [
     date: "October 2025",
     year: "2025",
     category: "Extra-Curricular",
-    thumbnail: "/img/certs/6.jpg",
-    verificationLink: "https://github.com/Aryaaa-21",
-    downloadLink: "/img/certs/6.jpg"
+    thumbnail: "/img/certs/6.webp",
+    downloadLink: "/img/certs/6.webp"
   },
   {
     id: "cert-7",
@@ -73,9 +69,8 @@ const entries = [
     date: "25th November 2025",
     year: "2025",
     category: "Volunteering",
-    thumbnail: "/img/certs/7.png",
-    verificationLink: "https://github.com/Aryaaa-21",
-    downloadLink: "/img/certs/7.png"
+    thumbnail: "/img/certs/7.webp",
+    downloadLink: "/img/certs/7.webp"
   },
   {
     id: "cert-8",
@@ -84,9 +79,8 @@ const entries = [
     date: "16th January 2026",
     year: "2026",
     category: "Hackathons",
-    thumbnail: "/img/certs/8.jpeg",
-    verificationLink: "https://github.com/Aryaaa-21",
-    downloadLink: "/img/certs/8.jpeg"
+    thumbnail: "/img/certs/8.webp",
+    downloadLink: "/img/certs/8.webp"
   },
   {
     id: "cert-9",
@@ -95,9 +89,8 @@ const entries = [
     date: "May 2026",
     year: "2026",
     category: "Academic",
-    thumbnail: "/img/certs/9.jpeg",
-    verificationLink: "https://github.com/Aryaaa-21",
-    downloadLink: "/img/certs/9.jpeg"
+    thumbnail: "/img/certs/9.webp",
+    downloadLink: "/img/certs/9.webp"
   },
   {
     id: "cert-10",
@@ -106,9 +99,9 @@ const entries = [
     date: "March 2026",
     year: "2026",
     category: "Hackathons",
-    thumbnail: "/img/certs/10.png",
-    verificationLink: "https://github.com/Aryaaa-21",
-    downloadLink: "/img/certs/10.png"
+    thumbnail: "/img/certs/10.webp",
+    verificationLink: "https://unstop.com/certificate-preview/9e45b8e1-0cc9-4ca1-bb72-bcbd2a8a4f0a",
+    downloadLink: "/img/certs/10.webp"
   },
   {
     id: "cert-11",
@@ -117,9 +110,9 @@ const entries = [
     date: "March 2026",
     year: "2026",
     category: "Hackathons",
-    thumbnail: "/img/certs/11.png",
-    verificationLink: "https://github.com/Aryaaa-21",
-    downloadLink: "/img/certs/11.png"
+    thumbnail: "/img/certs/11.webp",
+    verificationLink: "https://unstop.com/certificate-preview/861c212d-19cd-4455-8e91-64f52b7b8715",
+    downloadLink: "/img/certs/11.webp"
   },
   {
     id: "cert-12",
@@ -128,9 +121,9 @@ const entries = [
     date: "2026",
     year: "2026",
     category: "Hackathons",
-    thumbnail: "/img/certs/12.png",
-    verificationLink: "https://github.com/Aryaaa-21",
-    downloadLink: "/img/certs/12.png"
+    thumbnail: "/img/certs/12.webp",
+    verificationLink: "https://unstop.com/certificate-preview/e4c23007-c7f8-4508-abaf-d9ef5e9a31ff",
+    downloadLink: "/img/certs/12.webp"
   },
   {
     id: "cert-13",
@@ -139,9 +132,8 @@ const entries = [
     date: "February 2026",
     year: "2026",
     category: "Hackathons",
-    thumbnail: "/img/certs/13.png",
-    verificationLink: "https://github.com/Aryaaa-21",
-    downloadLink: "/img/certs/13.png"
+    thumbnail: "/img/certs/13.webp",
+    downloadLink: "/img/certs/13.webp"
   },
   {
     id: "cert-14",
@@ -150,9 +142,8 @@ const entries = [
     date: "30th June 2026",
     year: "2026",
     category: "Web3",
-    thumbnail: "/img/certs/14.jpeg",
-    verificationLink: "https://github.com/Aryaaa-21",
-    downloadLink: "/img/certs/14.jpeg"
+    thumbnail: "/img/certs/14.webp",
+    downloadLink: "/img/certs/14.webp"
   },
   {
     id: "cert-15",
@@ -161,9 +152,8 @@ const entries = [
     date: "11 & 12 May 2026",
     year: "2026",
     category: "Academic",
-    thumbnail: "/img/certs/15.jpeg",
-    verificationLink: "https://github.com/Aryaaa-21",
-    downloadLink: "/img/certs/15.jpeg"
+    thumbnail: "/img/certs/15.webp",
+    downloadLink: "/img/certs/15.webp"
   },
   {
     id: "cert-16",
@@ -172,9 +162,8 @@ const entries = [
     date: "20th April 2026",
     year: "2026",
     category: "Hackathons",
-    thumbnail: "/img/certs/16.jpeg",
-    verificationLink: "https://github.com/Aryaaa-21",
-    downloadLink: "/img/certs/16.jpeg"
+    thumbnail: "/img/certs/16.webp",
+    downloadLink: "/img/certs/16.webp"
   },
   {
     id: "cert-17",
@@ -183,9 +172,8 @@ const entries = [
     date: "January 2026",
     year: "2026",
     category: "Hackathons",
-    thumbnail: "/img/certs/17.jpeg",
-    verificationLink: "https://github.com/Aryaaa-21",
-    downloadLink: "/img/certs/17.jpeg"
+    thumbnail: "/img/certs/17.webp",
+    downloadLink: "/img/certs/17.webp"
   },
   {
     id: "cert-18",
@@ -194,9 +182,8 @@ const entries = [
     date: "16th January 2026",
     year: "2026",
     category: "Hackathons",
-    thumbnail: "/img/certs/18.jpeg",
-    verificationLink: "https://github.com/Aryaaa-21",
-    downloadLink: "/img/certs/18.jpeg"
+    thumbnail: "/img/certs/18.webp",
+    downloadLink: "/img/certs/18.webp"
   },
   {
     id: "cert-19",
@@ -205,9 +192,8 @@ const entries = [
     date: "20th April 2026",
     year: "2026",
     category: "Hackathons",
-    thumbnail: "/img/certs/19.jpeg",
-    verificationLink: "https://github.com/Aryaaa-21",
-    downloadLink: "/img/certs/19.jpeg"
+    thumbnail: "/img/certs/19.webp",
+    downloadLink: "/img/certs/19.webp"
   },
   {
     id: "cert-20",
@@ -216,9 +202,8 @@ const entries = [
     date: "2026",
     year: "2026",
     category: "Web3",
-    thumbnail: "/img/certs/20.jpeg",
-    verificationLink: "https://github.com/Aryaaa-21",
-    downloadLink: "/img/certs/20.jpeg"
+    thumbnail: "/img/certs/20.webp",
+    downloadLink: "/img/certs/20.webp"
   },
   {
     id: "cert-21",
@@ -227,9 +212,8 @@ const entries = [
     date: "7th and 8th of April, 2026",
     year: "2026",
     category: "Hackathons",
-    thumbnail: "/img/certs/21.jpeg",
-    verificationLink: "https://github.com/Aryaaa-21",
-    downloadLink: "/img/certs/21.jpeg"
+    thumbnail: "/img/certs/21.webp",
+    downloadLink: "/img/certs/21.webp"
   },
   {
     id: "cert-22",
@@ -238,9 +222,8 @@ const entries = [
     date: "31st October 2026",
     year: "2026",
     category: "Hackathons",
-    thumbnail: "/img/certs/22.png",
-    verificationLink: "https://github.com/Aryaaa-21",
-    downloadLink: "/img/certs/22.png"
+    thumbnail: "/img/certs/22.webp",
+    downloadLink: "/img/certs/22.webp"
   },
   {
     id: "cert-23",
@@ -249,9 +232,8 @@ const entries = [
     date: "20 December 2025",
     year: "2025",
     category: "Cloud",
-    thumbnail: "/img/certs/23.png",
-    verificationLink: "https://github.com/Aryaaa-21",
-    downloadLink: "/img/certs/23.png"
+    thumbnail: "/img/certs/23.webp",
+    downloadLink: "/img/certs/23.webp"
   },
   {
     id: "cert-24",
@@ -260,8 +242,8 @@ const entries = [
     date: "2026",
     year: "2026",
     category: "Hackathons",
-    thumbnail: "/img/certs/24.png",
-    verificationLink: "https://github.com/Aryaaa-21",
+    thumbnail: "/img/certs/24.webp",
+    verificationLink: "https://unstop.com/certificate-preview/3d239784-240d-4454-89a7-3254f9351aed",
     downloadLink: "/img/certs/24.pdf"
   }
 ];

@@ -33,7 +33,7 @@ export default function CertificateModal({ cert, list, onChange, onClose }) {
   useEffect(() => setCopied(false), [cert?.id]);
 
   const share = () => {
-    const url = `${window.location.origin}${window.location.pathname}#/certificates?id=${cert.id}`;
+    const url = `${window.location.origin}/certificates?id=${cert.id}`;
     if (!navigator.clipboard) return;
     navigator.clipboard.writeText(url).then(() => {
       setCopied(true);
@@ -70,7 +70,7 @@ export default function CertificateModal({ cert, list, onChange, onClose }) {
             {/* Header */}
             <div className="flex items-start justify-between gap-6 p-5 sm:p-7 border-b border-border dark:border-border-dark">
               <div className="min-w-0">
-                <div className="flex flex-wrap items-center gap-3 font-body text-[9px] font-bold tracking-[0.2em] uppercase text-text/45 dark:text-text-dark/45">
+                <div className="flex flex-wrap items-center gap-3 font-body text-xs font-bold tracking-[0.2em] uppercase text-text/45 dark:text-text-dark/45">
                   <span>N&deg; {String(cert.number).padStart(2, '0')}</span>
                   <span className="w-1 h-1 rounded-full bg-current" />
                   <span>{cert.category}</span>
@@ -126,19 +126,21 @@ export default function CertificateModal({ cert, list, onChange, onClose }) {
             {/* Actions */}
             <div className="flex flex-wrap items-center justify-between gap-4 p-5 sm:p-7 border-t border-border dark:border-border-dark">
               <div className="flex flex-wrap gap-3">
-                <a
-                  href={cert.verificationLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-2.5 bg-text dark:bg-text-dark text-background dark:text-background-dark font-body text-[10px] font-bold tracking-widest uppercase flex items-center gap-2 hover:opacity-85 transition-opacity"
-                >
-                  <ExternalLink className="w-3.5 h-3.5" />
-                  Verify
-                </a>
+                {cert.verificationLink && (
+                  <a
+                    href={cert.verificationLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2.5 bg-text dark:bg-text-dark text-background dark:text-background-dark font-body text-xs font-bold tracking-widest uppercase flex items-center gap-2 hover:opacity-85 transition-opacity"
+                  >
+                    <ExternalLink className="w-3.5 h-3.5" />
+                    Verify with issuer
+                  </a>
+                )}
                 <a
                   href={cert.downloadLink}
                   download
-                  className="px-4 py-2.5 border border-border dark:border-border-dark text-text dark:text-text-dark font-body text-[10px] font-bold tracking-widest uppercase flex items-center gap-2 hover:bg-text hover:text-background dark:hover:bg-text-dark dark:hover:text-background-dark transition-colors duration-300"
+                  className="px-4 py-2.5 border border-border dark:border-border-dark text-text dark:text-text-dark font-body text-xs font-bold tracking-widest uppercase flex items-center gap-2 hover:bg-text hover:text-background dark:hover:bg-text-dark dark:hover:text-background-dark transition-colors duration-300"
                 >
                   <Download className="w-3.5 h-3.5" />
                   Download
@@ -146,14 +148,14 @@ export default function CertificateModal({ cert, list, onChange, onClose }) {
                 <button
                   type="button"
                   onClick={share}
-                  className="px-4 py-2.5 border border-border dark:border-border-dark text-text/70 dark:text-text-dark/70 hover:text-text dark:hover:text-text-dark font-body text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 transition-colors"
+                  className="px-4 py-2.5 border border-border dark:border-border-dark text-text/70 dark:text-text-dark/70 hover:text-text dark:hover:text-text-dark font-body text-xs font-bold uppercase tracking-widest flex items-center gap-2 transition-colors"
                 >
                   <Share2 className="w-3.5 h-3.5" />
                   {copied ? 'Link Copied' : 'Share Link'}
                 </button>
               </div>
               {canStep && (
-                <span className="font-body text-[10px] font-bold tracking-[0.2em] text-text/40 dark:text-text-dark/40 tabular-nums">
+                <span className="font-body text-xs font-bold tracking-[0.2em] text-text/40 dark:text-text-dark/40 tabular-nums">
                   {String(index + 1).padStart(2, '0')} / {String(list.length).padStart(2, '0')}
                 </span>
               )}

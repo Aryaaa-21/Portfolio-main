@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
-import { Award, CalendarCheck, Landmark, Search, Trophy, X } from 'lucide-react';
+import { Award, BadgeCheck, CalendarCheck, Search, Trophy, X } from 'lucide-react';
 import { certificates, certificateCategories } from '../data/certificates';
 import CertificateCard from '../components/CertificateCard';
 import CertificateModal from '../components/CertificateModal';
@@ -28,11 +28,12 @@ export default function CertificatesPage() {
   };
   const closeCert = () => setSearchParams({}, { replace: true });
 
+  // Every number here is counted from the certificates below, so each one can be checked on this page.
   const stats = [
-    { label: 'Certificates Earned', value: String(certificates.length), icon: Award },
-    { label: 'Hackathons Won', value: '6+', icon: Trophy },
-    { label: 'Prize Money', value: '₹16K+', icon: Landmark },
-    { label: 'Events Attended', value: '15+', icon: CalendarCheck },
+    { label: 'Certificates', value: String(certificates.length), icon: Award, filter: 'All' },
+    { label: 'Award Certificates', value: String(certificates.filter((cert) => cert.award).length), icon: Trophy, filter: 'Awards' },
+    { label: 'Hackathon Certificates', value: String(certificates.filter((cert) => cert.category === 'Hackathons').length), icon: CalendarCheck, filter: 'Hackathons' },
+    { label: 'Verifiable With Issuer', value: String(certificates.filter((cert) => cert.verificationLink).length), icon: BadgeCheck, filter: null },
   ];
 
   const counts = useMemo(
@@ -81,9 +82,13 @@ export default function CertificatesPage() {
             const Icon = stat.icon;
             return (
               <Reveal key={stat.label} delay={idx * 0.08}>
-                <SpotlightCard className="cursor-target h-full border border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-5 sm:p-6 flex items-center justify-between gap-4">
+                <SpotlightCard
+                  as={stat.filter ? 'button' : 'div'}
+                  {...(stat.filter ? { type: 'button', onClick: () => setCategory(stat.filter), 'aria-label': `Show ${stat.label}` } : {})}
+                  className="cursor-target w-full h-full text-left border border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-5 sm:p-6 flex items-center justify-between gap-4"
+                >
                   <div>
-                    <span className="font-body text-[10px] font-bold tracking-widest text-text/40 dark:text-text-dark/40 uppercase block mb-1">
+                    <span className="font-body text-xs font-bold tracking-widest text-text/40 dark:text-text-dark/40 uppercase block mb-1">
                       {stat.label}
                     </span>
                     <CountUp
@@ -132,7 +137,7 @@ export default function CertificatesPage() {
                     type="button"
                     onClick={() => setCategory(name)}
                     aria-pressed={isActive}
-                    className={`relative px-3 py-1.5 border text-[9px] font-bold uppercase tracking-widest transition-colors duration-300 ${
+                    className={`relative px-3 py-1.5 border text-xs font-bold uppercase tracking-widest transition-colors duration-300 ${
                       isActive
                         ? 'border-text dark:border-text-dark text-background dark:text-background-dark'
                         : 'border-border dark:border-border-dark text-text/60 dark:text-text-dark/60 hover:text-text dark:hover:text-text-dark hover:border-text/50 dark:hover:border-text-dark/50'
@@ -156,7 +161,7 @@ export default function CertificatesPage() {
           </LayoutGroup>
         </Reveal>
 
-        <p className="font-body text-[10px] font-bold uppercase tracking-[0.2em] text-text/40 dark:text-text-dark/40 mb-8" aria-live="polite">
+        <p className="font-body text-xs font-bold uppercase tracking-[0.2em] text-text/40 dark:text-text-dark/40 mb-8" aria-live="polite">
           Showing {filtered.length} of {certificates.length}
         </p>
 
@@ -194,7 +199,7 @@ export default function CertificatesPage() {
                 setSearch('');
                 setCategory('All');
               }}
-              className="px-4 py-2 border border-text dark:border-text-dark font-body text-[10px] font-bold uppercase tracking-widest hover:bg-text hover:text-background dark:hover:bg-text-dark dark:hover:text-background-dark transition-colors duration-300"
+              className="px-4 py-2 border border-text dark:border-text-dark font-body text-xs font-bold uppercase tracking-widest hover:bg-text hover:text-background dark:hover:bg-text-dark dark:hover:text-background-dark transition-colors duration-300"
             >
               Show all certificates
             </button>

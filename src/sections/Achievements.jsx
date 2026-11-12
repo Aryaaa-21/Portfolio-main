@@ -55,7 +55,7 @@ export default function Achievements() {
               <button
                 key={catName}
                 onClick={() => setCategory(catName)}
-                className={`px-4 py-1.5 border text-[10px] font-bold uppercase tracking-widest transition-all duration-300 ${
+                className={`px-4 py-1.5 border text-xs font-bold uppercase tracking-widest transition-all duration-300 ${
                   isActive
                     ? 'bg-text border-text text-background dark:bg-text-dark dark:border-text-dark dark:text-background-dark'
                     : 'border-border dark:border-border-dark text-text/60 dark:text-text-dark/60 hover:text-text dark:hover:text-text-dark hover:border-text dark:hover:border-text-dark'
@@ -87,13 +87,13 @@ export default function Achievements() {
 
               {/* Text Meta info */}
               <div className="p-6">
-                <span className="font-body text-[9px] font-bold tracking-widest text-text/40 dark:text-text-dark/40 uppercase block mb-1">
+                <span className="font-body text-xs font-bold tracking-widest text-text/40 dark:text-text-dark/40 uppercase block mb-1">
                   {cert.category}
                 </span>
                 <h4 className="font-display text-lg font-bold text-text dark:text-text-dark group-hover:text-mono-255 dark:group-hover:text-mono-255 transition-colors mb-2 line-clamp-1">
                   {cert.title}
                 </h4>
-                <div className="flex justify-between items-center text-[11px] font-body text-text/50 dark:text-text-dark/50">
+                <div className="flex justify-between items-center text-xs font-body text-text/50 dark:text-text-dark/50">
                   <span>{cert.issuer}</span>
                   <span>{cert.date}</span>
                 </div>
@@ -125,7 +125,7 @@ export default function Achievements() {
 
             {/* Modal Certificate Details */}
             <div>
-              <span className="font-body text-[9px] font-bold tracking-widest text-text/40 dark:text-text-dark/40 uppercase">
+              <span className="font-body text-xs font-bold tracking-widest text-text/40 dark:text-text-dark/40 uppercase">
                 {selectedCert.category}
               </span>
               <h3 className="font-display text-2xl font-bold text-text dark:text-text-dark mt-1">
@@ -151,7 +151,7 @@ export default function Achievements() {
                 href={selectedCert.verificationLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 bg-text dark:bg-text-dark text-background dark:text-background-dark font-body text-[10px] font-bold tracking-widest uppercase flex items-center gap-2 hover:bg-mono-42 dark:hover:bg-mono-161 transition-colors"
+                className="px-4 py-2 bg-text dark:bg-text-dark text-background dark:text-background-dark font-body text-xs font-bold tracking-widest uppercase flex items-center gap-2 hover:bg-mono-42 dark:hover:bg-mono-161 transition-colors"
               >
                 <ExternalLink className="w-3.5 h-3.5" />
                 Verify Link
@@ -159,7 +159,7 @@ export default function Achievements() {
               <a
                 href={selectedCert.downloadLink}
                 download
-                className="px-4 py-2 border border-border dark:border-border-dark text-text dark:text-text-dark font-body text-[10px] font-bold tracking-widest uppercase flex items-center gap-2 hover:bg-text hover:text-background dark:hover:bg-text-dark dark:hover:text-background-dark transition-all duration-300"
+                className="px-4 py-2 border border-border dark:border-border-dark text-text dark:text-text-dark font-body text-xs font-bold tracking-widest uppercase flex items-center gap-2 hover:bg-text hover:text-background dark:hover:bg-text-dark dark:hover:text-background-dark transition-all duration-300"
               >
                 <Download className="w-3.5 h-3.5" />
                 Download

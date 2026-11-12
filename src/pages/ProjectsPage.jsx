@@ -24,16 +24,31 @@ export default function ProjectsPage() {
             className="text-center mb-0"
           >
             <h1 className="font-display text-4xl sm:text-6xl font-bold tracking-tight text-text dark:text-text-dark uppercase mb-6">
-              Core Engineering Deployments
+              Projects
             </h1>
             <p className="font-body text-sm text-text/60 dark:text-text-dark/60 max-w-2xl mx-auto leading-relaxed">
-              An index of built systems spanning decentralized ledger applications, spatial artificial intelligence navigation frameworks, and speed arithmetic engines.
+              Three main projects explained properly, then everything else, including the Web3 and Stellar builds and the early pages I learned on.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* 2. System Registry Header & Filter controls */}
+      {/* 2. Featured projects */}
+      <div className="w-full bg-background dark:bg-background-dark px-6 lg:px-16 pt-6 pb-6 relative z-10 theme-transition">
+        <div className="max-w-7xl mx-auto">
+          <div className="border-b border-border dark:border-border-dark pb-3 flex items-center justify-between">
+            <span className="font-mono text-xs tracking-[0.25em] text-text/50 dark:text-text-dark/50">
+              01 // FEATURED PROJECTS
+            </span>
+            <span className="font-mono text-xs text-text/40 dark:text-text-dark/40">3 PROJECTS</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Interactive Pinned Detail Showcase Section (Slideshow Component) */}
+      <Projects currentPage={currentPage} setCurrentPage={setCurrentPage} />
+
+      {/* 3. Search and filter for the full list */}
       <ArchiveHeader 
         search={search} 
         setSearch={setSearch} 
@@ -41,25 +56,7 @@ export default function ProjectsPage() {
         setFilterStatus={setFilterStatus} 
       />
 
-      {/* Flagship deployments category header */}
-      <div className="w-full bg-background dark:bg-background-dark px-6 lg:px-16 pt-2 pb-6 relative z-10 theme-transition">
-        <div className="max-w-7xl mx-auto">
-          <div className="border-b border-border/30 dark:border-border-dark/30 pb-3 flex items-center justify-between">
-            <span className="font-mono text-xs tracking-[0.25em] text-text/40 dark:text-text-dark/40 flex items-center gap-2">
-              <span className="text-emerald-500 font-bold">&gt;_</span>
-              01 // FLAGSHIP DEPLOYMENTS
-            </span>
-            <span className="font-mono text-[9px] text-text/30 dark:text-text-dark/30">
-              SYS_WEIGHT: 70%
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* 3. Interactive Pinned Detail Showcase Section (Slideshow Component) */}
-      <Projects currentPage={currentPage} setCurrentPage={setCurrentPage} />
-
-      {/* 4. System Registry Cards Grid (Below the slideshow) */}
+      {/* 4. Full project grid */}
       <ArchiveGrid 
         search={search} 
         filterStatus={filterStatus} 

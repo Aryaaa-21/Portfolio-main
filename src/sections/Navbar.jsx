@@ -58,7 +58,7 @@ export default function Navbar({ theme, toggleTheme }) {
 
           {/* Resume Button */}
           <a
-            href="/images/certs/blank.png"
+            href="/Arya_Bhagat_Resume.pdf"
             download="Arya_Bhagat_Resume.pdf"
             className="hidden sm:block px-4 py-2 border border-text dark:border-text-dark hover:bg-text hover:text-background dark:hover:bg-text-dark dark:hover:text-background-dark font-body text-xs font-semibold tracking-widest uppercase transition-all duration-300"
           >
@@ -100,7 +100,7 @@ export default function Navbar({ theme, toggleTheme }) {
                         : 'text-text/60 dark:text-text-dark/60'
                     }`}
                   >
-                    <span className="font-body text-[9px] font-bold text-text/40 dark:text-text-dark/40 tracking-widest mr-3">
+                    <span className="font-body text-xs font-bold text-text/40 dark:text-text-dark/40 tracking-widest mr-3">
                       0{idx + 1} //
                     </span>
                     {link.label}
@@ -111,7 +111,7 @@ export default function Navbar({ theme, toggleTheme }) {
 
             {/* Mobile Resume Link */}
             <a
-              href="/images/certs/blank.png"
+              href="/Arya_Bhagat_Resume.pdf"
               download="Arya_Bhagat_Resume.pdf"
               onClick={() => setIsOpen(false)}
               className="w-full py-3 text-center border border-text dark:border-text-dark hover:bg-text hover:text-background dark:hover:bg-text-dark dark:hover:text-background-dark font-body text-xs font-semibold tracking-widest uppercase transition-all duration-300"

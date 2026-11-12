@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowUpRight, Eye, Trophy } from 'lucide-react';
+import { ArrowUpRight, BadgeCheck, Eye, Trophy } from 'lucide-react';
 import SpotlightCard from './motion/SpotlightCard';
 
 // One certificate, shown as a framed, tilting card. The whole card is the button.
@@ -30,12 +30,12 @@ export default function CertificateCard({ cert, onOpen, compact = false }) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent opacity-70 group-hover:opacity-100 transition-opacity duration-500" />
         <div className="cert-shine" />
 
-        <span className="absolute top-3 left-3 px-2 py-1 bg-black/70 backdrop-blur-sm text-white font-body text-[9px] font-bold tracking-[0.2em]">
+        <span className="absolute top-3 left-3 px-2 py-1 bg-black/70 backdrop-blur-sm text-white font-body text-xs font-bold tracking-[0.2em]">
           N&deg; {number}
         </span>
 
         {cert.award && (
-          <span className="absolute top-3 right-3 px-2 py-1 bg-white text-black font-body text-[9px] font-bold tracking-[0.18em] uppercase flex items-center gap-1.5">
+          <span className="absolute top-3 right-3 px-2 py-1 bg-white text-black font-body text-xs font-bold tracking-[0.18em] uppercase flex items-center gap-1.5">
             <Trophy className="w-3 h-3" />
             Award
           </span>
@@ -48,7 +48,7 @@ export default function CertificateCard({ cert, onOpen, compact = false }) {
 
       {/* Details */}
       <div className={`flex-1 flex flex-col ${compact ? 'p-4 gap-2' : 'p-5 gap-3'}`}>
-        <div className="flex items-center justify-between gap-3 font-body text-[9px] font-bold tracking-[0.2em] uppercase text-text/45 dark:text-text-dark/45">
+        <div className="flex items-center justify-between gap-3 font-body text-xs font-bold tracking-[0.2em] uppercase text-text/45 dark:text-text-dark/45">
           <span>{cert.category}</span>
           <span>{cert.year}</span>
         </div>
@@ -62,8 +62,9 @@ export default function CertificateCard({ cert, onOpen, compact = false }) {
         </h3>
 
         <div className="mt-auto pt-3 border-t border-border/70 dark:border-border-dark flex items-center justify-between gap-3">
-          <span className="font-body text-[11px] text-text/55 dark:text-text-dark/55 truncate">
-            {cert.issuer}
+          <span className="font-body text-xs text-text/55 dark:text-text-dark/55 truncate flex items-center gap-1.5 min-w-0">
+            {cert.verificationLink && <BadgeCheck className="w-3.5 h-3.5 shrink-0 text-emerald-500" aria-label="Verifiable with issuer" />}
+            <span className="truncate">{cert.issuer}</span>
           </span>
           <ArrowUpRight className="w-4 h-4 shrink-0 text-text/40 dark:text-text-dark/40 transition-all duration-300 group-hover:text-text dark:group-hover:text-text-dark group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </div>

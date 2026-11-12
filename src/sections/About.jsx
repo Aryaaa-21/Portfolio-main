@@ -12,18 +12,18 @@ export default function About() {
     },
     {
       icon: Code2,
-      label: "Currently working on",
-      text: "Open source contributions to showcase my skills."
+      label: "What I build",
+      text: "Full stack web apps in React, TypeScript, Node.js and MongoDB, plus smart contracts in Rust on Stellar."
     },
     {
       icon: BookOpen,
-      label: "Currently learning",
-      text: "JavaScript, React.js, and Backend basics."
+      label: "Currently deepening",
+      text: "Data structures and algorithms, backend design, and testing."
     },
     {
       icon: Users2,
-      label: "Looking to collaborate on",
-      text: "Beginner-friendly open-source projects and hackathons."
+      label: "Open to",
+      text: "Software engineering internships, open-source work, and hackathon teams."
     }
   ];
 
@@ -64,7 +64,7 @@ export default function About() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="font-body text-lg font-bold uppercase tracking-wider text-text dark:text-text-dark mb-6"
           >
-            I'm a Web Developer
+            Full Stack Web Developer
           </motion.h3>
 
           <motion.p
@@ -74,12 +74,16 @@ export default function About() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="font-body text-base text-text/80 dark:text-text-dark/80 leading-relaxed max-w-xl"
           >
-            I am a Computer Science student at{" "}
+            I am an Information Technology student at{" "}
             <span className="font-semibold text-text dark:text-text-dark underline decoration-border dark:decoration-border-dark underline-offset-4">
               Narula Institute of Technology
-            </span>{" "}
-            passionate about building software that solves real-world problems.
-            <br />I am currently focusing on Web Development and strengthening my fundamentals in Data Structures.
+            </span>
+            , Kolkata. In my first year I shipped a Vedic maths trainer with its own backend, worked on a
+            safety-first navigation app with my team, and placed on the podium at three hackathons.
+            <br />
+            <br />
+            I am looking for a software engineering internship where I can work on real products with people
+            who know more than I do.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -128,7 +132,7 @@ export default function About() {
                   <Icon className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="font-body text-[10px] font-bold tracking-widest text-text/40 dark:text-text-dark/40 uppercase block mb-1">
+                  <span className="font-body text-xs font-bold tracking-widest text-text/40 dark:text-text-dark/40 uppercase block mb-1">
                     {item.label}
                   </span>
                   <p className="font-body text-sm font-medium text-text/80 dark:text-text-dark/80">

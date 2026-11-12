@@ -91,7 +91,7 @@ export default function Hero() {
     },
     {
       id: 'email',
-      url: 'mailto:aryabhagat249@gamil.com',
+      url: 'mailto:aryabhagat2102@gmail.com',
       hoverText: 'send an email to my account',
       ariaLabel: 'Email',
       icon: <Mail className="w-4 h-4" />
@@ -173,7 +173,7 @@ export default function Hero() {
                 <motion.span
                   initial={{ opacity: 0, x: -5 }}
                   animate={{ opacity: 1, x: 0 }}
-                  className="font-mono text-[9px] tracking-[0.2em] text-text/50 dark:text-text-dark/50 uppercase"
+                  className="font-mono text-xs tracking-[0.2em] text-text/50 dark:text-text-dark/50 uppercase"
                 >
                   &gt; {hoveredLabel}
                 </motion.span>
@@ -213,7 +213,10 @@ export default function Hero() {
               className="relative overflow-hidden border border-border dark:border-border-dark"
             >
               <img
-                src="/images/1.png"
+                src="/images/1.webp"
+                width="1200"
+                height="1500"
+                fetchpriority="high"
                 alt="Arya Bhagat portrait"
                 className="w-full h-auto object-cover select-none"
               />

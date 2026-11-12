@@ -109,13 +109,13 @@ export default function ScrollAdventure({ pages = defaultPages, onClose }) {
       
       {/* Floating Header controls */}
       <div className="absolute top-8 left-8 right-8 z-50 flex items-center justify-between pointer-events-none">
-        <span className="font-mono text-[10px] tracking-[0.25em] text-white/40 uppercase">
+        <span className="font-mono text-xs tracking-[0.25em] text-white/40 uppercase">
           PROJECT ARCHIVE // 0{currentPage}
         </span>
         {onClose && (
           <button
             onClick={onClose}
-            className="pointer-events-auto px-4 py-2 border border-white/20 bg-white/5 backdrop-blur-md text-white/80 hover:text-white hover:border-white/40 font-mono text-[9px] tracking-widest uppercase flex items-center gap-2 transition-all"
+            className="pointer-events-auto px-4 py-2 border border-white/20 bg-white/5 backdrop-blur-md text-white/80 hover:text-white hover:border-white/40 font-mono text-xs tracking-widest uppercase flex items-center gap-2 transition-all"
           >
             <X className="w-3.5 h-3.5" /> ESCAPE ARCHIVE
           </button>

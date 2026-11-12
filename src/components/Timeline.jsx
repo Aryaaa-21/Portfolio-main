@@ -36,7 +36,7 @@ function MilestoneCard({ milestone, side, active }) {
     >
       <div className={`flex items-center gap-3 mb-2 ${onLeft ? 'md:flex-row-reverse' : ''}`}>
         <Icon className="w-4 h-4 shrink-0 text-text/60 dark:text-text-dark/60" />
-        <span className="font-body text-[10px] font-bold text-text/45 dark:text-text-dark/45 uppercase tracking-widest">
+        <span className="font-body text-xs font-bold text-text/45 dark:text-text-dark/45 uppercase tracking-widest">
           {milestone.date}
         </span>
       </div>
@@ -47,7 +47,7 @@ function MilestoneCard({ milestone, side, active }) {
 
       {details && (
         <dl
-          className={`mb-4 text-[9px] uppercase font-bold tracking-widest text-text/45 dark:text-text-dark/45 space-y-1 border-border dark:border-border-dark border-l pl-3 ${
+          className={`mb-4 text-xs uppercase font-bold tracking-widest text-text/45 dark:text-text-dark/45 space-y-1 border-border dark:border-border-dark border-l pl-3 ${
             onLeft ? 'md:border-l-0 md:pl-0 md:border-r md:pr-3' : ''
           }`}
         >
@@ -68,7 +68,7 @@ function MilestoneCard({ milestone, side, active }) {
           {details.reason && (
             <div className="pt-1">
               <dt className="inline">Reason: </dt>
-              <dd className="inline italic normal-case font-medium tracking-normal text-[11px] text-text/80 dark:text-text-dark/80">
+              <dd className="inline italic normal-case font-medium tracking-normal text-xs text-text/80 dark:text-text-dark/80">
                 {details.reason}
               </dd>
             </div>

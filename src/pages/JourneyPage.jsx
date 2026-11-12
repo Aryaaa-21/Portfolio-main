@@ -70,7 +70,7 @@ function ClosingCard({ eyebrow, statement, quote, actionLabel, onAction }) {
   return (
     <Reveal className="max-w-4xl mx-auto mt-16">
       <SpotlightCard className="cursor-target border border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-8 sm:p-12 text-center">
-        <span className="font-body text-[10px] font-bold tracking-widest text-text/40 dark:text-text-dark/40 uppercase block mb-3">
+        <span className="font-body text-xs font-bold tracking-widest text-text/40 dark:text-text-dark/40 uppercase block mb-3">
           {eyebrow}
         </span>
         <p className="font-display text-lg sm:text-xl font-bold text-text dark:text-text-dark max-w-2xl mx-auto leading-relaxed mb-6">
@@ -82,7 +82,7 @@ function ClosingCard({ eyebrow, statement, quote, actionLabel, onAction }) {
         <button
           type="button"
           onClick={onAction}
-          className="group inline-flex items-center gap-2 px-6 py-3 border border-text dark:border-text-dark hover:bg-text hover:text-background dark:hover:bg-text-dark dark:hover:text-background-dark font-mono text-[10px] uppercase tracking-widest transition-colors duration-300"
+          className="group inline-flex items-center gap-2 px-6 py-3 border border-text dark:border-text-dark hover:bg-text hover:text-background dark:hover:bg-text-dark dark:hover:text-background-dark font-mono text-xs uppercase tracking-widest transition-colors duration-300"
         >
           {actionLabel}
           <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
@@ -106,7 +106,7 @@ function ExpandableGroup({ group }) {
           {group.title}
           <ChevronDown className={`w-3.5 h-3.5 opacity-60 transition-transform duration-300 ${open ? 'rotate-180' : ''}`} />
         </span>
-        <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/60 dark:text-text-dark/60">
+        <span className="font-body text-xs font-bold uppercase tracking-widest text-text/60 dark:text-text-dark/60">
           {group.caption}
         </span>
       </button>
@@ -119,8 +119,8 @@ function ExpandableGroup({ group }) {
             transition={{ duration: 0.35, ease: EASE }}
             className="overflow-hidden"
           >
-            <div className="mx-4 mb-4 pt-3 border-t border-border dark:border-border-dark text-left font-mono text-[10px] leading-relaxed text-text/70 dark:text-text-dark/70">
-              <div className="text-[8px] uppercase tracking-wider text-text/40 dark:text-text-dark/40 mb-1.5">
+            <div className="mx-4 mb-4 pt-3 border-t border-border dark:border-border-dark text-left font-mono text-xs leading-relaxed text-text/70 dark:text-text-dark/70">
+              <div className="text-xs uppercase tracking-wider text-text/40 dark:text-text-dark/40 mb-1.5">
                 {group.heading}
               </div>
               <ul className="space-y-1">
@@ -155,7 +155,7 @@ function YearSummary() {
           {yearOneSummary.stats.map((stat) => (
             <SpotlightCard key={stat.label} className="cursor-target p-4 border border-border dark:border-border-dark">
               <CountUp value={stat.value} className="font-display text-3xl font-bold block mb-1 text-text dark:text-text-dark" />
-              <span className="font-body text-[9px] font-bold uppercase tracking-widest text-text/60 dark:text-text-dark/60">
+              <span className="font-body text-xs font-bold uppercase tracking-widest text-text/60 dark:text-text-dark/60">
                 {stat.label}
               </span>
             </SpotlightCard>

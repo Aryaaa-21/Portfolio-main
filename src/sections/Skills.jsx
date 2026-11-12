@@ -248,7 +248,7 @@ export default function Skills() {
 
           {/* Interactive Help Hint Overlay */}
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center pointer-events-none z-10 w-full px-4">
-            <span className="font-body text-[10px] tracking-widest text-text/30 dark:text-text-dark/30 uppercase bg-background/80 dark:bg-background-dark/80 px-3 py-1 border border-border/20 dark:border-border-dark/20 backdrop-blur-sm">
+            <span className="font-body text-xs tracking-widest text-text/30 dark:text-text-dark/30 uppercase bg-background/80 dark:bg-background-dark/80 px-3 py-1 border border-border/20 dark:border-border-dark/20 backdrop-blur-sm">
               Hover cursor to collide with the 3D ecosystem spheres
             </span>
           </div>

@@ -6,7 +6,7 @@ export default function Contact() {
     { label: 'GitHub', icon: Github, href: 'https://github.com/Aryaaa-21' },
     { label: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/in/arya-bhagat-2102np' },
     { label: 'Email', icon: Mail, href: 'mailto:aryabhagat2102@gmail.com' },
-    { label: 'Resume', icon: FileText, href: '/images/certs/blank.png', download: true },
+    { label: 'Resume', icon: FileText, href: '/Arya_Bhagat_Resume.pdf', download: true },
   ];
 
   const scrollToTop = () => {
@@ -46,7 +46,7 @@ export default function Contact() {
         </div>
 
         {/* Footer Bottom elements */}
-        <div className="w-full pt-8 border-t border-border/10 dark:border-border-dark/10 flex flex-col sm:flex-row items-center justify-between gap-6 text-[10px] font-body text-text/40 dark:text-text-dark/40 uppercase tracking-widest">
+        <div className="w-full pt-8 border-t border-border/10 dark:border-border-dark/10 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs font-body text-text/40 dark:text-text-dark/40 uppercase tracking-widest">
           <div>
             &copy; {new Date().getFullYear()} Arya Bhagat. Digital Identity Archive.
           </div>

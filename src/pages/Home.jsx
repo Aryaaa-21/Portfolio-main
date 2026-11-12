@@ -1,13 +1,43 @@
-import React from 'react';
+import React, { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import Hero from '../sections/Hero';
 import About from '../sections/About';
-import Skills from '../sections/Skills';
 import Impact from '../sections/Impact';
 import { certificates, featuredCertificates } from '../data/certificates';
 import CertificateCard from '../components/CertificateCard';
 import Reveal, { RevealText } from '../components/motion/Reveal';
+
+// The skills section is a 3D scene (three.js, about 1 MB). It is fetched only
+// when the reader scrolls near it, so it never delays the first screen.
+const Skills = lazy(() => import('../sections/Skills'));
+
+function DeferredSkills() {
+  const ref = useRef(null);
+  const [near, setNear] = useState(false);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node || typeof IntersectionObserver === 'undefined') {
+      setNear(true);
+      return undefined;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setNear(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '800px 0px' }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  const placeholder = <div className="min-h-screen bg-background dark:bg-background-dark" aria-hidden="true" />;
+  return <div ref={ref}>{near ? <Suspense fallback={placeholder}><Skills /></Suspense> : placeholder}</div>;
+}
 
 export default function Home() {
   const navigate = useNavigate();
@@ -21,7 +51,7 @@ export default function Home() {
       <About />
 
       {/* Tech Ecosystem section */}
-      <Skills />
+      <DeferredSkills />
 
       {/* Top Certificates Showcase Section */}
       <section className="py-32 bg-background dark:bg-background-dark border-b border-border/20 dark:border-border-dark/20 theme-transition">

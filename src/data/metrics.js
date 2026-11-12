@@ -1,18 +1,22 @@
-// Real statistics and metrics for Arya Bhagat
+import { certificates } from './certificates';
+
+// Home page numbers. Each one is counted from what is on this site (or is a
+// plain fact), so a visitor can check it by clicking through.
 export const metrics = [
   {
-    value: "10+",
-    label: "GITHUB PROJECTS",
-    description: "Production-grade AI, Web3, and Full Stack applications deployed."
+    value: "3",
+    label: "HACKATHON PODIUMS",
+    description: "AI for Bharat 2026, Pragati Bengal Hackfest 2026 and TechSprint, all in first year."
   },
   {
-    value: "300+",
-    label: "GITHUB COMMITS",
-    description: "Contributions to repositories, open source, and personal products."
+    // 2 main projects + 6 highlighted Web3 builds + 3 early projects with a live link
+    value: "11",
+    label: "LIVE PROJECTS",
+    description: "Deployed apps you can open right now from the projects page."
   },
   {
-    value: "30+",
-    label: "GITHUB REPOS",
-    description: "Public and private repositories built, deployed, and maintained."
+    value: String(certificates.length),
+    label: "CERTIFICATES",
+    description: "Every one is shown in full on the achievements page."
   }
 ];

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Search, Filter, ExternalLink, Github, Cpu, Layers, Activity, Users, AlertTriangle } from 'lucide-react';
+import { Search, Filter, ExternalLink, Github, Cpu, Layers, Activity, Users, AlertTriangle, ArrowUpRight, ChevronLeft, ChevronRight, Lock, X } from 'lucide-react';
 import SpotlightCard from '../components/motion/SpotlightCard';
 import ScrambleText from '../components/motion/ScrambleText';
 
@@ -11,15 +11,15 @@ export function ArchiveHeader({ search, setSearch, filterStatus, setFilterStatus
   return (
     <div className="w-full bg-background dark:bg-background-dark px-6 lg:px-16 pt-8 pb-4 relative z-10 theme-transition">
       <div className="max-w-7xl mx-auto">
-        {/* Telemetry Control Header */}
+        {/* Search and filter */}
         <div className="border border-border/30 dark:border-border-dark/30 bg-surface/40 dark:bg-surface-dark/40 p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
           <div className="space-y-2">
-            <span className="font-mono text-[9px] tracking-[0.3em] text-text/40 dark:text-text-dark/40 flex items-center gap-2 uppercase">
+            <span className="font-mono text-xs tracking-[0.3em] text-text/40 dark:text-text-dark/40 flex items-center gap-2 uppercase">
               <Cpu className="w-3.5 h-3.5 text-emerald-500 animate-pulse" />
-              SYSTEM_CORE // SECURITY_INTEGRATION_ARCHIVE
+              Everything else I have built
             </span>
             <h2 className="font-display text-3xl font-bold tracking-tight text-text dark:text-text-dark uppercase">
-              SYSTEM REGISTRY
+              ALL PROJECTS
             </h2>
           </div>
 
@@ -29,10 +29,10 @@ export function ArchiveHeader({ search, setSearch, filterStatus, setFilterStatus
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text/40 dark:text-text-dark/40" />
               <input
                 type="text"
-                placeholder="Search telemetry..."
+                placeholder="Search projects..." aria-label="Search projects"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark/50 font-mono text-[10px] text-text dark:text-text-dark focus:outline-none focus:border-text dark:focus:border-text-dark uppercase rounded-none transition-colors"
+                className="w-full pl-10 pr-4 py-2 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark/50 font-mono text-xs text-text dark:text-text-dark focus:outline-none focus:border-text dark:focus:border-text-dark uppercase rounded-none transition-colors"
               />
             </div>
 
@@ -41,10 +41,10 @@ export function ArchiveHeader({ search, setSearch, filterStatus, setFilterStatus
               <select
                 value={filterStatus}
                 onChange={(e) => setFilterStatus(e.target.value)}
-                className="w-full pl-4 pr-10 py-2 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-text dark:text-text-dark font-mono text-[10px] uppercase rounded-none appearance-none focus:outline-none focus:border-text dark:focus:border-text-dark"
+                className="w-full pl-4 pr-10 py-2 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-text dark:text-text-dark font-mono text-xs uppercase rounded-none appearance-none focus:outline-none focus:border-text dark:focus:border-text-dark"
               >
                 {statuses.map(st => (
-                  <option key={st} value={st}>{st === 'All' ? 'FILTER: ALL_SYSTEMS' : `FILTER: ${st}`}</option>
+                  <option key={st} value={st}>{st === 'All' ? 'Filter: all' : `Filter: ${st.replace(/[\[\]]/g, '').toLowerCase()}`}</option>
                 ))}
               </select>
               <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-text/40">
@@ -63,62 +63,54 @@ const web3Projects = [
   {
     id: 'SS-004',
     title: 'SkillStake',
-    classification: 'WEB3 + INCENTIVIZED LEARNING',
-    mission: 'Aligning educational incentives through decentralized proof-of-skill staking.',
-    overview: 'SkillStake introduces financial accountability to digital learning through smart contract staking. Users commit cryptographic assets (tokens) into secure course escrows. When verified milestones are met, course contracts trigger auto-releases of the principal along with network-generated yields, while missed completion deadlines execute stake slashing.',
-    highlights: 'Milestone tracking is governed by decentralized escrows, eliminating manual credential verification and program dropouts.',
-    tech: ['SOLIDITY', 'NEXT.JS', 'HARDHAT', 'ETHERS.JS', 'IPFS', 'TAILWIND CSS', 'WEB3.JS'],
-    status: ['[BLOCKCHAIN]', '[DEPLOYED]'],
-    complexity: 'RANK #04',
-    impact: 'Recorded a 68% rise in student course completion rates in pilot cohorts, securing locked deposits in immutable contract vaults.',
+    classification: 'STELLAR + ACCOUNTABILITY STAKING',
+    mission: 'Stake XLM. Achieve goals. Earn rewards.',
+    overview: 'SkillStake is an accountability protocol on Stellar. You lock XLM in escrow against a time-bound habit or milestone, validators review your proof, and the contract either returns your stake or sends it to the shared reward pool.',
+    highlights: 'Soroban escrow with custom deadlines, stake sizes and validator thresholds. Ready-made challenge templates (gym, clean coding, DSA, board exams), on-chain proof logs, and Freighter or Albedo sign-in.',
+    tech: ['SOROBAN', 'RUST', 'REACT', 'TYPESCRIPT', 'STELLAR SDK', 'PLAYWRIGHT', 'VITEST'],
+    status: ['[BLOCKCHAIN]', '[SOROBAN]', '[DEPLOYED]'],
     github: 'https://github.com/Aryaaa-21/SkillStake',
     demo: 'https://skill-stake-nine.vercel.app/',
-    badges: ['ESCROW CONTRACT', 'MILESTONE MINT']
+    badges: ['STAKE ESCROW', 'VALIDATOR CONSENSUS']
   },
   {
     id: 'AB-005',
     title: 'AnchorBridge',
-    classification: 'WEB3 + INTEROPERABILITY',
-    mission: 'Enabling secure cross-chain wrapping and asset transport between EVM and Stellar networks.',
-    overview: 'AnchorBridge is a cross-ecosystem asset bridge facilitating transactions between Ethereum-compatible networks and the Stellar network. By utilizing locked vaults and multi-signature verifications, AnchorBridge issues wrapped representations of native tokens across environments, minimizing transaction friction and mitigating classical bridge security risks.',
-    highlights: 'Leverages Soroban Host Function interactions and Solidity contract listeners to orchestrate multi-network mint operations.',
-    tech: ['SOROBAN', 'SOLIDITY', 'RUST', 'NEXT.JS', 'ETHERS.JS', 'STELLAR SDK'],
+    classification: 'STELLAR + MILESTONE ESCROW',
+    mission: 'Trustless milestone escrow between clients and freelancers.',
+    overview: 'AnchorBridge is a milestone-based escrow platform on Stellar. A client locks funds in a Soroban contract, the freelancer delivers milestone by milestone, and each payment releases on approval, with no marketplace holding the money or taking a cut.',
+    highlights: 'Funds stay locked until a milestone is approved and remain secured during disputes. Freighter sign-in, a real-time feed driven by Soroban events, and a responsive dashboard with charts.',
+    tech: ['SOROBAN', 'RUST', 'REACT', 'TYPESCRIPT', 'TAILWIND CSS', 'ZUSTAND', 'RECHARTS'],
     status: ['[BLOCKCHAIN]', '[SOROBAN]', '[DEPLOYED]'],
-    complexity: 'RANK #01',
-    impact: 'Transferred $1.2M+ in cross-network transactions during stress tests, maintaining average settlement times under 5 seconds.',
     github: 'https://github.com/Aryaaa-21/AnchorBridge',
     demo: 'https://anchorbridge-taupe.vercel.app/',
-    badges: ['SOROBAN CONTRACT', 'STELLAR ECOSYSTEM']
+    badges: ['MILESTONE ESCROW', 'DISPUTE HOLD']
   },
   {
     id: 'SP-006',
     title: 'StellarPay',
-    classification: 'WEB3 + FINTECH PAYMENT ROUTER',
-    mission: 'Delivering low-latency, sub-penny remittance rails for B2B invoicing.',
-    overview: 'StellarPay provides cross-border remittance infrastructure using Stellar trustlines. The application resolves payment routing issues by utilizing Soroban automated market makers to match and settle invoices in optimal paths, enabling businesses to bypass legacy payment processors and perform transactions at negligible costs.',
-    highlights: 'Automates currency conversion pathfinding within liquidity pools to settle international payments near-instantaneously.',
-    tech: ['RUST', 'SOROBAN', 'REACT', 'STELLAR SDK', 'NODEJS', 'EXPRESS', 'POSTGRESQL'],
+    classification: 'STELLAR + ESCROW PAYMENTS',
+    mission: 'Lock, release or refund XLM under an agreement both sides can see.',
+    overview: 'StellarPay is an escrow platform on the Stellar testnet. Users lock XLM into an escrow agreement, release or refund it, raise disputes, and build an on-chain reputation score from how their deals end.',
+    highlights: 'An escrow contract paired with a reputation contract. Freighter, Albedo and xBull wallets, a trust leaderboard, an analytics dashboard, a live event feed, and CI that runs frontend and contract tests.',
+    tech: ['SOROBAN', 'RUST', 'REACT', 'VITE', 'TAILWIND CSS', 'STELLAR SDK', 'FRAMER MOTION'],
     status: ['[BLOCKCHAIN]', '[SOROBAN]', '[DEPLOYED]'],
-    complexity: 'RANK #03',
-    impact: 'Reduced B2B invoice settlement durations from 5 days to 3.2 seconds, saving up to 98% in transaction fees compared to SWIFT.',
     github: 'https://github.com/aruuu9/StellarPay',
     demo: 'https://stellarpay21.netlify.app/',
-    badges: ['PATHFINDING AMM', 'STELLAR TRUSTLINES']
+    badges: ['ESCROW CONTRACT', 'ON-CHAIN REPUTATION']
   },
   {
     id: 'CR-007',
     title: 'ChainRent',
-    classification: 'WEB3 + P2P LEASING',
-    mission: 'Eliminating broker friction and escrow disputes in P2P equipment leasing.',
-    overview: 'ChainRent is a P2P lease-and-rent platform that removes third-party broker fees for high-value industrial equipment. It utilizes Solidity contracts to automate rental agreements and secure lease deposits, ensuring transparent dispute resolution and automated damage-coverage payouts without central authority intervention.',
-    highlights: 'Secures performance bonds in decentralized escrows, triggered automatically by verifiable temporal milestones.',
-    tech: ['SOLIDITY', 'NEXT.JS', 'HARDHAT', 'ETHERS.JS', 'IPFS', 'NODEJS'],
-    status: ['[BLOCKCHAIN]', '[DEPLOYED]'],
-    complexity: 'RANK #05',
-    impact: 'Eliminated broker fee overheads by 100%, handling $45k in simulated rental volume with zero escrow defaults.',
+    classification: 'STELLAR + RENTAL AGREEMENTS',
+    mission: 'Secure rental agreements. Trustless deposits.',
+    overview: 'ChainRent puts residential rental agreements on Stellar. The security deposit sits in a Soroban contract instead of with the landlord, rent and refunds follow the lease terms, and both sides share one tamper-proof record of what was agreed and paid.',
+    highlights: 'Lease terms and payment history are read from contract state. Freighter and xBull sign-in, live balances, and step-by-step status for each ledger transaction.',
+    tech: ['SOROBAN', 'RUST', 'REACT', 'TYPESCRIPT', 'TAILWIND CSS', 'FRAMER MOTION'],
+    status: ['[BLOCKCHAIN]', '[SOROBAN]', '[DEPLOYED]'],
     github: 'https://github.com/sunita-coder-21/ChainRent',
     demo: 'https://chainrent.netlify.app/',
-    badges: ['LEASING AGREEMENT', 'DEPOSIT LOCK']
+    badges: ['DEPOSIT ESCROW', 'LEASE LEDGER']
   }
 ];
 
@@ -127,10 +119,10 @@ const foundationalProjects = [
   {
     id: 'SC-008',
     title: 'Spotify Clone',
-    classification: 'MEDIA STREAMING FRONTEND',
-    mission: 'Engineering high-fidelity, high-performance web audio interfaces.',
-    overview: 'A custom replica of the Spotify web player focused on optimizing client-side audio rendering pipelines. This project focuses on high-fidelity visual fidelity, smooth state transitions, and responsive grid layouts, testing the performance boundaries of native browser APIs under complex UI interaction.',
-    tech: ['HTML5', 'VANILLA CSS', 'JAVASCRIPT', 'WEB AUDIO API', 'VERCEL'],
+    classification: 'HTML + CSS LAYOUT PRACTICE',
+    mission: 'Rebuilding the Spotify web player screen by hand to learn layout.',
+    overview: 'A static copy of the Spotify web player home screen, written in plain HTML and CSS. I used it to practise flexbox, grid, sticky sidebars and matching spacing and type to a real product.',
+    tech: ['HTML', 'CSS', 'GITHUB PAGES'],
     status: ['[FOUNDATIONAL]', '[DEPLOYED]'],
     complexity: 'RANK #09',
     github: 'https://github.com/Aryaaa-21/Spo-tea-fy',
@@ -218,6 +210,128 @@ const ralLetsProjects = [
   }
 ];
 
+// Stellar / Soroban builds from the RAL LETS organisation. Most of these repos
+// are private, so they carry a live link only and no repository link.
+const stellarProjects = [
+  {
+    id: 'FF-015',
+    title: 'FundForge',
+    classification: 'STELLAR + CROWDFUNDING',
+    mission: 'Raise funds in the open, with every contribution held in an on-chain escrow.',
+    overview: 'FundForge is a decentralized crowdfunding platform on Stellar. Creators, startups and NGOs launch campaigns that each get their own escrow contract, and backers contribute in XLM or custom Stellar tokens while activity streams in live.',
+    highlights: 'A factory registry deploys a dedicated escrow per campaign. Freighter and Albedo sign-in, a Horizon event stream instead of polling, a transaction centre, a Recharts analytics panel, and upgradeable contracts.',
+    tech: ['SOROBAN', 'RUST', 'REACT', 'TYPESCRIPT', 'TAILWIND CSS', 'ZUSTAND', 'RECHARTS', 'VITEST'],
+    status: ['[BLOCKCHAIN]', '[SOROBAN]', '[DEPLOYED]'],
+    github: '',
+    demo: 'https://fund-forge.netlify.app/',
+    badges: ['ESCROW FACTORY', 'LIVE EVENT STREAM']
+  },
+  {
+    id: 'SR-016',
+    title: 'StellaRaise',
+    classification: 'STELLAR + CROWDFUNDING',
+    mission: 'Crowdfunding where the smart contract, not a platform, holds the money.',
+    overview: 'StellaRaise lets creators and organisations raise funds transparently on Stellar. Campaigns are backed by Soroban escrow contracts, contributions arrive in XLM or custom tokens, and a dashboard tracks every transaction.',
+    highlights: 'Multi-wallet sign-in through Stellar Wallets Kit, per-campaign escrow, real-time activity, and contribution analytics, tested with Vitest.',
+    tech: ['SOROBAN', 'RUST', 'REACT', 'TYPESCRIPT', 'TAILWIND CSS', 'ZUSTAND', 'RECHARTS'],
+    status: ['[BLOCKCHAIN]', '[SOROBAN]', '[DEPLOYED]'],
+    github: '',
+    demo: 'https://stellaraise.vercel.app',
+    badges: ['CAMPAIGN ESCROW', 'MULTI-WALLET']
+  },
+  {
+    id: 'IX-017',
+    title: 'InvoiceX',
+    classification: 'STELLAR + INVOICING',
+    mission: 'Create. Send. Get paid. On Stellar.',
+    overview: 'InvoiceX is a billing and settlement protocol on Soroban. A freelancer or business writes an invoice to the ledger, shares its link, and the client pays it directly, with the record of who paid what kept on-chain.',
+    highlights: 'Invoices live in persistent contract state with pending, paid and cancelled filters. Payment is routed from client to creator through a cross-contract call that settles atomically. Runs in a sandbox mode or against the testnet.',
+    tech: ['SOROBAN', 'RUST', 'REACT', 'TYPESCRIPT', 'TAILWIND CSS', 'FRAMER MOTION', 'VITEST'],
+    status: ['[BLOCKCHAIN]', '[SOROBAN]', '[DEPLOYED]'],
+    github: 'https://github.com/Aryaaa-21/InvoiceX',
+    demo: 'https://invoicex.vercel.app',
+    badges: ['ATOMIC SETTLEMENT', 'SHAREABLE INVOICES']
+  },
+  {
+    id: 'SB-018',
+    title: 'SkillBounty',
+    classification: 'STELLAR + BOUNTY MARKETPLACE',
+    mission: 'Build. Contribute. Earn.',
+    overview: 'SkillBounty is a freelancing and development bounty board on Stellar. Project owners lock reward funds in an on-chain escrow, contributors submit work, and payment releases once the milestone is verified, with no platform holding the money in between.',
+    highlights: 'Post work, lock XLM, pay on delivery. Soroban escrow contracts, Freighter sign-in, React Query for chain data, and Zustand for live state.',
+    tech: ['SOROBAN', 'RUST', 'REACT', 'TYPESCRIPT', 'TAILWIND CSS', 'REACT QUERY', 'ZUSTAND'],
+    status: ['[BLOCKCHAIN]', '[SOROBAN]', '[DEPLOYED]'],
+    github: '',
+    demo: 'https://skillbounty.vercel.app',
+    badges: ['REWARD ESCROW', 'MILESTONE PAYOUT']
+  },
+  {
+    id: 'BB-019',
+    title: 'BountyBridge',
+    classification: 'STELLAR + TASK BOUNTIES',
+    mission: 'Create, fund, and complete bounties on Stellar.',
+    overview: 'BountyBridge is a dApp for launching and managing task bounties backed by smart contracts. Funders pay straight into escrow and contributors are paid on validated milestones, which removes the fees, payout delays and account freezes of centralized freelancing sites.',
+    highlights: 'BountyEscrow and SubmissionRegistry contracts working together, Freighter, Albedo and xBull wallets, and on-screen feedback for each transaction as it is submitted.',
+    tech: ['SOROBAN', 'RUST', 'REACT', 'TYPESCRIPT', 'TAILWIND CSS', 'REACT QUERY', 'ZUSTAND'],
+    status: ['[BLOCKCHAIN]', '[SOROBAN]', '[DEPLOYED]'],
+    github: '',
+    demo: 'https://bounty-bridge-three.vercel.app',
+    badges: ['BOUNTY ESCROW', 'SUBMISSION REGISTRY']
+  },
+  {
+    id: 'TK-020',
+    title: 'TicketChain',
+    classification: 'STELLAR + EVENT TICKETING',
+    mission: 'Fraud-proof event tickets, enforced by contract instead of a ticketing company.',
+    overview: 'TicketChain issues every ticket as a verified on-chain token. Ownership cannot be forged, transfers are permissioned, resale happens peer to peer at a validated price, and a ticket checked in at the gate cannot be used twice.',
+    highlights: 'Ticket funds sit in an escrow contract and are released when the event completes or refunded if it is cancelled. Includes a resale marketplace, an organiser dashboard, and ticket passes with QR codes.',
+    tech: ['SOROBAN', 'RUST', 'REACT', 'TYPESCRIPT', 'TAILWIND CSS', 'REACT QUERY', 'ZUSTAND', 'VITEST'],
+    status: ['[BLOCKCHAIN]', '[SOROBAN]', '[DEPLOYED]'],
+    github: '',
+    demo: 'https://ticketchain1.netlify.app/',
+    badges: ['RESALE MARKET', 'GATE VERIFICATION']
+  },
+  {
+    id: 'VS-021',
+    title: 'VoteSphere',
+    classification: 'STELLAR + GOVERNANCE',
+    mission: 'Trust every vote. Verify every decision.',
+    overview: 'VoteSphere is a voting and governance platform on Stellar. Admins create elections with any number of candidates, each wallet can vote once, and results tally in real time from the ledger.',
+    highlights: 'Separate election registry, voting and results contracts. One wallet, one vote is enforced on-chain. Freighter, Albedo and xBull support, event streaming over Soroban RPC, and Playwright end-to-end tests.',
+    tech: ['SOROBAN', 'RUST', 'REACT', 'TYPESCRIPT', 'REACT QUERY', 'ZUSTAND', 'PLAYWRIGHT'],
+    status: ['[BLOCKCHAIN]', '[SOROBAN]', '[DEPLOYED]'],
+    github: '',
+    demo: 'https://vote-sphere1.netlify.app/',
+    badges: ['ONE WALLET ONE VOTE', 'LIVE TALLY']
+  },
+  {
+    id: 'SW-022',
+    title: 'StellarPay Wallet',
+    classification: 'STELLAR + STUDENT FINTECH',
+    mission: 'A student wallet where rewards are paid out by contract.',
+    overview: 'A decentralized student wallet and milestone reward gateway on Stellar. Students connect a wallet, track their balance, and receive rewards that the contract only releases to students registered on-chain.',
+    highlights: 'Freighter and Albedo sign-in plus locally generated keys, a cross-contract registry check before any reward is distributed, a live ledger event log, and an explorer for querying registry entries.',
+    tech: ['SOROBAN', 'RUST', 'REACT', 'TYPESCRIPT', 'TAILWIND CSS', 'STELLAR SDK'],
+    status: ['[BLOCKCHAIN]', '[SOROBAN]', '[DEPLOYED]'],
+    github: '',
+    demo: 'https://stellarpay-phi.vercel.app',
+    badges: ['REWARD GATEWAY', 'ON-CHAIN REGISTRY']
+  },
+  {
+    id: 'SP-023',
+    title: 'SplitPay',
+    classification: 'STELLAR + EXPENSE SPLITTING',
+    mission: 'Split expenses. Settle instantly.',
+    overview: 'SplitPay is a group expense manager on Stellar. Groups register on-chain, expenses are split evenly, by percentage or by custom amounts, and the contract nets everyone\'s debts down to the fewest payments before settling in XLM.',
+    highlights: 'An on-chain group registry with admin permissions, a debt-netting settlement algorithm in the contract, contract events shown as a live activity feed, and a simulator mode when no wallet is installed.',
+    tech: ['SOROBAN', 'RUST', 'REACT', 'TYPESCRIPT', 'TAILWIND CSS', 'VITEST'],
+    status: ['[BLOCKCHAIN]', '[SOROBAN]'],
+    github: '',
+    demo: '',
+    badges: ['DEBT NETTING', 'GROUP REGISTRY']
+  }
+];
+
 const ACCENTS = {
   cyan: {
     card: 'border-cyan-500/25 hover:border-cyan-500/60',
@@ -226,14 +340,7 @@ const ACCENTS = {
     badge: 'bg-cyan-500/10 border-cyan-500/25 text-cyan-700 dark:text-cyan-300',
     primary: 'bg-cyan-500/10 border-cyan-500/40 text-cyan-700 dark:text-cyan-400 hover:bg-cyan-500 hover:text-black hover:border-cyan-500',
     icon: 'text-cyan-500',
-  },
-  amber: {
-    card: 'border-amber-500/25 hover:border-amber-500/60',
-    text: 'text-amber-600 dark:text-amber-400',
-    rule: 'border-amber-500/40',
-    badge: 'bg-amber-500/10 border-amber-500/25 text-amber-700 dark:text-amber-300',
-    primary: 'bg-amber-500/10 border-amber-500/40 text-amber-700 dark:text-amber-400 hover:bg-amber-500 hover:text-black hover:border-amber-500',
-    icon: 'text-amber-500',
+    line: 'bg-cyan-500',
   },
   mono: {
     card: 'border-border dark:border-border-dark hover:border-text/50 dark:hover:border-text-dark/50',
@@ -242,40 +349,34 @@ const ACCENTS = {
     badge: 'border-border dark:border-border-dark text-text/60 dark:text-text-dark/60',
     primary: 'bg-text border-text text-background dark:bg-text-dark dark:border-text-dark dark:text-background-dark hover:opacity-85',
     icon: 'text-violet-500',
+    line: 'bg-text dark:bg-text-dark',
   },
 };
 
+// Team builds sit in the same Web3 group as the solo ones; the [TEAM] tag tells them apart.
 const GROUPS = [
   {
     key: 'web3',
-    label: 'WEB3 & SOROBAN BLOCKCHAIN ARCHIVE',
+    label: 'WEB3, SOROBAN & STELLAR BUILDS',
     icon: Layers,
     accent: 'cyan',
-    columns: 'lg:grid-cols-2',
     entrance: 'decrypt',
-    projects: web3Projects,
-  },
-  {
-    key: 'ral-lets',
-    label: 'RAL LETS // STELLAR TEAM BUILDS',
-    icon: Users,
-    accent: 'amber',
-    columns: 'lg:grid-cols-2',
-    projects: ralLetsProjects,
-    note: 'Built with the team under the RAL LETS GitHub organisation.',
+    projects: [...web3Projects, ...stellarProjects, ...ralLetsProjects],
+    // Shown first; the rest sit behind a "show all" button so the list is not a wall of similar apps.
+    highlightIds: ['SS-004', 'AB-005', 'TK-020', 'VS-021', 'IX-017', 'FF-015'],
   },
   {
     key: 'foundational',
-    label: 'FOUNDATIONAL ENGINEERING SYSTEMS',
+    label: 'EARLY AND FOUNDATIONAL PROJECTS',
     icon: Activity,
     accent: 'mono',
-    columns: 'md:grid-cols-3',
-    compact: true,
+    entrance: 'rise',
     projects: foundationalProjects,
   },
 ];
 
 const EASE = [0.22, 1, 0.36, 1];
+const MAX_CHIPS = 3;
 
 // How a card arrives. "rise" is the default fade-up. "decrypt" is the Web3 one:
 // the card swings in from its side in 3D while it is unmasked from the top,
@@ -287,33 +388,37 @@ const ENTRANCES = {
     transition: { duration: 0.65, ease: EASE, delay: (index % 3) * 0.08 },
   }),
   decrypt: (index) => {
-    const fromLeft = index % 2 === 0;
+    const column = index % 3;
+    const direction = column === 0 ? -1 : column === 2 ? 1 : 0;
     return {
       initial: {
         opacity: 0,
-        x: fromLeft ? -70 : 70,
-        rotateY: fromLeft ? 22 : -22,
+        x: direction * 60,
+        y: direction === 0 ? 40 : 0,
+        rotateY: direction * -20,
         clipPath: 'inset(-24px -24px 100% -24px)',
       },
-      whileInView: { opacity: 1, x: 0, rotateY: 0, clipPath: 'inset(-24px -24px -24px -24px)' },
-      transition: { duration: 1, ease: EASE, delay: (index % 2) * 0.15 },
+      whileInView: { opacity: 1, x: 0, y: 0, rotateY: 0, clipPath: 'inset(-24px -24px -24px -24px)' },
+      transition: { duration: 0.9, ease: EASE, delay: column * 0.12 },
       style: { transformPerspective: 1400 },
     };
   },
 };
 
-const ProjectCard = React.forwardRef(function ProjectCard({ project, accent, compact, index, entrance = 'rise' }, ref) {
+// A compact tile: name, one line, a few tags. The whole tile opens the full write-up.
+const ProjectCard = React.forwardRef(function ProjectCard({ project, accent, index, entrance = 'rise', onOpen }, ref) {
   const tone = ACCENTS[accent];
-  const hasDemo = Boolean(project.demo);
   const isDecrypt = entrance === 'decrypt';
-  const motionProps = ENTRANCES[entrance](index);
-  const revealDelay = (index % 2) * 0.15;
+  const revealDelay = (index % 3) * 0.12;
+  const isTeam = project.status.includes('[TEAM]');
+  const isLive = Boolean(project.demo);
+  const extraTech = project.tech.length - MAX_CHIPS;
 
   return (
     <motion.div
       ref={ref}
       layout
-      {...motionProps}
+      {...ENTRANCES[entrance](index)}
       viewport={{ once: true, margin: '0px 0px -60px 0px' }}
       exit={{ opacity: 0, scale: 0.96, transition: { duration: 0.2 } }}
       className="relative h-full"
@@ -324,120 +429,243 @@ const ProjectCard = React.forwardRef(function ProjectCard({ project, accent, com
           initial={{ top: '0%', opacity: 0 }}
           whileInView={{ top: ['0%', '100%'], opacity: [0, 1, 1, 0] }}
           viewport={{ once: true, margin: '0px 0px -60px 0px' }}
-          transition={{ duration: 1.1, ease: 'easeInOut', delay: revealDelay }}
+          transition={{ duration: 1, ease: 'easeInOut', delay: revealDelay }}
           className="absolute left-0 right-0 h-px z-20 pointer-events-none bg-cyan-400 shadow-[0_0_14px_2px_rgba(34,211,238,0.7)]"
         />
       )}
       <SpotlightCard
-        whileHover={{ y: -5 }}
+        as="button"
+        type="button"
+        onClick={() => onOpen(project)}
+        aria-label={`Open project: ${project.title}`}
+        whileHover={{ y: -6 }}
+        whileTap={{ scale: 0.985 }}
         transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-        className={`cursor-target group h-full border bg-surface/40 dark:bg-surface-dark/40 flex flex-col justify-between transition-colors duration-300 ${tone.card} ${
-          compact ? 'p-5' : 'p-6'
-        }`}
+        className={`cursor-target group w-full h-full text-left border bg-surface/40 dark:bg-surface-dark/40 p-5 flex flex-col gap-4 overflow-hidden transition-colors duration-300 ${tone.card}`}
       >
-        <div className={compact ? 'space-y-3' : 'space-y-4'}>
-          {/* Header metadata */}
-          <div className="flex items-start justify-between gap-4">
-            <span className="font-mono text-[10px] text-text/40 dark:text-text-dark/40 font-bold">{project.id}</span>
-            <div className="flex flex-wrap justify-end gap-1.5">
-              {project.status.map((st) => (
-                <span
-                  key={st}
-                  className="px-1.5 py-0.5 border border-border dark:border-border-dark text-[8px] font-mono text-text/45 dark:text-text-dark/45"
-                >
-                  {st}
-                </span>
-              ))}
-            </div>
-          </div>
+        {/* accent line that draws across the top on hover */}
+        <span
+          aria-hidden="true"
+          className={`absolute top-0 left-0 h-[2px] w-full origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out ${tone.line}`}
+        />
 
-          {/* Title */}
-          <div>
-            <div className="flex flex-wrap items-baseline gap-2 mb-1.5">
-              <h4 className={`font-display font-bold text-text dark:text-text-dark uppercase ${compact ? 'text-lg' : 'text-xl'}`}>
-                {isDecrypt ? <ScrambleText text={project.title} delay={revealDelay * 1000 + 250} /> : project.title}
-              </h4>
-              {project.complexity && (
-                <span className="text-[8px] font-mono text-text/35 dark:text-text-dark/35">// {project.complexity}</span>
-              )}
-            </div>
-            <p className={`font-mono text-[9px] tracking-wider font-bold uppercase ${tone.text}`}>{project.classification}</p>
-            {project.badges && (
-              <div className="flex flex-wrap gap-1 mt-2">
-                {project.badges.map((badge) => (
-                  <span key={badge} className={`px-2 py-0.5 border text-[7px] font-mono tracking-widest font-bold ${tone.badge}`}>
-                    {badge}
-                  </span>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {!compact && project.mission && (
-            <p className={`font-body text-xs text-text/80 dark:text-text-dark/80 font-medium leading-relaxed italic border-l pl-2 ${tone.rule}`}>
-              {project.mission}
-            </p>
-          )}
-
-          <p className="font-body text-xs text-text/60 dark:text-text-dark/60 leading-relaxed">{project.overview}</p>
-
-          {!compact && project.highlights && (
-            <div className="space-y-1 bg-background/60 dark:bg-background-dark/60 p-3 border border-border/60 dark:border-border-dark">
-              <span className="font-mono text-[8px] text-text/40 dark:text-text-dark/40 block tracking-wider">
-                ARCHITECTURE NOTES
-              </span>
-              <p className="font-body text-[11px] text-text/55 dark:text-text-dark/55 leading-relaxed">{project.highlights}</p>
-            </div>
-          )}
-
-          {!compact && project.impact && (
-            <p className={`font-body text-xs leading-relaxed font-semibold ${tone.text}`}>IMPACT // {project.impact}</p>
-          )}
-
-          <div className="flex flex-wrap gap-1 pt-1">
-            {project.tech.map((tech, techIdx) => (
-              <motion.span
-                key={tech}
-                initial={isDecrypt ? { opacity: 0, y: 8 } : false}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: isDecrypt ? 0.6 + revealDelay + techIdx * 0.05 : 0 }}
-                className="px-2 py-0.5 border border-border/70 dark:border-border-dark text-[8px] font-mono text-text/50 dark:text-text-dark/50"
-              >
-                {tech}
-              </motion.span>
-            ))}
-          </div>
+        <div className="h-5 flex items-center justify-between gap-3 font-mono text-xs text-text/45 dark:text-text-dark/45">
+          <span className="font-bold tracking-wider">{project.id}</span>
+          <span className="flex items-center gap-2">
+            {isTeam && <span className="px-1.5 py-0.5 border border-border dark:border-border-dark flex items-center gap-1"><Users className="w-2.5 h-2.5" /> TEAM</span>}
+            <span className="flex items-center gap-1.5">
+              <span className={`w-1.5 h-1.5 rounded-full ${isLive ? 'bg-emerald-500' : 'bg-text/25 dark:bg-text-dark/25'}`} />
+              {isLive ? 'LIVE' : project.github ? 'REPO' : project.linkLabel || 'PRIVATE'}
+            </span>
+          </span>
         </div>
 
-        {/* Links */}
-        <div className={`relative z-10 flex gap-3 border-t border-border/60 dark:border-border-dark ${compact ? 'pt-4 mt-4' : 'pt-6 mt-6'}`}>
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 text-center py-2 border border-border dark:border-border-dark text-[9px] font-mono uppercase tracking-wider text-text/80 dark:text-text-dark/80 hover:border-text dark:hover:border-text-dark hover:text-text dark:hover:text-text-dark transition-colors flex items-center justify-center gap-1.5"
-          >
-            <Github className="w-3.5 h-3.5" /> Repo
-          </a>
-          {hasDemo && (
-            <a
-              href={project.demo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`flex-1 text-center py-2 border text-[9px] font-mono uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 ${tone.primary}`}
-            >
-              <ExternalLink className="w-3.5 h-3.5" /> Live
-            </a>
-          )}
+        <div>
+          <h4 className="font-display text-xl font-bold text-text dark:text-text-dark uppercase leading-tight mb-1.5">
+            {isDecrypt ? <ScrambleText text={project.title} delay={revealDelay * 1000 + 250} /> : project.title}
+          </h4>
+          <p className={`font-mono text-xs tracking-wider font-bold uppercase ${tone.text}`}>{project.classification}</p>
+        </div>
+
+        <p className="font-body text-xs text-text/60 dark:text-text-dark/60 leading-relaxed line-clamp-2">
+          {project.mission || project.overview}
+        </p>
+
+        <div className="mt-auto pt-4 border-t border-border/60 dark:border-border-dark flex items-center justify-between gap-3">
+          <div className="flex flex-wrap gap-1 min-w-0">
+            {project.tech.slice(0, MAX_CHIPS).map((tech) => (
+              <span key={tech} className="px-1.5 py-0.5 border border-border/70 dark:border-border-dark text-xs font-mono text-text/50 dark:text-text-dark/50">
+                {tech}
+              </span>
+            ))}
+            {extraTech > 0 && (
+              <span className="px-1.5 py-0.5 text-xs font-mono text-text/40 dark:text-text-dark/40">+{extraTech}</span>
+            )}
+          </div>
+          <ArrowUpRight className="w-4 h-4 shrink-0 text-text/40 dark:text-text-dark/40 transition-all duration-300 group-hover:text-text dark:group-hover:text-text-dark group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </div>
       </SpotlightCard>
     </motion.div>
   );
 });
 
+// Full write-up for one project. Arrows and the left/right keys step through `list`.
+function ProjectModal({ project, accent, list, onChange, onClose }) {
+  const index = project ? list.findIndex((item) => item.id === project.id) : -1;
+  const canStep = list.length > 1 && index !== -1;
+  const step = (direction) => {
+    if (canStep) onChange(list[(index + direction + list.length) % list.length]);
+  };
+
+  useEffect(() => {
+    if (!project) return undefined;
+    const onKey = (event) => {
+      if (event.key === 'Escape') onClose();
+      if (event.key === 'ArrowRight') step(1);
+      if (event.key === 'ArrowLeft') step(-1);
+    };
+    window.addEventListener('keydown', onKey);
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = previousOverflow;
+    };
+  });
+
+  const tone = ACCENTS[accent] || ACCENTS.mono;
+  const navButton =
+    'cursor-target p-2 border border-border dark:border-border-dark text-text/60 dark:text-text-dark/60 hover:bg-text hover:text-background dark:hover:bg-text-dark dark:hover:text-background-dark transition-colors duration-300';
+
+  return (
+    <AnimatePresence>
+      {project && (
+        <motion.div
+          key="project-modal"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25 }}
+          className="fixed inset-0 z-[10000] bg-[#050505]/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-8"
+          onClick={onClose}
+          role="dialog"
+          aria-modal="true"
+          aria-label={project.title}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 30, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.97 }}
+            transition={{ type: 'spring', stiffness: 260, damping: 26 }}
+            onClick={(event) => event.stopPropagation()}
+            className="relative w-full max-w-2xl max-h-full overflow-y-auto border border-border dark:border-border-dark bg-surface dark:bg-surface-dark"
+          >
+            <span aria-hidden="true" className={`absolute top-0 left-0 h-[2px] w-full ${tone.line}`} />
+
+            {/* Header */}
+            <div className="flex items-start justify-between gap-6 p-5 sm:p-7 border-b border-border dark:border-border-dark">
+              <div className="min-w-0">
+                <div className="flex flex-wrap items-center gap-1.5 mb-3">
+                  <span className="font-mono text-xs font-bold text-text/45 dark:text-text-dark/45 mr-1.5">{project.id}</span>
+                  {project.status.map((st) => (
+                    <span key={st} className="px-1.5 py-0.5 border border-border dark:border-border-dark text-xs font-mono text-text/50 dark:text-text-dark/50">
+                      {st}
+                    </span>
+                  ))}
+                </div>
+                <h3 className="font-display text-2xl sm:text-3xl font-bold text-text dark:text-text-dark uppercase leading-tight">
+                  {project.title}
+                </h3>
+                <p className={`font-mono text-xs tracking-wider font-bold uppercase mt-2 ${tone.text}`}>{project.classification}</p>
+              </div>
+              <button type="button" onClick={onClose} aria-label="Close project" className={`${navButton} shrink-0`}>
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Body: re-keyed so the content fades when stepping between projects */}
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, x: 12 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -12 }}
+                transition={{ duration: 0.2 }}
+                className="p-5 sm:p-7 space-y-5"
+              >
+                {project.mission && (
+                  <p className={`font-body text-sm text-text/85 dark:text-text-dark/85 font-medium leading-relaxed italic border-l-2 pl-3 ${tone.rule}`}>
+                    {project.mission}
+                  </p>
+                )}
+
+                <p className="font-body text-sm text-text/65 dark:text-text-dark/65 leading-relaxed">{project.overview}</p>
+
+                {project.highlights && (
+                  <div className="space-y-1.5 bg-background/60 dark:bg-background-dark/60 p-4 border border-border/60 dark:border-border-dark">
+                    <span className="font-mono text-xs text-text/40 dark:text-text-dark/40 block tracking-wider">HOW IT IS BUILT</span>
+                    <p className="font-body text-xs text-text/60 dark:text-text-dark/60 leading-relaxed">{project.highlights}</p>
+                  </div>
+                )}
+
+                {project.impact && (
+                  <div className="space-y-1.5">
+                    <span className="font-mono text-xs text-text/40 dark:text-text-dark/40 block tracking-wider">IMPACT</span>
+                    <p className={`font-body text-xs leading-relaxed font-semibold ${tone.text}`}>{project.impact}</p>
+                  </div>
+                )}
+
+                <div className="space-y-2">
+                  <span className="font-mono text-xs text-text/40 dark:text-text-dark/40 block tracking-wider">STACK</span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {(project.badges || []).map((badge) => (
+                      <span key={badge} className={`px-2 py-1 border text-xs font-mono tracking-widest font-bold ${tone.badge}`}>
+                        {badge}
+                      </span>
+                    ))}
+                    {project.tech.map((tech) => (
+                      <span key={tech} className="px-2 py-1 border border-border/70 dark:border-border-dark text-xs font-mono text-text/60 dark:text-text-dark/60">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Links */}
+            <div className="flex flex-wrap items-center justify-between gap-4 p-5 sm:p-7 border-t border-border dark:border-border-dark">
+              <div className="flex flex-wrap gap-3">
+                {project.github ? (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2.5 border border-border dark:border-border-dark text-xs font-mono uppercase tracking-widest text-text dark:text-text-dark hover:bg-text hover:text-background dark:hover:bg-text-dark dark:hover:text-background-dark transition-colors duration-300 flex items-center gap-2"
+                  >
+                    <Github className="w-3.5 h-3.5" /> Repository
+                  </a>
+                ) : (
+                  <span className="px-4 py-2.5 border border-dashed border-border dark:border-border-dark text-xs font-mono uppercase tracking-widest text-text/45 dark:text-text-dark/45 flex items-center gap-2">
+                    <Lock className="w-3.5 h-3.5" /> {project.linkNote || 'Private Repository'}
+                  </span>
+                )}
+                {project.demo && (
+                  <a
+                    href={project.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`px-4 py-2.5 border text-xs font-mono uppercase tracking-widest transition-all flex items-center gap-2 ${tone.primary}`}
+                  >
+                    <ExternalLink className="w-3.5 h-3.5" /> Live Site
+                  </a>
+                )}
+              </div>
+              {canStep && (
+                <div className="flex items-center gap-3">
+                  <span className="font-mono text-xs text-text/40 dark:text-text-dark/40 tabular-nums">
+                    {String(index + 1).padStart(2, '0')} / {String(list.length).padStart(2, '0')}
+                  </span>
+                  <button type="button" onClick={() => step(-1)} aria-label="Previous project" className={navButton}>
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+                  <button type="button" onClick={() => step(1)} aria-label="Next project" className={navButton}>
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+              )}
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
 // 2. SYSTEM REGISTRY DATA GRID
 export function ArchiveGrid({ search, filterStatus }) {
+  const [selected, setSelected] = useState(null);
+  const [expanded, setExpanded] = useState(false);
   const query = search.trim().toLowerCase();
 
   const matches = (item) => {
@@ -452,9 +680,21 @@ export function ArchiveGrid({ search, filterStatus }) {
     return matchesSearch && matchesStatus;
   };
 
-  const visibleGroups = GROUPS.map((group) => ({ ...group, visible: group.projects.filter(matches) })).filter(
-    (group) => group.visible.length > 0
-  );
+  // While searching or filtering, look through everything; otherwise show the highlights first.
+  const browsing = !query && filterStatus === 'All';
+  const visibleGroups = GROUPS.map((group) => {
+    const matching = group.projects.filter(matches);
+    const collapsed = browsing && !expanded && group.highlightIds;
+    const visible = collapsed
+      ? group.highlightIds.map((id) => matching.find((item) => item.id === id)).filter(Boolean)
+      : matching;
+    return { ...group, visible, hiddenCount: matching.length - visible.length, canCollapse: Boolean(browsing && group.highlightIds) };
+  }).filter((group) => group.visible.length > 0);
+
+  // The viewer steps through everything currently on screen, across groups.
+  const visibleProjects = visibleGroups.flatMap((group) => group.visible);
+  const accentOf = (project) =>
+    project ? (GROUPS.find((group) => group.projects.includes(project)) || {}).accent : undefined;
 
   return (
     <section id="archive" className="py-24 bg-background dark:bg-background-dark border-b border-border/20 dark:border-border-dark/20 theme-transition relative">
@@ -488,34 +728,51 @@ export function ArchiveGrid({ search, filterStatus }) {
                     <GroupIcon className={`w-4 h-4 ${tone.icon}`} />
                     {String(groupIdx + 2).padStart(2, '0')} // {group.label}
                   </span>
-                  <span className="font-mono text-[9px] text-text/40 dark:text-text-dark/40">
-                    {String(group.visible.length).padStart(2, '0')} {group.visible.length === 1 ? 'SYSTEM' : 'SYSTEMS'}
+                  <span className="font-mono text-xs text-text/40 dark:text-text-dark/40">
+                    {group.visible.length} {group.visible.length === 1 ? 'PROJECT' : 'PROJECTS'} &middot; CLICK A CARD FOR DETAILS
                   </span>
                 </motion.div>
 
-                {group.note && (
-                  <p className="font-body text-xs text-text/55 dark:text-text-dark/55 -mt-4">{group.note}</p>
-                )}
-
-                <div className={`grid grid-cols-1 ${group.columns} gap-6`}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                   <AnimatePresence mode="popLayout">
                     {group.visible.map((project, idx) => (
                       <ProjectCard
                         key={project.id}
                         project={project}
                         accent={group.accent}
-                        compact={group.compact}
                         entrance={group.entrance}
                         index={idx}
+                        onOpen={setSelected}
                       />
                     ))}
                   </AnimatePresence>
                 </div>
+
+                {group.canCollapse && (group.hiddenCount > 0 || expanded) && (
+                  <div className="flex justify-center pt-2">
+                    <button
+                      type="button"
+                      onClick={() => setExpanded((value) => !value)}
+                      aria-expanded={expanded}
+                      className="cursor-target px-6 py-3 border border-border dark:border-border-dark font-mono text-xs uppercase tracking-wider text-text/70 dark:text-text-dark/70 hover:border-text dark:hover:border-text-dark hover:text-text dark:hover:text-text-dark transition-colors duration-300"
+                    >
+                      {expanded ? 'Show fewer' : `Show ${group.hiddenCount} more Web3 builds`}
+                    </button>
+                  </div>
+                )}
               </div>
             );
           })}
         </div>
       </div>
+
+      <ProjectModal
+        project={selected}
+        accent={accentOf(selected)}
+        list={visibleProjects.includes(selected) ? visibleProjects : selected ? [selected] : []}
+        onChange={setSelected}
+        onClose={() => setSelected(null)}
+      />
     </section>
   );
 }
