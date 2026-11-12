@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Sun, Moon, Menu, X } from 'lucide-react';
+import { Sun, Moon, Menu, X, Search } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { openCommandMenu } from '../lib/site';
 
 export default function Navbar({ theme, toggleTheme }) {
   const location = useLocation();
@@ -30,19 +31,37 @@ export default function Navbar({ theme, toggleTheme }) {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`font-body text-xs font-semibold tracking-wider uppercase transition-colors duration-300 ${
+                className={`relative pb-1 font-body text-xs font-semibold tracking-wider uppercase transition-colors duration-300 ${
                   isActive
-                    ? 'text-text dark:text-text-dark border-b border-text dark:border-text-dark pb-0.5'
+                    ? 'text-text dark:text-text-dark'
                     : 'text-text/60 dark:text-text-dark/60 hover:text-text dark:hover:text-text-dark'
                 }`}
               >
                 {link.label}
+                {isActive && (
+                  <motion.span
+                    layoutId="nav-underline"
+                    className="absolute left-0 right-0 bottom-0 h-px bg-text dark:bg-text-dark"
+                    transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                  />
+                )}
               </Link>
             );
           })}
         </div>
 
         <div className="flex items-center gap-2 sm:gap-4">
+          {/* Quick menu */}
+          <button
+            type="button"
+            onClick={openCommandMenu}
+            className="flex items-center gap-2 p-2 md:px-3 border border-border dark:border-border-dark text-text/70 dark:text-text-dark/70 hover:text-text dark:hover:text-text-dark hover:border-text dark:hover:border-text-dark transition-colors duration-300"
+            aria-label="Open quick menu"
+          >
+            <Search className="w-4 h-4" />
+            <kbd className="hidden md:inline font-body text-xs font-semibold">Ctrl K</kbd>
+          </button>
+
           {/* Theme Toggle */}
           <button
             onClick={toggleTheme}

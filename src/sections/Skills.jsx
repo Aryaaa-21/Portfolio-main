@@ -138,27 +138,41 @@ export default function Skills() {
   const isActive = true;
   const categories = {
     Languages: [
-      { name: 'C', projects: ['VEDAX'] },
-      { name: 'Java', projects: ['VEDAX'] },
-      { name: 'JavaScript', projects: ['VEDAX', 'StellarPay', 'ChainRent'] },
+      { name: 'JavaScript', projects: ['VEDAX', 'RakshaMarg'] },
+      { name: 'TypeScript', projects: ['VEDAX', 'RakshaMarg', 'SkillStake'] },
+      { name: 'Rust', projects: ['SkillStake', 'AnchorBridge'] },
+      { name: 'Java', projects: [] },
+      { name: 'C', projects: [] },
+      { name: 'HTML', projects: ['Spotify Clone', 'Basic Portfolio'] },
+      { name: 'CSS', projects: ['Spotify Clone', 'Basic Portfolio'] },
     ],
     Frontend: [
-      { name: 'React', projects: ['StellarPay', 'VEDAX', 'RakshaMarg'] },
-      { name: 'Tailwind CSS', projects: ['VEDAX', 'StellarPay'] },
+      { name: 'React', projects: ['VEDAX', 'RakshaMarg', 'Swasthi'] },
+      { name: 'Tailwind CSS', projects: ['VEDAX'] },
       { name: 'Framer Motion', projects: ['VEDAX'] },
+      { name: 'Zustand', projects: ['VEDAX'] },
     ],
-    Database: [
-      { name: 'MongoDB', projects: ['RakshaMarg'] },
+    Backend: [
+      { name: 'Node.js', projects: ['VEDAX'] },
+      { name: 'Express', projects: ['VEDAX'] },
+      { name: 'MongoDB', projects: ['VEDAX', 'RakshaMarg'] },
+      { name: 'REST APIs', projects: ['VEDAX'] },
+    ],
+    Blockchain: [
+      { name: 'Stellar', projects: ['SkillStake', 'AnchorBridge'] },
+      { name: 'Soroban', projects: ['SkillStake', 'AnchorBridge'] },
+      { name: 'Freighter', projects: ['SkillStake'] },
     ],
     Cloud: [
-      { name: 'AWS', projects: ['RakshaMarg'] },
-      { name: 'Docker', projects: ['StellarPay'] },
-      { name: 'Vercel', projects: ['ChainRent', 'VEDAX'] },
+      { name: 'Vercel', projects: ['VEDAX'] },
+      { name: 'AWS', projects: [] },
+      { name: 'Docker', projects: [] },
     ],
     Tools: [
-      { name: 'Git', projects: ['RakshaMarg', 'ChainRent', 'StellarPay', 'VEDAX'] },
-      { name: 'Vite', projects: ['StellarPay', 'VEDAX'] },
-      { name: 'Postman', projects: ['RakshaMarg', 'StellarPay'] },
+      { name: 'Git', projects: ['VEDAX', 'RakshaMarg'] },
+      { name: 'Vite', projects: ['VEDAX'] },
+      { name: 'Postman', projects: ['VEDAX'] },
+      { name: 'Vitest', projects: [] },
     ]
   };
 

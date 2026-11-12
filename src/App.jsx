@@ -1,4 +1,4 @@
-import React, { useState, useEffect, lazy, Suspense } from 'react';
+import React, { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { AnimatePresence, MotionConfig, motion } from 'framer-motion';
 import Navbar from './sections/Navbar';
@@ -16,6 +16,8 @@ import ShaderBackground from './components/ShaderBackground';
 import TargetCursor from './components/ui/TargetCursor';
 import Preloader from './components/Preloader';
 import ScrollProgress from './components/motion/ScrollProgress';
+import CommandMenu from './components/CommandMenu';
+import { IntroContext } from './lib/intro';
 import { initAnalytics, trackPageView } from './lib/analytics';
 
 // Helper component to scroll to top on route change
@@ -125,12 +127,13 @@ export default function App() {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  const toggleTheme = () => {
+  const toggleTheme = useCallback(() => {
     setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
-  };
+  }, []);
 
   return (
     <MotionConfig reducedMotion="user">
+    <IntroContext.Provider value={!isLoading}>
     <Router>
       <ScrollToTop />
       <RouteMeta />
@@ -158,6 +161,9 @@ export default function App() {
           hideDefaultCursor={false}
         />
 
+        {/* Quick menu (Ctrl+K) */}
+        <CommandMenu toggleTheme={toggleTheme} />
+
         {/* Multi-page Header */}
         <Navbar theme={theme} toggleTheme={toggleTheme} />
 
@@ -170,6 +176,7 @@ export default function App() {
         <Contact />
       </div>
     </Router>
+    </IntroContext.Provider>
     </MotionConfig>
   );
 }

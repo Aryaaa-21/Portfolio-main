@@ -4,6 +4,9 @@ import { ArrowRight } from 'lucide-react';
 import Hero from '../sections/Hero';
 import About from '../sections/About';
 import Impact from '../sections/Impact';
+import SelectedWork from '../sections/SelectedWork';
+import Marquee from '../components/Marquee';
+import { TOTAL_PROJECTS } from '../lib/site';
 import { certificates, featuredCertificates } from '../data/certificates';
 import CertificateCard from '../components/CertificateCard';
 import Reveal, { RevealText } from '../components/motion/Reveal';
@@ -46,6 +49,12 @@ export default function Home() {
     <div className="w-full flex flex-col">
       {/* Hero section */}
       <Hero />
+
+      {/* Hackathon results */}
+      <Marquee />
+
+      {/* Main projects */}
+      <SelectedWork total={TOTAL_PROJECTS} />
 
       {/* About section */}
       <About />
